@@ -1,0 +1,12 @@
+[01-May-2016 14:59:17 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'File '/home/rentabag/public_html/media/catalog/product/t/r/' does not exists.' in /home/rentabag/public_html/lib/Varien/File/Transfer/Adapter/Http.php:96
+Stack trace:
+#0 /home/rentabag/public_html/get.php(205): Varien_File_Transfer_Adapter_Http->send('/home/rentabag/...')
+#1 /home/rentabag/public_html/get.php(165): sendFile('/home/rentabag/...')
+#2 {main}
+  thrown in /home/rentabag/public_html/lib/Varien/File/Transfer/Adapter/Http.php on line 96
+[12-May-2016 06:07:54 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/rentabag/public_html/app/design/frontend/rentabag/default/template/catalog/product/price.phtml on line 419
+[12-May-2016 07:23:53 UTC] PHP Fatal error:  Call to undefined method Mage_Core_Helper_Data::formatPricq() in /home/rentabag/public_html/app/design/frontend/rentabag/default/template/catalog/product/price.phtml on line 214
+[12-May-2016 07:23:58 UTC] PHP Fatal error:  Call to undefined method Mage_Core_Helper_Data::formatPricq() in /home/rentabag/public_html/app/design/frontend/rentabag/default/template/catalog/product/price.phtml on line 214
+[12-May-2016 07:24:35 UTC] PHP Fatal error:  Call to undefined method Mage_Core_Helper_Data::formatPricq() in /home/rentabag/public_html/app/design/frontend/rentabag/default/template/catalog/product/price.phtml on line 214
+[12-May-2016 07:26:31 UTC] PHP Fatal error:  Call to undefined method Mage_Core_Helper_Data::formatPricq() in /home/rentabag/public_html/app/design/frontend/rentabag/default/template/catalog/product/price.phtml on line 214
+[13-May-2016 03:18:28 UTC] PHP Parse error:  syntax error, unexpected 'here' (T_STRING) in /home/rentabag/public_html/app/code/local/Addweb/AdvReservation/controllers/RentController.php on line 50

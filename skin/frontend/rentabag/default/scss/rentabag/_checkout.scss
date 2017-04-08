@@ -1,0 +1,28 @@
+.opc .section .step-title .number,
+.opc .section.allow.active .step-title .number,
+.no-touch .opc .section.allow:hover .step-title .number{
+  border-radius: 5px;
+}
+body.checkout-onepage-index{
+  .col2-right-layout a{  @include text-decoration;  }
+  .opc .section{
+	&.active .step-title{
+	  border-bottom: none;
+	}
+	&.allow:not(.active){
+	  .step-title:hover{
+		background: linear-gradient(to right, #ffffff, #f4f4f4, #ffffff);
+	  }
+	}
+	.step-title{
+	  border-top: none;
+	  @include border-top;
+	  a:after{  display: none;  }
+	}
+  }
+  .block-progress{
+	border-left: none;
+	position: relative;
+	@include border-left;
+  }
+}
