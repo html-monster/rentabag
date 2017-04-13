@@ -539,7 +539,7 @@ class Addweb_AdvReservation_Model_Observer
                     'idus' => $userId,
                     'id_prod' => $key,
                     'id_order' => $orderID,
-                    'fdate' => $fdate,
+                    'fdate' => date('Y-m-d H:i:s', strtotime($fdate) + 1),
                     'tdate' => date('Y-m-d H:i:s', strtotime($tdate) + 86400 - 1),
                 );
                 $write->query($query, $binds);
@@ -642,24 +642,25 @@ class Addweb_AdvReservation_Model_Observer
 
         // *** Check for tier price discount
         $tierPrices = $product->getFormatedTierPrice();
-        if( $tierPrices )
-        {
+//        if( $tierPrices )
+//        {
             $days = ($tdate - $fdate) / 86400 + 1;
 
-            $price = $product->getPrice();
+            $price = $product->getSpecialPrice() ?: $product->getPrice();
             foreach ($tierPrices as $key => $val)
             {
                 if( $val['price_qty'] <= $days )
                     if( $val['price'] < $price ) $price = $val['price'];
             } // end foreach
 
-            if( $price != $product->getPrice() )
-            {
+//            if( true || $price != $product->getPrice() )
+//            {
+        // change price always if update event
                 $event = $observer->getEvent();
                 $quote_item = $event->getQuoteItem();
                 $quote_item->setOriginalCustomPrice($price * $days);
-            }
-        } // endif
+//            }
+//        } // endif
 
             // stop add to cart
 //            $productId = Mage::app()->getRequest()->getParam('product');

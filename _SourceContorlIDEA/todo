@@ -1,0 +1,35 @@
+- Сделать 2 0-ля нуля в портфолио заказов
+- Добавить индексы на adv_rent
+
+
+UPDATE admin_user SET password=CONCAT(MD5('qX11'), ':qX') WHERE username='admin';
+
+
+1. При редактировании аренды в корзине, сбоит цена
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Default site https://www.rent-a-bag.club/my-account/
+sales_order_invoice_save_after - http://magento.stackexchange.com/questions/9026/events-in-magento-when-order-complete
+sales_order_save_commit_after" or "sales_order_invoice_pay - http://stackoverflow.com/questions/7927618/magento-observer-for-order-state-is-complete
+checkout_cart_add_product_complete - https://habrahabr.ru/post/138933/
+How to allow only one product in a cart? - http://magento.stackexchange.com/questions/9584/how-to-allow-only-one-product-in-a-cart
+Create custom module in magento Хабр -  https://habrahabr.ru/post/180555/
+Magento шаг за шагом - https://habrahabr.ru/post/230957/
+Magento модели от А до Я: модели ядра - http://freaksidea.com/php_and_somethings/show-62-magento-modeli-ot-a-do-ia-modeli-iadra
+Добавление блоков в Magento - http://kuzvac.ru/post/13507713838/dobavlenie-blokov-v-magento
+Devtoolbar https://www.magentocommerce.com/magento-connect/tb-developer-toolbar.html
+https://www.magentocommerce.com/magento-connect/manage-customer-account-menu.html
+Create custom customer page http://alanstorm.com/magento_create_customer_page?ECBM1=1,2,2,43
+Magento Articles for PROFESSIONAL DEVELOPERS - http://alanstorm.com/category/magento#magento_for_php_developers
+  ORM Basic - http://alanstorm.com/magento_models_orm
+Using magento pagination with custom collections - http://magento.stackexchange.com/questions/11808/using-magento-pagination-with-custom-collections
+Gurumagento на русском - http://gurumagento.varshevsky.com/
+Pagination:
+    http://stackoverflow.com/questions/9129691/magento-paginate-filtered-product-collection
+    http://excellencemagentoblog.com/blog/2011/10/18/magento-collection-paging/
+Magento for Developers: Part 8—Varien Data Collections - http://devdocs.magento.com/guides/m1x/magefordev/mage-for-dev-8.html
+CRUD, admin https://www.creare.co.uk/blog/magento/magento-model-basics-the-complete-series
+
+Заметки:
+  - в событии onCheckoutCartProductAddAfter для изменения цены убраны всё проверки, так как первый раз цену на аренду устанавливает сам плагин, а после изменения заказа из корзины - оригинальное событие плагина уже не работает, поэтому устанавливается цена как на 1 день (1 товар). Соответственно Я вручную перемножаю цену на кол-во дней.

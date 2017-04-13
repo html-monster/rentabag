@@ -24,8 +24,8 @@
 //                  .$s1 . print_r($val, 1)."\n"
 //                  ."</pre>";$notpr;
 //        } // end foreach
-$s1 = 'currentAction='.var_export('currentAction', 1)."\n";
-0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, 0);//FILE_APPEND
+//$s1 = 'currentAction='.var_export('currentAction', 1)."\n";
+//0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, 0);//FILE_APPEND
 
         $this->loadLayout();
         $this->renderLayout();
@@ -49,8 +49,8 @@ $s1 = 'currentAction='.var_export('currentAction', 1)."\n";
       */
     public function futureAction()
     {
-$s1 = 'futureAction='.var_export('futureAction', 1)."\n";
-0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, FILE_APPEND);//FILE_APPEND
+//$s1 = 'futureAction='.var_export('futureAction', 1)."\n";
+//0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, FILE_APPEND);//FILE_APPEND
         $this->loadLayout();
         $this->renderLayout();
     }

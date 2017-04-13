@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+      <Addweb_AdvReservation>
+        <version>0.1.0</version>
+      </Addweb_AdvReservation>
+    </modules>
+    <global>
+		<helpers>
+			<advreservation>
+				<class>Addweb_AdvReservation_Helper</class>
+			</advreservation>
+		</helpers>
+		<resources>
+			<advreservation_setup>
+				<setup>
+					<module>Addweb_AdvReservation</module>
+				</setup>
+			<connection>
+				<use>core_setup</use>
+			</connection>
+			</advreservation_setup>
+			<advreservation_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</advreservation_write>
+			<advreservation_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</advreservation_read>
+		</resources>
+		<blocks>
+			<advreservation>
+				  <class>Addweb_AdvReservation_Block</class>
+			</advreservation>
+			<core>
+				<rewrite>
+						<html_date>Addweb_AdvReservation_Block_Core_Html_Date</html_date>
+				</rewrite>
+			</core>
+			<adminhtml>
+				<rewrite>
+						<catalog_product_edit_tab_options_option>Addweb_AdvReservation_Block_Adminhtml_Catalog_Product_Edit_Tab_Options_Option</catalog_product_edit_tab_options_option>
+				</rewrite>
+			</adminhtml>
+			<adminhtml>
+				<rewrite>
+						<catalog_product_edit_tab_options_type_date>Addweb_AdvReservation_Block_Adminhtml_Catalog_Product_Edit_Tab_Options_Type_Date</catalog_product_edit_tab_options_type_date>
+				</rewrite>
+			</adminhtml>
+			<adminhtml>
+				<rewrite>
+						<catalog_product_edit_tab_options_type_select>Addweb_AdvReservation_Block_Adminhtml_Catalog_Product_Edit_Tab_Options_Type_Select</catalog_product_edit_tab_options_type_select>
+				</rewrite>
+			</adminhtml>
+			<catalog>
+				<rewrite>
+						<product_view_options_type_date>Addweb_AdvReservation_Block_Catalog_Product_View_Options_Type_Date</product_view_options_type_date>
+				</rewrite>
+			</catalog>
+			<catalog>
+				<rewrite>
+						<product_view_options_type_select>Addweb_AdvReservation_Block_Catalog_Product_View_Options_Type_Select</product_view_options_type_select>
+				</rewrite>
+			</catalog>
+			<xmlconnect>
+				<rewrite>
+						<catalog_product_options>Addweb_AdvReservation_Block_XmlConnect_Catalog_Product_Options</catalog_product_options>
+				</rewrite>
+			</xmlconnect>
+		</blocks>
+		<models>
+			<advreservation>
+				  <class>Addweb_AdvReservation_Model</class>
+				  <resourceModel>advreservation_mysql4</resourceModel>
+			</advreservation>
+			<catalog>
+					<rewrite>
+							<product_option_type_date>Addweb_AdvReservation_Model_Catalog_Product_Option_Type_Date</product_option_type_date>
+					</rewrite>
+			</catalog>
+			<catalog>
+					<rewrite>
+							<product_option_type_select>Addweb_AdvReservation_Model_Catalog_Product_Option_Type_Select</product_option_type_select>
+					</rewrite>
+			</catalog>
+			<catalog>
+					<rewrite>
+							<product_option>Addweb_AdvReservation_Model_Catalog_Product_Option</product_option>
+					</rewrite>
+			</catalog>
+			<catalog_resource>
+					<rewrite>
+							<product_option>Addweb_AdvReservation_Model_Catalog_Resource_Product_Option</product_option>
+					</rewrite>
+			</catalog_resource>
+		</models>
+		<events>
+			<checkout_cart_product_add_after> <!-- identifier of the event we want to catch -->
+				<observers>
+					<checkout_cart_product_add_after_handler> <!-- identifier of the event handler -->
+					  <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+					  <class>advreservation/observer</class> <!-- observers class alias -->
+					  <method>modifyCalulatedCustomOption</method>  <!-- observer's method to be called -->
+					  <args></args> <!-- additional arguments passed to observer -->
+					</checkout_cart_product_add_after_handler>
+				</observers>
+			</checkout_cart_product_add_after>
+			<checkout_cart_add_product_complete> <!-- identifier of the event we want to catch -->
+				<observers>
+					<checkout_cart_add_product_complete_handler> <!-- identifier of the event handler -->
+					  <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+					  <class>advreservation/observer</class> <!-- observers class alias -->
+					  <method>addProductAfter</method>  <!-- observer's method to be called -->
+					  <args></args> <!-- additional arguments passed to observer -->
+					</checkout_cart_add_product_complete_handler>
+				</observers>
+			</checkout_cart_add_product_complete>
+			<checkout_cart_product_update_after> <!-- identifier of the event we want to catch -->
+				<observers>
+					<checkout_cart_product_update_after_handler> <!-- identifier of the event handler -->
+					  <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+					  <class>advreservation/observer</class> <!-- observers class alias -->
+					  <method>updatePriceCustomization</method>  <!-- observer's method to be called -->
+					  <args></args> <!-- additional arguments passed to observer -->
+					</checkout_cart_product_update_after_handler>
+				</observers>
+			</checkout_cart_product_update_after>
+		</events>
+		<catalog>
+			<product>
+				<options>
+					<custom>
+						<groups>
+							<select translate="label" module="advreservation">
+								<label>Select</label><!-- Product Custom option label -->
+								<render>advreservation/adminhtml_catalog_product_edit_tab_options_type_select</render>
+								<types>
+									<adults translate="label" module="advreservation">
+										<label>Adults Select</label><!-- Add custom option value --> 
+									</adults>
+									<childs translate="label" module="advreservation">
+										<label>Childs Select</label><!-- Add custom option value --> 
+									</childs>
+									<reserve_type translate="label" module="advreservation">
+										<label>Reserve Type</label><!-- Add custom option value --> 
+									</reserve_type>
+								</types>
+							</select>
+							<date translate="label" module="advreservation">
+							  <label>Date</label><!-- Product Custom option label -->
+							  <render>advreservation/adminhtml_catalog_product_edit_tab_options_type_date</render>
+							  <types>
+									<from_date translate="label" module="advreservation">
+										<label>Start Date</label><!-- Add custom option value --> 
+									</from_date>
+									<to_date translate="label" module="advreservation">
+										<label>End Date</label><!-- Add custom option value --> 
+									</to_date>
+							  </types>
+							</date>
+						</groups>
+					</custom>
+				</options>
+			</product>
+		</catalog>    
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <addweb_advreservation module="Addweb_AdvReservation">
+                    <file>addweb/advreservation.xml</file><!--Addweb_AdvReservation module frontend xml file -->
+                </addweb_advreservation>
+            </updates>
+        </layout>
+		 <routers>
+			<checkout>
+				<use>standard</use>
+				<args>
+					<modules>
+						<Addweb_AdvReservation before="Mage_Checkout">Addweb_AdvReservation_Checkout</Addweb_AdvReservation>
+					</modules>
+				</args>
+			</checkout>
+        </routers>
+     </frontend>
+</config> 
