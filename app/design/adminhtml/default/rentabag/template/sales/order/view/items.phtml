@@ -25,7 +25,7 @@
  */
 ?>
 <script type="text/javascript">
- 0||console.log( 'here', 3 );
+ 0||console.log( 'here', 22 );
 </script>
 <?php $_order = $this->getOrder() ?>
 <div class="grid np">
@@ -52,14 +52,16 @@
                 <th><span class="nobr"><?php echo $this->helper('sales')->__('Tax Amount') ?></span></th>
                 <th><span class="nobr"><?php echo $this->helper('sales')->__('Tax Percent') ?></span></th>
                 <th><span class="nobr"><?php echo $this->helper('sales')->__('Discount Amount') ?></span></th>
-                <th class="last"><span class="nobr"><?php echo $this->helper('sales')->__('Row Total') ?></span></th>
+                <th><span class="nobr"><?php echo $this->helper('sales')->__('Row Total') ?></span></th>
+                <th class="last"><span class="nobr">Pledge</span></th>
             </tr>
         </thead>
         <?php $_items = $this->getItemsCollection() ?>
         <?php $i=0;foreach ($_items as $_item):?>
             <?php if ($_item->getParentItem()) continue; else $i++;?>
             <tbody class="<?php echo $i%2?'even':'odd' ?>">
-                <?php echo $this->getItemHtml($_item) ?>
+                <?php $_item->test = "hello" ?>
+                <?php echo $this->getItemHtml($_item, $_items) ?>
                 <?php echo $this->getItemExtraInfoHtml($_item) ?>
             </tbody>
         <?php endforeach; ?>

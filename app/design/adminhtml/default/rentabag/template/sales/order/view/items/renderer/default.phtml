@@ -24,6 +24,9 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<script type="text/javascript">
+ 0||console.log( 'here', 33 );
+</script>
 <?php $_item = $this->getItem() ?>
 <?php $this->setPriceDataObject($_item) ?>
 <tr<?php if (!$this->canDisplayGiftmessage()): ?> class="border"<?php endif; ?>>
@@ -237,10 +240,19 @@
     <td class="a-right"><?php echo $this->displayPriceAttribute('tax_amount') ?></td>
     <td class="a-right"><?php echo $this->displayTaxPercent($_item) ?></td>
     <td class="a-right"><?php echo $this->displayPriceAttribute('discount_amount') ?></td>
-    <td class="a-right last">
+    <td class="a-right">
         <?php echo $this->displayPrices(
             $_item->getBaseRowTotal() + $_item->getBaseTaxAmount() + $_item->getBaseHiddenTaxAmount() + Mage::helper('weee')->getBaseRowWeeeAmountAfterDiscount($_item) - $_item->getBaseDiscountAmount(),
             $_item->getRowTotal() + $_item->getTaxAmount() + $_item->getHiddenTaxAmount() + Mage::helper('weee')->getRowWeeeAmountAfterDiscount($_item) - $_item->getDiscountAmount()
         ); ?>
+    </td>
+    <td class="a-right last">
+        <span class="price">
+            <?php if( $this->getData()['rent'][$_item->getData()["product_id"]]["price"] > 0 ): ?>
+                &pound;<?= $this->getData()['rent'][$_item->getData()["product_id"]]["price"] ?>
+            <?php else: ?>
+                <i>not payed</i>
+            <?php endif; ?>
+        </span>
     </td>
 </tr>

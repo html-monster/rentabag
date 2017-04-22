@@ -7,9 +7,7 @@
 class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abstract
 {
     /**
-     * Retrieve current order model instance
-     *
-     * @return Mage_Sales_Model_Order
+     * Retrieve current order rent
      */
     public function getOrder()
     {
