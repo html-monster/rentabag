@@ -45,7 +45,7 @@ class Addweb_AdvReservation_Block_Adminhtml_Sales_Order_View_Items extends Mage_
      * @param Varien_Object $item
      * @return string
      */
-    public function getItemHtml(Varien_Object $item, $smth)
+    public function getItemHtml(Varien_Object $item, $items)
     {
         if ($item->getOrderItem()) {
             $type = $item->getOrderItem()->getProductType();
@@ -54,7 +54,8 @@ class Addweb_AdvReservation_Block_Adminhtml_Sales_Order_View_Items extends Mage_
         }
 
         $renderer = $this->getItemRenderer($type);
-        $renderer->rent = $this->getOrderProductsPledge($smth->getData()[0]["order_id"]);
+        $renderer->setData('rent', $this->getOrderProductsPledge($items->getData()[0]["order_id"]));
+//        $renderer->rent = $this->getOrderProductsPledge($smth->getData()[0]["order_id"]);
         return $renderer->setItem($item)
         //        return $this->getItemRenderer($type)->setItem($item)
             ->setCanEditQty($this->canEditQty())

@@ -1,12 +1,14 @@
 <layout>
     <!-- Vlasakh -->
-<!--    <default>
+<!--
+    <default>
        <reference name="left">
           <action method="setTemplate">
               <template>your_path/page.phtml</template>
           </action>
        </reference>
-    </default>-->
+    </default>
+-->
 <!--
     <adminhtml_sales_order_view>
         <reference name="left">

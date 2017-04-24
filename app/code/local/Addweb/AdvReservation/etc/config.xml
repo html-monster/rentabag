@@ -288,7 +288,8 @@
 			</design>
 		</admin>
 	</stores>
-	<!--<admin>
+<!--
+	<admin>
 		<routers>
 			<adminhtml>
 				<args>
@@ -299,6 +300,7 @@
 			</adminhtml>
 		</routers>
 	</admin>
+-->
 
 	<adminhtml>
 		<layout>
@@ -308,5 +310,5 @@
 				</adv_rent>
 			</updates>
 		</layout>
-	</adminhtml>-->
+	</adminhtml>
 </config>
