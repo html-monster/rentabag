@@ -32,7 +32,7 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
         $readConnection = $resource->getConnection('core_read');
 
         $query = "SELECT
-                  id, mailletters, price, id_prod,
+                  id, mailletters, price, id_prod, id_order,
                   DATE_FORMAT(fdate, '%Y-%m-%d') fdate,
                   DATE_FORMAT(tdate, '%Y-%m-%d') tdate
                 FROM adv_rent
@@ -41,12 +41,12 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
                   AND status < 2
                   AND mailletters < 4
                 ORDER BY fdate ";
-        $results = $readConnection->fetchAll($query);
+        $rents = $readConnection->fetchAll($query);
 
-        foreach ($results as $key => $val)
-        {
-            $rents[$val['id_prod']] = $val;
-        } // end foreach
+//        foreach ($results as $key => $val)
+//        {
+//            $rents[$val['id_prod']] = $val;
+//        } // end foreach
 
 
 
@@ -78,16 +78,16 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
                 // check each product
                 if ($id = $Item->getId())
                 {
-                    if( (int)$Item->getData()['pledge'] > 0 && $rents[$id] )
+                    if( (int)$Item->getData()['pledge'] > 0 && ($prod = $this->searchProduct($rents, $id, $order->getId())) )
                     {
 //                        $timezone = new DateTimeZone("Europe/Kiev");
                         $datetime1 = new DateTime("now");
-                        $datetime2 = (new DateTime())->createFromFormat('Y-m-d', $rents[$id]['fdate']);
+                        $datetime2 = (new DateTime())->createFromFormat('Y-m-d', $prod['fdate']);
                         $interval = $datetime1->diff($datetime2);
 
                         // check 7 days
                         $mailletter = false;
-                        if( $rents[$id]['mailletters'] == 0 && $interval->y == 0 && $interval->m == 0
+                        if( $prod['mailletters'] == 0 && $interval->y == 0 && $interval->m == 0
                             && $interval->d <= 7 && $interval->d > 2 )
                         {
                             $mailletter = 1;
@@ -100,7 +100,7 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
 
 
                         // check 2 days
-                        } elseif ($rents[$id]['mailletters'] < 2 && $interval->y == 0 && $interval->m == 0
+                        } elseif ($prod['mailletters'] < 2 && $interval->y == 0 && $interval->m == 0
                             && $interval->d == 2 )
                         {
                             $mailletter = 2;
@@ -109,7 +109,7 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
 
 
                         // check 1 days
-                        } elseif ($rents[$id]['mailletters'] < 3 && $interval->y == 0 && $interval->m == 0
+                        } elseif ($prod['mailletters'] < 3 && $interval->y == 0 && $interval->m == 0
                             && $interval->d == 1 )
                         {
                             $mailletter = 3;
@@ -118,7 +118,7 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
 
 
                         // check 0 days
-                        } elseif ($rents[$id]['mailletters'] < 4 && $interval->y == 0 && $interval->m == 0
+                        } elseif ($prod['mailletters'] < 4 && $interval->y == 0 && $interval->m == 0
                             && $interval->d == 0 )
                         {
                             $mailletter = 4;
@@ -135,7 +135,7 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
                             /** @var Magento_Db_Adapter_Pdo_Mysql */
                             $readConnection = $resource->getConnection('core_write');
 
-                            $query = "UPDATE adv_rent SET mailletters = {$mailletter} WHERE id_order = {$order->getId()} AND id_prod = {$rents[$id]['id_prod']}";
+                            $query = "UPDATE adv_rent SET mailletters = {$mailletter} WHERE id_order = {$order->getId()} AND id_prod = {$prod['id_prod']}";
                             $results = $readConnection->query($query);
 
 
@@ -148,7 +148,7 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
                             $emailTemplateVariables['orderDate'] = date('d M Y', strtotime($itemData['created_at']));
                             $emailTemplateVariables['orderNum'] = $order->getIncrementId();
                             $emailTemplateVariables['goodsName'] = trim($itemData['name']);
-                            $emailTemplateVariables['rentStart'] = date('d M Y', strtotime($rents[$id]['fdate']));
+                            $emailTemplateVariables['rentStart'] = date('d M Y', strtotime($prod['fdate']));
                             $emailTemplateVariables['pledge'] = $itemData['pledge'];
                             $emailTemplateVariables['orderId'] = $order->getId();
                             $emailTemplateVariables['prodId'] = $id;
@@ -183,7 +183,7 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
                         } // endif
                     } // endif
 
-                    $result[$order_id]['items'][] = [$Item->getName(), $Item->getPrice(), $Item->getProductUrl(), $Item->getImageUrl(), $Item->getData()['pledge'], date('d M Y', strtotime($rents[$id]['fdate']))];
+                    $result[$order_id]['items'][] = [$Item->getName(), $Item->getPrice(), $Item->getProductUrl(), $Item->getImageUrl(), $Item->getData()['pledge'], date('d M Y', strtotime($prod['fdate']))];
                 }
             }
         }
@@ -257,5 +257,20 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
         }
 
         return $result;
+    }
+
+
+
+    private function searchProduct($inProducts, $inProdId, $inOrderId)
+    {
+        foreach ($inProducts as $key => $val)
+        {
+            if( $val['id_prod'] == $inProdId && $val['id_order'] == $inOrderId )
+            {
+                return $val;
+            } // endif
+        } // end foreach
+
+        return false;
     }
 }
