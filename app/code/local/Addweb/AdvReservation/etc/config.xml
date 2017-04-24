@@ -280,7 +280,7 @@
 		<admin>
 			<design>
 				<package>
-					<name>rentabag</name>
+					<name>Adv_rent</name>
 				</package>
 				<theme>
 					<default>rentabag</default>
@@ -288,7 +288,7 @@
 			</design>
 		</admin>
 	</stores>
-	<admin>
+	<!--<admin>
 		<routers>
 			<adminhtml>
 				<args>
@@ -308,5 +308,5 @@
 				</adv_rent>
 			</updates>
 		</layout>
-	</adminhtml>
+	</adminhtml>-->
 </config>

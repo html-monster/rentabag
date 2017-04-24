@@ -53,12 +53,10 @@ class Addweb_AdvReservation_Block_Adminhtml_Sales_Order_View_Items extends Mage_
             $type = $item->getProductType();
         }
 
-        ;
-
         $renderer = $this->getItemRenderer($type);
         $renderer->rent = $this->getOrderProductsPledge($smth->getData()[0]["order_id"]);
         return $renderer->setItem($item)
-//        return $this->getItemRenderer($type)->setItem($item)
+        //        return $this->getItemRenderer($type)->setItem($item)
             ->setCanEditQty($this->canEditQty())
             ->toHtml();
     }
