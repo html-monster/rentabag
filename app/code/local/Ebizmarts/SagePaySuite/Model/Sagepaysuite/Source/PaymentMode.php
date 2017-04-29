@@ -6,9 +6,11 @@
  * Sagepay Payment Mode Dropdown source
  *
  */
-class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Source_PaymentMode {
+class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Source_PaymentMode
+{
 
-    public function toOptionArray() {
+    public function toOptionArray() 
+    {
         return array(
             /*
             array(
@@ -27,12 +29,13 @@ class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Source_PaymentMode {
         );
     }
 
-    public function toOptions() {
+    public function toOptions() 
+    {
         $options = $this->toOptionArray();
 
         $modes = array();
 
-        for($i = 0; $i < count($options); $i++) {
+        for ($i = 0; $i < count($options); $i++) {
             $modes[$options[$i]['value']] = $options[$i]['label'];
         }
 

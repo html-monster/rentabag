@@ -10,4 +10,6 @@
 class Ebizmarts_SagePaySuite_Block_Info_SagePayForm extends Ebizmarts_SagePaySuite_Block_Info_Suite
 {
 
+    const SAGEPAYFORM = true;
+
 }

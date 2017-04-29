@@ -11,5 +11,5 @@
 class Ebizmarts_SagePaySuite_Block_Info_SagePayDirectPro extends Ebizmarts_SagePaySuite_Block_Info_Suite
 {
 
-
+const NIT2 = true;
 }

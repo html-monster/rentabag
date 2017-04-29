@@ -15,7 +15,7 @@ class Ebizmarts_SagePaySuite_Model_Observer_Token extends Ebizmarts_SagePaySuite
      */
     public function registerOnPayment($o)
     {
-    	$request = $o->getEvent()->getRequest();
+        $request = $o->getEvent()->getRequest();
 
         $customerSession = Mage::helper('customer')->getCustomer();
 
@@ -23,8 +23,8 @@ class Ebizmarts_SagePaySuite_Model_Observer_Token extends Ebizmarts_SagePaySuite
 
         Ebizmarts_SagePaySuite_Log::w($customerId, null, 'Token.log');
 
-        if(!$customerId){
-        	return $o;
+        if (!$customerId) {
+            return $o;
         }
 
         $_data = $request->getData();
@@ -36,14 +36,14 @@ class Ebizmarts_SagePaySuite_Model_Observer_Token extends Ebizmarts_SagePaySuite
 
         $rs = Mage::getModel('sagepaysuite/sagePayToken')->registerCard(array_intersect_key($_data, $_pdata));
 
-        if(empty($rs)){
+        if (empty($rs)) {
             return $o;
         }
 
         Ebizmarts_SagePaySuite_Log::w($_data, null, 'SagePayToken.log');
         Ebizmarts_SagePaySuite_Log::w($rs, null, 'SagePayToken.log');
 
-        if($rs['Status'] == 'OK'){
+        if ($rs['Status'] == 'OK') {
          $save = Mage::getModel('sagepaysuite2/sagepaysuite_tokencard')
             ->setToken($rs['Token'])
             ->setStatus($rs['Status'])
@@ -54,11 +54,10 @@ class Ebizmarts_SagePaySuite_Model_Observer_Token extends Ebizmarts_SagePaySuite
             ->setCustomerId($customerId)
             ->setLastFour(substr($_data['CardNumber'], -4))
             ->save();
-        }else{
+        } else {
             Ebizmarts_SagePaySuite_Log::w($rs, null, 'SagePayToken_Errors.log');
 
             #$customerSession->addError(Mage::helper('sagepaysuite')->__('Could not save credit card token: %s', $rs['StatusDetail']));
-
         }
     }
 

@@ -7,7 +7,8 @@
  * @package    Ebizmarts_SagePaySuite
  * @author     Ebizmarts <info@ebizmarts.com>
  */
-class Ebizmarts_SagePaySuite_Model_Feed_Updates {
+class Ebizmarts_SagePaySuite_Model_Feed_Updates
+{
 
     private $_key = 'sagepaysuite';
     private $_resources = array('Ebizmarts_Global', 'Ebizmarts_SagePaySuite');
@@ -17,16 +18,20 @@ class Ebizmarts_SagePaySuite_Model_Feed_Updates {
      *
      * @return SimpleXMLElement
      */
-    public function getFeedData($uri) {
+    public function getFeedData($uri) 
+    {
         $curl = new Varien_Http_Adapter_Curl;
-        $curl->setConfig(array(
+        $curl->setConfig(
+            array(
             'timeout' => 30
-        ));
+            )
+        );
         $curl->write(Zend_Http_Client::GET, $uri, '1.0');
         $data = $curl->read();
         if ($data === false) {
             return false;
         }
+
         $data = preg_split('/^\r?$/m', $data, 2);
         $data = trim($data[1]);
         $curl->close();
@@ -41,7 +46,8 @@ class Ebizmarts_SagePaySuite_Model_Feed_Updates {
         return $xml;
     }
 
-    public function getConfig($key) {
+    public function getConfig($key) 
+    {
         return Mage::getStoreConfig($this->_key . '/notifications/' . $key);
     }
 
@@ -51,7 +57,8 @@ class Ebizmarts_SagePaySuite_Model_Feed_Updates {
      * @param string $rssDate
      * @return string YYYY-MM-DD YY:HH:SS
      */
-    public function getDate($rssDate) {
+    public function getDate($rssDate) 
+    {
         return gmdate('Y-m-d H:i:s', strtotime($rssDate));
     }    
     
@@ -60,11 +67,13 @@ class Ebizmarts_SagePaySuite_Model_Feed_Updates {
      *
      * @return string
      */
-    public function getFeedUrl() {
+    public function getFeedUrl() 
+    {
         return $this->getConfig('updates_url');
     }
 
-    public function getLastUpdate($resource) {
+    public function getLastUpdate($resource) 
+    {
         return Mage::app()->loadCache($this->_key . $resource . '_updates_feed_lastcheck');
     }
 
@@ -73,14 +82,15 @@ class Ebizmarts_SagePaySuite_Model_Feed_Updates {
      * Checks feed
      * @return
      */
-    public function check() {
+    public function check() 
+    {
 
         if (!Mage::getSingleton('admin/session')->isLoggedIn()) {
             return $this;
         }
         
         //For when the module is not enabled.
-        if(!is_object(Mage::getModel('adminnotification/inbox'))) {
+        if (!is_object(Mage::getModel('adminnotification/inbox'))) {
             return $this;
         }
         
@@ -88,21 +98,19 @@ class Ebizmarts_SagePaySuite_Model_Feed_Updates {
             return $this;
         }
         
-        foreach($this->_resources as $resource) {
-            
+        foreach ($this->_resources as $resource) {
             //if ((time() - Mage::app()->loadCache($this->_key . $resource . '_updates_feed_lastcheck')) > (int)$this->getConfig('check_frequency')) {
-            if(((int)$this->getConfig('check_frequency')) + $this->getLastUpdate($resource) < time()) {
+            if (((int)$this->getConfig('check_frequency')) + $this->getLastUpdate($resource) < time()) {
                 $this->_getUpdates($resource);
             }
-            
         }
     }
 
-    protected function _getUpdates($resource) {
+    protected function _getUpdates($resource) 
+    {
         $feedData = array();
 
         try {
-
             $node = $this->getFeedData($this->getFeedUrl() . "{$resource}.xml");
 
             if (!$node) {
@@ -110,6 +118,7 @@ class Ebizmarts_SagePaySuite_Model_Feed_Updates {
                 return false;
             }
 
+            //@codingStandardsIgnoreStart
             foreach ($node->xpath('items/item') as $item) {        
                 
                 $feedData[] = array(
@@ -120,6 +129,7 @@ class Ebizmarts_SagePaySuite_Model_Feed_Updates {
                     'url' => (string) $item->url,
                 );
             }
+            //@codingStandardsIgnoreEnd
 
             if (count($feedData)) {
                 Mage::getModel('adminnotification/inbox')->parse($feedData);

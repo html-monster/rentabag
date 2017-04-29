@@ -1,4 +1,6 @@
-getSgpsAjaxUrl = function (method){
+//"use strict";
+
+var getSgpsAjaxUrl = function (method) {
 
     var loc = window.location.href;
 
@@ -10,16 +12,17 @@ getSgpsAjaxUrl = function (method){
     }else{
         return loc+'/'+method;
     }
-}
+};
 
-tokenSetDefault = function (radioelement){
+var tokenSetDefault = function (radioelement) {
 
-    new Ajax.Request(getSgpsAjaxUrl('default'), {
+    new Ajax.Request(
+        getSgpsAjaxUrl('default'), {
         method: 'get',
         parameters: {
             card:radioelement.value
-            },
-        onSuccess: function(transport) {
+        },
+        onSuccess: function (transport) {
 
             var rsp = transport.responseText.evalJSON();
 
@@ -30,36 +33,39 @@ tokenSetDefault = function (radioelement){
             $('sageTokenCardLoading').hide();
 
         },
-        onLoading: function(){
+        onLoading: function () {
             $('sageTokenCardLoading').show();
         }
-    })
+        }
+    )
 
-}
+};
 
-evenOdd = function(row, index){
+var evenOdd = function (row, index) {
     var _class = ((index+1)%2 == 0 ? 'even' : 'odd');
     row.addClassName(_class);
-}
+};
 
-updateEvenOdd = function(){
+var updateEvenOdd = function () {
     var rows = $$('table#my-sagepaycards-table tbody tr');
     rows.invoke('removeClassName', 'odd').invoke('removeClassName', 'even');
     rows.each(
-        function(row, index){
+        function (row, index) {
             evenOdd(row, index);
-        });
-}
+        }
+    );
+};
 
-postRegisterCard = function(frm){
+var postRegisterCard = function (frm) {
 
     var safeForm = new Validation(frm);
     if(!safeForm.validate()){
         return;
     }
 
-    frm.request({
-        onComplete: function(trn){
+    frm.request(
+        {
+        onComplete: function (trn) {
 
             var rsp = trn.responseText.evalJSON();
             if(rsp.status != 'OK'){
@@ -75,59 +81,65 @@ postRegisterCard = function(frm){
                 if($('no-tokencards-tr')){
                     $('no-tokencards-tr').up().remove();
                 }
+
                 $('frmRegCard').remove();
 
                 updateEvenOdd();
-            //window.location.reload();
+                //window.location.reload();
             }
 
             $('sageTokenCardLoading').hide();
 
         },
-        onLoading: function(){
+        onLoading: function () {
             $('sageTokenCardLoading').show();
         }
-    })
+        }
+    )
 
-}
+};
 
-updateNickname = function(card,nickname,successCallback,failureCallback) {
+var updateNickname = function (card,nickname,successCallback,failureCallback) {
 
-    this.url = getSgpsAjaxUrl('updatenickname/card/'+parseInt(card));
-    new Ajax.Request(url, {
+    var url = getSgpsAjaxUrl('updatenickname/card/'+parseInt(card));
+    new Ajax.Request(
+        url, {
         method: 'post', //should be patch
         postBody: 'nickname='+nickname,
-        onSuccess: function(result) {
+        onSuccess: function (result) {
 
             if(JSON.parse(result.transport.response).st == 'ok'){
-
                 if(typeof successCallback == 'function'){
                     successCallback();
                 }
+
                 $('sageTokenCardLoading').hide();
             }
 
         },
-        onFailure: function(){
+        onFailure: function () {
             if(typeof failureCallback == 'function'){
                 failureCallback();
             }
+
             $('sageTokenCardLoading').hide();
         },
-        onLoading: function() {
+        onLoading: function () {
             $('sageTokenCardLoading').show();
         }
-    });
+        }
+    );
 
-}
+};
 
-removeCard = function(elem) {
+var removeCard = function (elem) {
 
     var oncheckout = elem.hasClassName('oncheckout');
 
-    new Ajax.Request(elem.href, {
+    new Ajax.Request(
+        elem.href, {
         method: 'get',
-        onSuccess: function(transport) {
+        onSuccess: function (transport) {
             try {
                 var rsp = transport.responseText.evalJSON();
 
@@ -137,16 +149,19 @@ removeCard = function(elem) {
                 }
                 else {
                     if(false === oncheckout) {
-                        elem.up().up().fade({
-                            afterFinish:function(){
+                        elem.up().up().fade(
+                            {
+                            afterFinish:function () {
                                 elem.up().up().remove();
                                 updateEvenOdd();
                             }
-                        });
+                            }
+                        );
                     }
                     else {
-                        elem.up().fade({
-                            afterFinish:function() {
+                        elem.up().fade(
+                            {
+                            afterFinish:function () {
 
                                 var daiv = elem.up('div');
 
@@ -160,7 +175,8 @@ removeCard = function(elem) {
                                 }
 
                             }
-                        });
+                            }
+                        );
                     }
                 }
 
@@ -171,7 +187,7 @@ removeCard = function(elem) {
                 alert(er);
             }
         },
-        onLoading: function() {
+        onLoading: function () {
             if(!oncheckout) {
                 if($('iframeRegCard')) {
                     $('iframeRegCard').remove();
@@ -179,6 +195,7 @@ removeCard = function(elem) {
                 else if($('frmRegCard')) {
                     $('frmRegCard').remove();
                 }
+
                 $('sageTokenCardLoading').show();
             }
             else {
@@ -186,14 +203,16 @@ removeCard = function(elem) {
             }
 
         }
-    })
+        }
+    )
 
-}
+};
 
-registerCard = function(url){
-    new Ajax.Request(url, {
+var registerCard = function (url) {
+    new Ajax.Request(
+        url, {
         method: 'get',
-        onSuccess: function(transport) {
+        onSuccess: function (transport) {
 
             var rsp = transport.responseText.evalJSON();
 
@@ -210,7 +229,7 @@ registerCard = function(url){
             $('sageTokenCardLoading').hide();
 
         },
-        onLoading: function(){
+        onLoading: function () {
 
             if($('iframeRegCard')){
                 $('iframeRegCard').remove();
@@ -221,14 +240,16 @@ registerCard = function(url){
             $('sageTokenCardLoading').show();
 
         }
-    })
+        }
+    )
 }
 
-function trim (str) {
+function trim(str) 
+{
     return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 }
 
-editNickname = function(event){
+var editNickname = function (event) {
 
     this.div = event.findElement();
     this.td = this.div.up('td');
@@ -243,13 +264,13 @@ editNickname = function(event){
 
 }
 
-keyPressHandler = function(event){
+var keyPressHandler = function (event) {
     if (event.keyCode == 13) {
         saveNickname(event);
     }
-}
+};
 
-saveNickname = function(event){
+var saveNickname = function (event) {
 
     this.input = event.findElement();
     this.td = this.input.up('td');
@@ -262,30 +283,35 @@ saveNickname = function(event){
 
     var self = this;
 
-    this.successCallback = function(){
+    this.successCallback = function () {
 
         if(self.nickname) {
             self.td.update('<div style="cursor: pointer" title="Click to edit the credit card description.">' + self.nickname + '</div>');
         }else {
             self.td.update('<div style="cursor: pointer" title="Click to edit the credit card description.">Click to add a Description</div>');
         }
+
         self.td.down('div').observe('click', editNickname);
     };
 
-    this.failureCallback = function (){
+    this.failureCallback = function () {
         alert('Something went wrong, credit card description not changed.');
-    }
+    };
 
     updateNickname(this.id,this.nickname,this.successCallback,this.failureCallback);
-}
+};
 
-setObservers = function(){
-    $$('.nickname').each(function(elem){
+var setObservers = function () {
+    $$('.nickname').each(
+        function (elem) {
         Event.stopObserving(elem.down('div'), 'click', editNickname);
         Event.observe(elem.down('div'), 'click', editNickname);
-    });
-}
+        }
+    );
+};
 
-document.observe("dom:loaded", function() {
+document.observe(
+    "dom:loaded", function () {
     setObservers();
-});
+    }
+);

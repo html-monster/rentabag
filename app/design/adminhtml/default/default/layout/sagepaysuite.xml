@@ -107,6 +107,14 @@
 			</block>
 		</reference>
 	</adminhtml_spslog_index>
+	<adminhtml_spsrepeatpayment_index>
+		<reference name="head">
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>sagepaysuite/js/sagePaySuite.js</name>
+			</action>
+		</reference>
+	</adminhtml_spsrepeatpayment_index>
 	<adminhtml_sagepayreporting_transactiondetailmodal>
 		<reference name="head">
 			<action method="addItem">
@@ -154,12 +162,20 @@
 	<adminhtml_system_config_edit>
 		<reference name="head">
 			<action method="addItem">
+				<type>js</type>
+				<name>sagepaysuite/livepipe/livepipe.js</name>
+			</action>
+			<action method="addItem">
+				<type>js</type>
+				<name>sagepaysuite/livepipe/window.js</name>
+			</action>
+			<action method="addItem">
 				<type>skin_css</type>
 				<name>sagepaysuite/css/sagePaySuite.css</name>
 			</action>
             <action method="addItem">
                 <type>js</type>
-                <name>sagepaysuite/common.js</name>
+                <name>sagepaysuite/adminhtml.js</name>
             </action>
 		</reference>
 	</adminhtml_system_config_edit>
@@ -307,7 +323,16 @@
 				<name>sagepaysuite/livepipe/window.js</name>
 			</action>
 		</reference>
+		<reference name="submit_before">
+			<block type="sagepaysuite/adminhtml_sales_order_creditmemo_invoices" name="sagepaysuite.refund.choser" template="sagepaysuite/sales/order/creditmemo/create/invoices.phtml" />
+		</reference>
 	</adminhtml_sales_order_creditmemo_new>
+	<!-- For when the qty is updated. Thanks Adam Malkin for this! -->
+	<adminhtml_sales_order_creditmemo_updateqty>
+	    <reference name="submit_before">
+	    	<block type="sagepaysuite/adminhtml_sales_order_creditmemo_invoices" name="sagepaysuite.refund.choser" template="sagepaysuite/sales/order/creditmemo/create/invoices.phtml" />
+	    </reference>
+	</adminhtml_sales_order_creditmemo_updateqty>
 	<adminhtml_sales_order_invoice_view>
 		<reference name="head">
 			<action method="addItem">
@@ -356,5 +381,44 @@
 			</action>
 		</reference>
 	</adminhtml_sales_order_invoice_new>
+
+    <!-- Direct Refunds -->
+    <adminhtml_spsdirectrefund_edit>
+        <reference name="left">
+            <block type="sagepaysuite/adminhtml_directrefund_edit_tabs" name="adminhtml.sagepay.directrefund.edit.tabs"/>
+        </reference>
+        <reference name="content">
+            <block type="sagepaysuite/adminhtml_directrefund_edit" name="adminhtml.sagepay.directrefund.edit"/>
+        </reference>
+    </adminhtml_spsdirectrefund_edit>
+    <adminhtml_spsdirectrefund_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>sagepaysuite/css/sagePaySuite.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>sagepaysuite/js/sagePaySuite.js</name>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>sagepaysuite/livepipe/livepipe.js</name>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>sagepaysuite/livepipe/window.js</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="sagepaysuite/adminhtml_directrefund" name="adminhtml.sagepay.directrefunds" />
+        </reference>
+    </adminhtml_spsdirectrefund_index>
+    <adminhtml_spsdirectrefund_grid>
+        <reference name="content">
+            <block type="sagepaysuite/adminhtml_directrefund_grid" name="adminhtml.sagepay.directrefunds.grid" output="toHtml" />
+        </reference>
+    </adminhtml_spsdirectrefund_grid>
+    <!-- Direct Refunds -->
 
 </layout>

@@ -2,12 +2,12 @@
 
 class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Transaction extends Mage_Core_Model_Abstract
 {
-	 /** Order instance
+     /** Order instance
      *
      * @var Mage_Sales_Model_Order
      */
     protected $_order;
-	protected $_paypal_trn = null;
+    protected $_paypalTrn = null;
 
     /**
      * Prefix of model events names
@@ -51,38 +51,37 @@ class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Transaction extends Mage_Core_Mo
         return $this;
     }
 
-	public function loadMultipleBy($attribute, $value)
-	{
-		$this->getCollection()
-		->addFieldToFilter($attribute, $value);
-		return $this;
-	}
+    public function loadMultipleBy($attribute, $value)
+    {
+        $this->getCollection()
+        ->addFieldToFilter($attribute, $value);
+        return $this;
+    }
 
-	/**
-	 * Adds some API data to transaction
-	 *
-	 * @param int Order ID
-	 */
-	public function addApiDetails($orderId)
-	{
-		$this->loadByParent($orderId);
+    /**
+     * Adds some API data to transaction
+     *
+     * @param int Order ID
+     */
+    public function addApiDetails($orderId)
+    {
+        $this->loadByParent($orderId);
 
-		if($this->getId()){
+        if ($this->getId()) {
+            try{
+                $details = Mage::getModel('sagepayreporting/sagepayreporting')
+                        ->getTransactionDetails(null, $this->getVpsTxId());
 
-			try{
-				$details = Mage::getModel('sagepayreporting/sagepayreporting')
-						->getTransactionDetails(null, $this->getVpsTxId());
-
-                if((string)$details->getErrorcode() === '0000'){
-					$this->setEci($details->getEci())
-						->setPaymentSystemDetails($details->getPaymentsystemdetails())
-						->save();
-				}
-
-			}catch(Exception $e){}
-
-		}
-	}
+                if ((string)$details->getErrorcode() === '0000') {
+                    $this->setEci($details->getEci())
+                        ->setPaymentSystemDetails($details->getPaymentsystemdetails())
+                        ->save();
+                }
+            }catch(Exception $e){
+                Mage::logException($e);
+            }
+        }
+    }
 
     /**
      * Update transaction from API
@@ -92,22 +91,19 @@ class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Transaction extends Mage_Core_Mo
     public function updateFromApi()
     {
 
-        if($this->getId()){
-
-            try{
-
+        if ($this->getId()) {
+            try {
                 $details = Mage::getModel('sagepayreporting/sagepayreporting')
-                        ->getTransactionDetails($this->getVendorTxCode(), $this->getVpsTxId());
+                    ->getTransactionDetails($this->getVendorTxCode(), $this->getVpsTxId());
 
-                if((string)$details->getErrorcode() === '0000') {
+                if ((string)$details->getErrorcode() === '0000') {
+                    //Mage::log("STATUS: " . (int)$details->getTxstateid() . " " . $details->getStatus());
 
-                        //Mage::log("STATUS: " . (int)$details->getTxstateid() . " " . $details->getStatus());
+                    if (((int)$details->getTxstateid()) === 16) {
+                        $this->setStatus('OK');
+                    }
 
-                        if(((int)$details->getTxstateid()) === 16) {
-                            $this->setStatus('OK');
-                        }
-
-                        $this
+                    $this
                         ->setVpsTxId($details->getVpstxid())
                         ->setBatchId($details->getBatchid())
                         ->setSecurityKey($details->getSecuritykey())
@@ -124,62 +120,69 @@ class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Transaction extends Mage_Core_Mo
                         ->setReleased(($details->getReleased() ? 1 : 0))
                         ->setAborted(($details->getAborted() ? 1 : 0))
                         ->setSurchargeAmount($details->getSurcharge())
+                        ->setRedFraudResponse($details->getFraudscreenrecommendation())
                         ->setVoided((((int)$details->getTxstateid() == 18) ? 1 : 0))
+                        ->setTxAuthNo($details->getVpsauthcode())
+                        ->setVpsProtocol($details->getVpsprotocol())
                         ->save();
 
-                        //Update Fraud Score
-                        if($details->getT3maction() != 'NORESULT') {
-                            $fraud = Mage::getModel('sagepayreporting/fraud')->updateThirdMan($this->getOrderId(), $details);
-                            $this->setFraud($fraud);
-                        }
-
-                }
-                else {
+                    //Update Fraud Score
+                    if ($details->getT3maction() != 'NORESULT') {
+                        $fraud = Mage::getModel('sagepayreporting/fraud')->updateThirdMan($details, $this->getOrderId());
+                        $this->setFraud($fraud);
+                    }
+                } else {
                     //Mage::log((string)$details->getError());
-					$this->setApiError(Mage::helper('sagepayreporting/error')->parseError((string)$details->getError(),
-                        Mage::getStoreConfig('sagepayreporting/account/vendor')));
-				}
-
+                    $this->setApiError(
+                        Mage::helper('sagepayreporting/error')->parseError(
+                            (string)$details->getError(),
+                            Mage::getStoreConfig('sagepayreporting/account/vendor')
+                        )
+                    );
+                }
             }catch(Exception $e){
-				Mage::logException($e);
-				$this->setApiError($e->getMessage());
+                Mage::logException($e);
+                $this->setApiError($e->getMessage());
 
                 //set as status 0 (not found)
-                if(is_null($this->getTxStateId())){
+                if (is_null($this->getTxStateId())) {
                     $this->setTxStateId(0)->save();
                 }
-			}
-
+            }
         }
 
         return $this;
     }
 
-	public function getisPayPalTransaction()
-	{
-		if(!is_null($this->_paypal_trn)){
-			return $this->_paypal_trn;
-		}
+    public function getisPayPalTransaction()
+    {
 
-		$pp = Mage::getModel('sagepaysuite2/sagepaysuite_paypaltransaction')
-		->loadByVendorTxCode($this->getVendorTxCode());
+        if (!is_null($this->_paypalTrn)) {
+            return $this->_paypalTrn;
+        }
 
-		if($pp->getId()){
-			$this->_paypal_trn = true;
-		}else{
-			$this->_paypal_trn = false;
-		}
-		return $this->_paypal_trn;
-	}
+        $pp = Mage::getModel('sagepaysuite2/sagepaysuite_paypaltransaction')
+        ->loadByVendorTxCode($this->getVendorTxCode());
 
-	public function getCardExpiryDate()
-	{
-		$data = $this->getData('card_expiry_date');
-		if(!$data){
-			return null;
-		}
-		return $data[0].$data[1].'/'.$data[2].$data[3];
-	}
+        if ($pp->getId()) {
+            $this->_paypalTrn = true;
+            $this->setPayPalData($pp);
+        } else {
+            $this->_paypalTrn = false;
+        }
+
+        return $this->_paypalTrn;
+    }
+
+    public function getCardExpiryDate()
+    {
+        $data = $this->getData('card_expiry_date');
+        if (!$data) {
+            return null;
+        }
+
+        return $data[0].$data[1].'/'.$data[2].$data[3];
+    }
 
     /**
      * Processing object before save data
@@ -188,12 +191,12 @@ class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Transaction extends Mage_Core_Mo
      */
     protected function _beforeSave()
     {
-    	$quote = Mage::getModel('sagepaysuite/api_payment')->getQuote();
-    	$dbQuote = Mage::getModel('sagepaysuite/api_payment')->loadQuote($quote->getId(), Mage::app()->getStore()->getId());
+        $quote = Mage::getModel('sagepaysuite/api_payment')->getQuote();
+        $dbQuote = Mage::getModel('sagepaysuite/api_payment')->loadQuote($quote->getId(), Mage::app()->getStore()->getId());
 
-        if($quote->getId() && $dbQuote->getId()){
-    		$this->setQuoteId($quote->getId())
-    		->setStoreId(Mage::app()->getStore()->getId());
+        if ($quote->getId() && $dbQuote->getId()) {
+            $this->setQuoteId($quote->getId())
+            ->setStoreId(Mage::app()->getStore()->getId());
         }
 
         return parent::_beforeSave();
@@ -206,21 +209,27 @@ class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Transaction extends Mage_Core_Mo
      */
     protected function _afterLoad()
     {
-    	/**
-    	 * Multishipping parent TRN
-    	 */
-        if($this->getOrderId() && $this->getParentTrnId()){
-        	$parent = Mage::getModel('sagepaysuite2/sagepaysuite_transaction')
-        			  ->load($this->getParentTrnId())->toArray();
-        	unset($parent['id']);
-        	unset($parent['order_id']);
-        	unset($parent['parent_trn_id']);
+        /**
+         * Multishipping parent TRN
+         */
+        if ($this->getOrderId() && $this->getParentTrnId()) {
+            $parent = Mage::getModel('sagepaysuite2/sagepaysuite_transaction')
+                      ->load($this->getParentTrnId())->toArray();
+            unset($parent['id']);
+            unset($parent['order_id']);
+            unset($parent['parent_trn_id']);
 
-        	$this->addData($parent);
+            $this->addData($parent);
         }
-    	/**
-    	 * Multishipping parent TRN
-    	 */
+
+        /**
+         * Multishipping parent TRN
+         */
+
+        /**
+         * Paypal
+         */
+        $this->getisPayPalTransaction();
 
         return parent::_afterLoad();
     }

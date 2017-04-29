@@ -26,8 +26,12 @@
  }
  $_code = $this->getMethod()->getCode();
 
+ //For emails
+ if(Mage::getSingleton('sagepaysuite/session')->getSagepaypaypalRqpost()){
+   $_code = 'sagepaypaypal';
+ }
 
- if(!$sagepay->getLastFourDigits() && ($_code == 'sagepayserver' || $_code == 'sagepayserver_moto' || $_code == 'sagepaypaypal') && is_object($this->getInfo()->getOrder())){
+ if(!$sagepay->getLastFourDigits() && ($_code == 'sagepayserver' || $_code == 'sagepayserver_moto' || $_code == 'sagepaypaypal' || $_code == 'sagepayform') && is_object($this->getInfo()->getOrder())){
  	$sagepay = Mage::getModel('sagepaysuite2/sagepaysuite_transaction')
                 ->loadByParent($this->getInfo()->getOrder()->getId());
  }
@@ -58,10 +62,27 @@
 
        <?php if($this->getInfo()->getRemembertoken()): ?>
                 <input id="token-remembertoken" type="hidden" name="payment[remembertoken]" value="<?php echo $this->getInfo()->getRemembertoken(); ?>" />
-                <input type="hidden" name="payment[cc_nickname]" value="<?php echo $this->htmlEscape($this->getInfo()->getCcNickname()); ?>" />
+                <input type="hidden" name="payment[cc_nickname]" value="<?php echo $this->htmlEscape($this->htmlEscape($this->getInfo()->getCcNickname())); ?>" />
        <?php endif; ?>
 
 <?php endif; ?>
+
+<?php if($sagepay->getisPayPalTransaction()){ ?>
+	<p><?php echo is_null($this->getMethod()->getPayPalTitle()) ? $this->getMethod()->getTitle() : $this->getMethod()->getPayPalTitle(); ?></p>
+    <?php if($this->getInfo()->getCcType() == 'PAYPAL'): ?>
+    <table>
+        <tr>
+            <td><?php echo $this->getCcTypeName($sagepay->getCardType()); ?></td>
+        </tr>
+    </table>
+    <?php endif; ?>
+<?php }elseif($_code == 'sagepaypaypal'){
+    //payment review sidebar for paypal
+    ?>
+    <p><?php echo $this->getMethod()->getTitle(); ?></p>
+    <img style="max-width: 200px;margin-right: -8px;" src="<?php echo $this->getSkinUrl('sagepaysuite/images/paypal_checkout_review.jpg')?>" alt="<?php echo $this->__('Checkout with PayPal via SagePay');?>" />
+
+<?php }else{ ?>
 	<p><?php echo $this->getMethod()->getTitle(); ?></p>
     <?php if($sagepay->getLastFourDigits()): ?>
         <table>
@@ -81,6 +102,7 @@
             <?php endif; ?>
         </table>
     <?php endif; ?>
+<?php } ?>
 
 <?php if(Mage::getSingleton('core/translate')->getTranslateInline() === true && $this->getIsSecureMode() != true && !Mage::app()->getRequest()->isXmlHttpRequest()): ?>
 	<?php echo $this->getChildHtml(); ?>

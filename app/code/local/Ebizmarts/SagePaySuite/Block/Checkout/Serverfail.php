@@ -7,24 +7,26 @@
  * @package    Ebizmarts_SagePaySuite
  * @author     Ebizmarts <info@ebizmarts.com>
  */
-class Ebizmarts_SagePaySuite_Block_Checkout_Serverfail extends Mage_Core_Block_Template {
+class Ebizmarts_SagePaySuite_Block_Checkout_Serverfail extends Mage_Core_Block_Template
+{
 
-    protected function _getSess() {
+    protected function _getSess() 
+    {
         return Mage::getSingleton('sagepaysuite/session');
     }
 
-    protected function _toHtml() {
+    protected function _toHtml() 
+    {
 
         $message = $this->_getSess()->getFailStatus();
 
-        if(empty($message)){
+        if (empty($message)) {
             $message = "Transaction canceled.";
         }
 
-        $server_mode = (string)Mage::getModel('sagepaysuite/sagePayServer')->getConfigData('payment_iframe_position');
+        $serverMode = (string)Mage::getModel('sagepaysuite/sagePayServer')->getConfigData('payment_iframe_position');
         //Redirect to cart
-        if($server_mode == 'full_redirect' || $this->isMobile()) {
-
+        if ($serverMode == 'full_redirect' || $this->isMobile()) {
             Mage::getSingleton('checkout/session')->addError(Mage::helper('sagepaysuite/error')->parseTransactionFailedError($message));
 
             $checkoutUrl     = $this->getUrl('checkout/cart', array('_secure'=>true));
@@ -32,8 +34,7 @@ class Ebizmarts_SagePaySuite_Block_Checkout_Serverfail extends Mage_Core_Block_T
             $html = '<html><body>';
             $html.= '<script type="text/javascript">' . $fullRedirectionJsScript . '</script>';
             $html.= '</body></html>';
-        }else{
-
+        } else {
             //alert message
             $alert = '';
             if ($message) {
@@ -88,7 +89,8 @@ class Ebizmarts_SagePaySuite_Block_Checkout_Serverfail extends Mage_Core_Block_T
         return $html;
     }
 
-    protected function isMobile() {
+    protected function isMobile() 
+    {
         return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
     }
 

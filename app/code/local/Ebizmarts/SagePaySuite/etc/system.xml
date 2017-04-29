@@ -19,13 +19,22 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                 </hint>
-            	<sagepaysuite translate="label comment" module="sagepaysuite">
+                <sagepaysuite translate="label comment" module="sagepaysuite">
                     <label>Sage Pay Suite [Basic Settings]</label>
                     <sort_order>10</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
+                        <license_key translate="label">
+                            <label>License Key</label>
+                            <config_path>payment/sagepaysuite/license_key</config_path>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </license_key>
                         <vendor translate="label">
                             <label>Vendor</label>
                             <frontend_type>text</frontend_type>
@@ -74,19 +83,22 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </title>
-                        <payment_action translate="label tooltip">
+                        <payment_action translate="label">
                             <label>Payment Action</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepayform/payment_action</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_paymentAction</source_model>
-                            <tooltip><![CDATA[<span>Become PRO</span> to enable more payment options! More information here http://ebizmarts.com/sage-pay-suite]]></tooltip>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </payment_action>
                         <order_status translate="label">
                             <label>New order status</label>
@@ -97,7 +109,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </order_status>
                         <mode translate="label">
                             <label>Mode</label>
@@ -108,19 +122,24 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </mode>
                         <encryption_pass translate="label">
                             <label>Encryption Password</label>
                             <frontend_type>obscure</frontend_type>
                             <config_path>payment/sagepayform/encryption_pass</config_path>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
-                            <comment><![CDATA[<a target="_blank" href="http://www.sagepay.co.uk/support/find-document/form-integration">Sage Pay</a> would provide this]]></comment>
+                            <comment>
+                                <![CDATA[<a target="_blank" href="http://www.sagepay.co.uk/support/find-document/form-integration">Sage Pay</a> would provide this]]></comment>
                             <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </encryption_pass>
                         <selected_description translate="label">
                             <label>Selected Description</label>
@@ -131,7 +150,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </selected_description>
                         <allowspecific translate="label">
                             <label>Payment from applicable countries</label>
@@ -142,7 +163,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allowspecific>
                         <specificcountry translate="label">
                             <label>Payment from Specific countries</label>
@@ -153,7 +176,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </specificcountry>
                         <allow_gift_aid translate="label comment">
                             <label>Allow Gift Aid</label>
@@ -165,7 +190,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allow_gift_aid>
                         <send_email translate="label">
                             <label>Send Email</label>
@@ -176,41 +203,54 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </send_email>
                         <vendor_email translate="label comment">
                             <label>Vendor Email</label>
                             <frontend_type>text</frontend_type>
                             <config_path>payment/sagepayform/vendor_email</config_path>
-                            <comment><![CDATA[If you wish to use multiple email addresses, you should add them using the : (colon) character as a separator. e.g. me@mail1.com:me@mail2.com]]></comment>
+                            <comment>
+                                <![CDATA[If you wish to use multiple email addresses, you should add them using the : (colon) character as a separator. e.g. me@mail1.com:me@mail2.com]]></comment>
                             <sort_order>105</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </vendor_email>
                         <email_message translate="label comment">
                             <label>Email Message</label>
                             <frontend_type>textarea</frontend_type>
-                            <comment>A message to the customer which is inserted into the successful transaction emails only. If provided this message is included toward the top of the customer confirmation emails.</comment>
+                            <comment>A message to the customer which is inserted into the successful transaction emails
+                                only. If provided this message is included toward the top of the customer confirmation
+                                emails.
+                            </comment>
                             <config_path>payment/sagepayform/email_message</config_path>
                             <sort_order>108</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </email_message>
                         <avscv2 translate="label">
                             <label>AVS CV2</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepayform/avscv2</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_avsCv2</source_model>
-                            <comment><![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
+                            <comment>
+                                <![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
                             <sort_order>110</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </avscv2>
                         <sort_order translate="label">
                             <label>Sort order</label>
@@ -220,7 +260,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </sort_order>
                         <min_order_total>
                             <label>Minimum Order Total</label>
@@ -230,7 +272,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </min_order_total>
                         <max_order_total>
                             <label>Maximum Order Total</label>
@@ -240,7 +284,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </max_order_total>
                     </fields>
                 </sagepayform>
@@ -261,21 +307,23 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </active>
-                        <payment_action translate="label tooltip">
+                        <payment_action translate="label">
                             <label>Payment Action</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepayserver/payment_action</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_paymentAction</source_model>
-                            <tooltip><![CDATA[<span>Become PRO</span> to enable more payment options! More information here http://ebizmarts.com/sage-pay-suite]]></tooltip>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </payment_action>
                         <pre_save translate="label">
                             <label>Save Order Before</label>
-                            <comment><![CDATA[Order will be saved before loading Sage Pay's iframe with 'Pending Payment' status.]]></comment>
+                            <comment>
+                                <![CDATA[Order will be saved before loading Sage Pay's iframe with 'Pending Payment' status.]]></comment>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepayserver/pre_save</config_path>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -283,7 +331,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </pre_save>
                         <cancel_pending_payment translate="label">
                             <label>Cancel Pending Payment Orders Cron</label>
@@ -308,7 +358,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </order_status>
                         <title translate="label">
                             <label>Title</label>
@@ -318,7 +370,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </title>
                         <mode translate="label">
                             <label>Mode</label>
@@ -329,7 +383,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </mode>
                         <purchase_description translate="label">
                             <label>Purchase Description</label>
@@ -340,7 +396,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </purchase_description>
                         <selected_description translate="label">
                             <label>Selected Description</label>
@@ -351,7 +409,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </selected_description>
                         <payment_iframe_position>
                             <label>Payment pages layout</label>
@@ -362,7 +422,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </payment_iframe_position>
                         <iframe_height translate="label">
                             <label>iFrame Height</label>
@@ -373,7 +435,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </iframe_height>
                         <iframe_width translate="label">
                             <label>iFrame Width</label>
@@ -384,7 +448,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </iframe_width>
                         <template_profile translate="label comment">
                             <label>Template Profile</label>
@@ -395,9 +461,27 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment><![CDATA[A profile of LOW returns the new simpler VSP Server payment pages which have only one step and minimal formatting. Designed to run in i-Frames.]]></comment>
-                            <depends><active>1</active></depends>
+                            <comment>
+                                <![CDATA[A profile of LOW returns the new simpler VSP Server payment pages which have only one step and minimal formatting. Designed to run in i-Frames.]]></comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </template_profile>
+                        <parameters_in_success_url translate="label">
+                            <label>Use GET params in Success URL</label>
+                            <comment>
+                                <![CDATA[If enabled, the order id and quote id will be sent in the success URL, which will provide a failsafe in case of session lost cases.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepayserver/parameters_in_success_url</config_path>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>165</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </parameters_in_success_url>
                         <token_iframe_height translate="label">
                             <label>Token form iFrame height</label>
                             <frontend_type>text</frontend_type>
@@ -407,7 +491,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </token_iframe_height>
                         <token_iframe_width translate="label">
                             <label>Token form iFrame width</label>
@@ -418,19 +504,24 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </token_iframe_width>
                         <avscv2 translate="label comment">
                             <label>AVS CV2</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepayserver/avscv2</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_avsCv2</source_model>
-                            <comment><![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
+                            <comment>
+                                <![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
                             <sort_order>190</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </avscv2>
                         <allow_gift_aid translate="label comment">
                             <label>Allow Gift Aid</label>
@@ -442,8 +533,24 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allow_gift_aid>
+                        <secure3d translate="label">
+                            <label>3D Secure</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepayserver/secure3d</config_path>
+                            <source_model>sagepaysuite/sagepaysuite_source_secure3d</source_model>
+                            <comment><![CDATA[Please visit your MySagePay merchant dashboard (Settings/3D Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
+                            <sort_order>205</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </secure3d>
                         <allowspecific translate="label">
                             <label>Payment from applicable countries</label>
                             <frontend_type>allowspecific</frontend_type>
@@ -453,7 +560,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allowspecific>
                         <specificcountry translate="label">
                             <label>Payment from Specific countries</label>
@@ -464,7 +573,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </specificcountry>
                         <min_order_total translate="label">
                             <label>Minimum Order Total</label>
@@ -474,7 +585,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </min_order_total>
                         <max_order_total translate="label">
                             <label>Maximum Order Total</label>
@@ -484,7 +597,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </max_order_total>
                         <sort_order translate="label">
                             <label>Sort order</label>
@@ -494,7 +609,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </sort_order>
                     </fields>
                 </sagepayserver>
@@ -525,7 +642,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </order_status>
                         <sort_order translate="label">
                             <label>Sort order</label>
@@ -535,7 +654,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </sort_order>
                         <mode translate="label">
                             <label>Mode</label>
@@ -546,7 +667,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </mode>
                         <title translate="label">
                             <label>Title</label>
@@ -556,19 +679,22 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </title>
-                        <payment_action translate="label tooltip">
+                        <payment_action translate="label">
                             <label>Payment Action</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepaydirectpro/payment_action</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_paymentAction</source_model>
-                            <tooltip><![CDATA[<span>Become PRO</span> to enable more payment options! More information here http://ebizmarts.com/sage-pay-suite]]></tooltip>
                             <sort_order>2</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </payment_action>
                         <cctypesSagePayDirectPro translate="label">
                             <label>Accepted Card types</label>
@@ -579,23 +705,29 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </cctypesSagePayDirectPro>
                         <secure3d translate="label">
                             <label>3D Secure</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepaydirectpro/secure3d</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_secure3d</source_model>
-                            <comment><![CDATA[Please visit your accounts My Sage Pay area (Settings/ 3D Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
+                            <comment>
+                                <![CDATA[Please visit your accounts My Sage Pay area (Settings/ 3D Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
                             <sort_order>49</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </secure3d>
                         <force_threed_cards translate="label comment">
                             <label>Force 3D checking for selected credit cards</label>
-                            <comment><![CDATA[Force 3D-Secure checks for this transaction (if your account is 3D-enabled) but ALWAYS obtain an auth code, irrespective of rule base. Selected cards from the above list are not applied against the accounts 3D secure Rule base, so will not be REJECTED as a result.]]></comment>
+                            <comment>
+                                <![CDATA[Force 3D-Secure checks for this transaction (if your account is 3D-enabled) but ALWAYS obtain an auth code, irrespective of rule base. Selected cards from the above list are not applied against the accounts 3D secure Rule base, so will not be REJECTED as a result.]]></comment>
                             <frontend_type>multiselect</frontend_type>
                             <config_path>payment/sagepaydirectpro/force_threed_cards</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_CreditCards</source_model>
@@ -603,7 +735,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </force_threed_cards>
                         <allowspecific translate="label">
                             <label>Payment from applicable countries</label>
@@ -614,7 +748,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allowspecific>
                         <specificcountry translate="label">
                             <label>Payment from Specific countries</label>
@@ -625,7 +761,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </specificcountry>
                         <min_order_total>
                             <label>Minimum Order Total</label>
@@ -635,7 +773,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </min_order_total>
                         <max_order_total>
                             <label>Maximum Order Total</label>
@@ -645,7 +785,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </max_order_total>
                         <threed_iframe_height translate="label">
                             <label>3D iFrame Height</label>
@@ -656,7 +798,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </threed_iframe_height>
                         <threed_iframe_width translate="label">
                             <label>3D iFrame Width</label>
@@ -667,7 +811,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </threed_iframe_width>
                         <threed_layout translate="label">
                             <label>3D layout</label>
@@ -678,19 +824,24 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </threed_layout>
                         <avscv2 translate="label">
                             <label>AVS CV2</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepaydirectpro/avscv2</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_avsCv2</source_model>
-                            <comment><![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
+                            <comment>
+                                <![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </avscv2>
                         <allow_gift_aid translate="label comment">
                             <label>Allow Gift Aid</label>
@@ -702,116 +853,135 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allow_gift_aid>
                     </fields>
                 </sagepaydirectpro>
-                <!--<sagepaynit translate="label" order_status="sagepaysuite">-->
-                    <!--<label>Sage Pay Suite [Frontend - PI Integration] (BETA)</label>-->
-                    <!--<frontend_type>text</frontend_type>-->
-                    <!--<sort_order>45</sort_order>-->
-                    <!--<show_in_default>1</show_in_default>-->
-                    <!--<show_in_website>1</show_in_website>-->
-                    <!--<show_in_store>1</show_in_store>-->
-                    <!--<fields>-->
-                        <!--<active translate="label">-->
-                            <!--<label>Enabled</label>-->
-                            <!--<frontend_type>select</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/active</config_path>-->
-                            <!--<source_model>adminhtml/system_config_source_yesno</source_model>-->
-                            <!--<sort_order>1</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                        <!--</active>-->
-                        <!--<title translate="label">-->
-                            <!--<label>Title</label>-->
-                            <!--<frontend_type>text</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/title</config_path>-->
-                            <!--<sort_order>2</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                            <!--<depends><active>1</active></depends>-->
-                        <!--</title>-->
-                        <!--<payment_action translate="label">-->
-                            <!--<label>Payment Action</label>-->
-                            <!--<frontend_type>select</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/payment_action</config_path>-->
-                            <!--<source_model>sagepaysuite/sagepaysuite_source_paymentAction</source_model>-->
-                            <!--<sort_order>3</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                            <!--<depends><active>1</active></depends>-->
-                        <!--</payment_action>-->
-                        <!--<order_status translate="label">-->
-                            <!--<label>New order status</label>-->
-                            <!--<frontend_type>select</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/order_status</config_path>-->
-                            <!--<source_model>adminhtml/system_config_source_order_status</source_model>-->
-                            <!--<sort_order>5</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                            <!--<depends><active>1</active></depends>-->
-                        <!--</order_status>-->
-                        <!--<mode translate="label">-->
-                            <!--<label>Mode</label>-->
-                            <!--<frontend_type>select</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/mode</config_path>-->
-                            <!--<source_model>sagepaysuite/sagepaysuite_source_paymentMode</source_model>-->
-                            <!--<sort_order>10</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                            <!--<depends><active>1</active></depends>-->
-                        <!--</mode>-->
-                        <!--<key translate="label">-->
-                            <!--<label>Key (Username)</label>-->
-                            <!--<frontend_type>text</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/key</config_path>-->
-                            <!--<sort_order>11</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                            <!--<depends><active>1</active></depends>-->
-                        <!--</key>-->
-                        <!--<password translate="label">-->
-                            <!--<label>Password</label>-->
-                            <!--<frontend_type>obscure</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/password</config_path>-->
-                            <!--<backend_model>adminhtml/system_config_backend_encrypted</backend_model>-->
-                            <!--<comment><![CDATA[<a target="_blank" href="http://www.sagepay.co.uk">Sage Pay</a> would provide this]]></comment>-->
-                            <!--<sort_order>12</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                            <!--<depends><active>1</active></depends>-->
-                        <!--</password>-->
-                        <!--<cctypesSagePayNit translate="label">-->
-                            <!--<label>Accepted Card types</label>-->
-                            <!--<frontend_type>multiselect</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/cctypesSagePayNit</config_path>-->
-                            <!--<source_model>sagepaysuite/sagepaysuite_source_CreditCards</source_model>-->
-                            <!--<sort_order>15</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                            <!--<depends><active>1</active></depends>-->
-                        <!--</cctypesSagePayNit>-->
-                        <!--<sort_order translate="label">-->
-                            <!--<label>Sort order</label>-->
-                            <!--<frontend_type>text</frontend_type>-->
-                            <!--<config_path>payment/sagepaynit/sort_order</config_path>-->
-                            <!--<sort_order>100</sort_order>-->
-                            <!--<show_in_default>1</show_in_default>-->
-                            <!--<show_in_website>1</show_in_website>-->
-                            <!--<show_in_store>1</show_in_store>-->
-                            <!--<depends><active>1</active></depends>-->
-                        <!--</sort_order>-->
-                    <!--</fields>-->
-                <!--</sagepaynit>-->
+                <sagepaynit translate="label" order_status="sagepaysuite">
+                    <label>Sage Pay Suite [Frontend - PI Integration] (BETA)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>45</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaynit/active</config_path>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <config_path>payment/sagepaynit/title</config_path>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </title>
+                        <payment_action translate="label">
+                            <label>Payment Action</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaynit/payment_action</config_path>
+                            <source_model>sagepaysuite/sagepaysuite_source_paymentAction</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </payment_action>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaynit/order_status</config_path>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </order_status>
+                        <mode translate="label">
+                            <label>Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaynit/mode</config_path>
+                            <source_model>sagepaysuite/sagepaysuite_source_paymentMode</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </mode>
+                        <key translate="label">
+                            <label>Key (Username)</label>
+                            <frontend_type>text</frontend_type>
+                            <config_path>payment/sagepaynit/key</config_path>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </key>
+                        <password translate="label">
+                            <label>Password</label>
+                            <frontend_type>obscure</frontend_type>
+                            <config_path>payment/sagepaynit/password</config_path>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <comment>
+                                <![CDATA[<a target="_blank" href="http://www.sagepay.co.uk">Sage Pay</a> would provide this]]></comment>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </password>
+                        <cctypesSagePayNit translate="label">
+                            <label>Accepted Card types</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <config_path>payment/sagepaynit/cctypesSagePayNit</config_path>
+                            <source_model>sagepaysuite/sagepaysuite_source_CreditCards</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </cctypesSagePayNit>
+                        <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <config_path>payment/sagepaynit/sort_order</config_path>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </sort_order>
+                    </fields>
+                </sagepaynit>
                 <sagepaypaypal translate="label">
                     <label>Sage Pay Suite [Frontend - PayPal Express Integration]</label>
                     <frontend_type>text</frontend_type>
@@ -820,10 +990,8 @@
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <active translate="label tooltip">
+                        <active translate="label">
                             <label>Enabled</label>
-                            <tooltip><![CDATA[<span>Become PRO</span> to enable PayPal via SagePay! More information here http://ebizmarts.com/sage-pay-suite]]></tooltip>
-                            <frontend_class>hidesuite</frontend_class>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepaypaypal/active</config_path>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -834,27 +1002,55 @@
                         </active>
                         <title translate="label">
                             <label>Title</label>
-                            <frontend_class>hidesuite</frontend_class>
                             <frontend_type>text</frontend_type>
                             <config_path>payment/sagepaypaypal/title</config_path>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </title>
                         <payment_action translate="label">
                             <label>Payment Action</label>
                             <frontend_type>select</frontend_type>
-                            <frontend_class>hidesuite</frontend_class>
                             <config_path>payment/sagepaypaypal/payment_action</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_paymentActionPayPal</source_model>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </payment_action>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaypaypal/order_status</config_path>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </order_status>
+                        <mode translate="label">
+                            <label>Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaypaypal/mode</config_path>
+                            <source_model>sagepaysuite/sagepaysuite_source_paymentModePaypal</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </mode>
                         <vendor translate="label">
                             <label>Vendor</label>
                             <frontend_type>text</frontend_type>
@@ -863,8 +1059,128 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </vendor>
+                        <frontend_behaviour translate="label">
+                            <label>Frontend</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>sagepaysuite/sagepaysuite_source_frontendPaypal</source_model>
+                            <config_path>payment/sagepaypaypal/frontend_behaviour</config_path>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </frontend_behaviour>
+                        <shipping_method_selection translate="label">
+                            <label>Shipping method selection for Quick Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaypaypal/shipping_method_selection</config_path>
+                            <source_model>sagepaysuite/sagepaysuite_source_paypalExpressShippingSelection</source_model>
+                            <sort_order>61</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </shipping_method_selection>
+                        <force_basketxml_paypal translate="label">
+                            <label>Force XML basket</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaypaypal/force_basketxml_paypal</config_path>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[The cart content will only be detailed in Paypal's website if the basket content is set to XML format.]]></comment>
+                            <sort_order>62</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </force_basketxml_paypal>
+                        <billing_agreement translate="label">
+                            <label>Enable Billing Agreement</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepaypaypal/billing_agreement</config_path>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>
+                                <![CDATA[You will need to contact PayPal directly in order to apply for REPEAT transactions and have the service confirmed before attempting to use it. Further information can be found <a target="_blank" href="https://www.paypal.com/au/webapps/mpp/ua/recurringpymts-full">here</a>.]]></comment>
+                            <sort_order>63</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </billing_agreement>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <config_path>payment/sagepaypaypal/allowspecific</config_path>
+                            <sort_order>67</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <config_path>payment/sagepaypaypal/specificcountry</config_path>
+                            <sort_order>69</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </specificcountry>
+                        <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <config_path>payment/sagepaypaypal/sort_order</config_path>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </sort_order>
+                        <min_order_total>
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <config_path>payment/sagepaypaypal/min_order_total</config_path>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </min_order_total>
+                        <max_order_total>
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <config_path>payment/sagepaypaypal/max_order_total</config_path>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </max_order_total>
                     </fields>
                 </sagepaypaypal>
                 <sagepayserver_moto translate="label comment" module="sagepaysuite">
@@ -892,7 +1208,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </title>
                         <pre_save translate="label">
                             <label>Save Order Before</label>
@@ -903,19 +1221,22 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </pre_save>
-                        <payment_action translate="label tooltip">
+                        <payment_action translate="label">
                             <label>Payment Action</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepayserver_moto/payment_action</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_paymentAction</source_model>
-                            <tooltip><![CDATA[<span>Become PRO</span> to enable more payment options! More information here http://ebizmarts.com/sage-pay-suite]]></tooltip>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </payment_action>
                         <order_status translate="label">
                             <label>New order status</label>
@@ -926,7 +1247,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </order_status>
                         <vendor translate="label">
                             <label>Vendor</label>
@@ -936,7 +1259,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </vendor>
                         <mode translate="label">
                             <label>Mode</label>
@@ -947,7 +1272,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </mode>
                         <template_profile translate="label comment">
                             <label>Template Profile</label>
@@ -958,8 +1285,11 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <comment><![CDATA[A profile of LOW returns the new simpler VSP Server payment pages which have only one step and minimal formatting. Designed to run in i-Frames.]]></comment>
-                            <depends><active>1</active></depends>
+                            <comment>
+                                <![CDATA[A profile of LOW returns the new simpler VSP Server payment pages which have only one step and minimal formatting. Designed to run in i-Frames.]]></comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </template_profile>
                         <allowspecific translate="label">
                             <label>Payment from applicable countries</label>
@@ -970,7 +1300,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allowspecific>
                         <specificcountry translate="label">
                             <label>Payment from Specific countries</label>
@@ -981,7 +1313,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </specificcountry>
                         <purchase_description translate="label">
                             <label>Purchase Description</label>
@@ -992,7 +1326,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </purchase_description>
                         <sort_order translate="label">
                             <label>Sort order</label>
@@ -1002,7 +1338,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </sort_order>
                         <min_order_total translate="label">
                             <label>Minimum Order Total</label>
@@ -1012,7 +1350,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </min_order_total>
                         <max_order_total translate="label">
                             <label>Maximum Order Total</label>
@@ -1022,19 +1362,24 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </max_order_total>
                         <avscv2 translate="label">
                             <label>AVS CV2</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepayserver_moto/avscv2</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_avsCv2</source_model>
-                            <comment><![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
+                            <comment>
+                                <![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
                             <sort_order>140</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </avscv2>
                     </fields>
                 </sagepayserver_moto>
@@ -1064,7 +1409,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </vendor>
                         <order_status translate="label">
                             <label>New order status</label>
@@ -1075,7 +1422,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </order_status>
                         <sort_order translate="label">
                             <label>Sort order</label>
@@ -1085,7 +1434,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </sort_order>
                         <mode translate="label">
                             <label>Mode</label>
@@ -1096,7 +1447,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </mode>
                         <title translate="label">
                             <label>Title</label>
@@ -1106,30 +1459,35 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </title>
-                        <payment_action translate="label tooltip">
+                        <payment_action translate="label">
                             <label>Payment Action</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepaydirectpro_moto/payment_action</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_paymentAction</source_model>
-                            <tooltip><![CDATA[<span>Become PRO</span> to enable more payment options! More information here http://ebizmarts.com/sage-pay-suite]]></tooltip>
                             <sort_order>2</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </payment_action>
-			   			<cctypesSagePayDirectPro translate="label">
+                        <cctypesSagePayDirectPro translate="label">
                             <label>Accepted Card Types</label>
-							<frontend_type>multiselect</frontend_type>
-							<config_path>payment/sagepaydirectpro_moto/cctypesSagePayDirectPro</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <config_path>payment/sagepaydirectpro_moto/cctypesSagePayDirectPro</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_CreditCards</source_model>
                             <sort_order>49</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </cctypesSagePayDirectPro>
                         <allowspecific translate="label">
                             <label>Payment from applicable countries</label>
@@ -1140,7 +1498,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allowspecific>
                         <specificcountry translate="label">
                             <label>Payment from Specific countries</label>
@@ -1151,7 +1511,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </specificcountry>
                         <min_order_total>
                             <label>Minimum Order Total</label>
@@ -1161,7 +1523,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </min_order_total>
                         <max_order_total>
                             <label>Maximum Order Total</label>
@@ -1171,19 +1535,24 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </max_order_total>
                         <avscv2 translate="label">
                             <label>AVS CV2</label>
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepaydirectpro_moto/avscv2</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_avsCv2</source_model>
-                            <comment><![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
+                            <comment>
+                                <![CDATA[Please visit your accounts My Sage Pay area (Settings/ AVS/CV2 Secure) for activating checks and implementing rules. For guidance on setting up rules, please consult the Sage Pay rule base guide downloadable from the Developer section on the Sage Pay website (http://www.sagepay.com)]]></comment>
                             <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </avscv2>
                         <allow_gift_aid translate="label comment">
                             <label>Allow Gift Aid</label>
@@ -1195,10 +1564,57 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </allow_gift_aid>
                     </fields>
                 </sagepaydirectpro_moto>
+                <sagepayrepeat translate="label">
+                    <label>Sage Pay Suite [Backend - REPEAT MOTO]</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepayrepeat/active</config_path>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <config_path>payment/sagepayrepeat/title</config_path>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </title>
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <config_path>payment/sagepayrepeat/order_status</config_path>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </order_status>
+                    </fields>
+                </sagepayrepeat>
                 <sagepaysuitetoken translate="label comment" module="sagepaysuite">
                     <label>Sage Pay Suite [Token - Saved Credit Cards Settings]</label>
                     <sort_order>110</sort_order>
@@ -1209,7 +1625,7 @@
                         <active translate="label">
                             <label>Enabled</label>
                             <frontend_type>select</frontend_type>
-                            <config_path>payment/sagepaysuite_source_tokenActive</config_path>
+                            <config_path>payment/sagepaysuite/token_active</config_path>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
@@ -1221,12 +1637,15 @@
                             <frontend_type>select</frontend_type>
                             <source_model>sagepaysuite/sagepaysuite_source_tokenintegration</source_model>
                             <config_path>payment/sagepaysuite/token_integration</config_path>
-                            <comment><![CDATA[Only applicable for My Account card registration. If not enabled won't be used anywhere.]]></comment>
+                            <comment>
+                                <![CDATA[Only applicable for My Account card registration. If not enabled won't be used anywhere.]]></comment>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </token_integration>
                         <token_iframe_position>
                             <label>Token pages layout</label>
@@ -1237,7 +1656,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </token_iframe_position>
                         <max_token_card translate="label">
                             <label>Max Token Cards Per customer</label>
@@ -1247,7 +1668,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><active>1</active></depends>
+                            <depends>
+                                <active>1</active>
+                            </depends>
                         </max_token_card>
                     </fields>
                 </sagepaysuitetoken>
@@ -1348,7 +1771,7 @@
                     </fields>
                 </sagepayreporting_moto>
                 <sagepaysuiteadvanced translate="label comment" module="sagepaysuite">
-                <label>Sage Pay Suite [Advanced Settings]</label>
+                    <label>Sage Pay Suite [Advanced Settings]</label>
                     <sort_order>120</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
@@ -1359,7 +1782,8 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <config_path>payment/sagepaysuite/logs</config_path>
-                            <comment><![CDATA[Location of the log files: "{{MagentoBaseDir}}/var/log/SagePaySuite/"]]></comment>
+                            <comment>
+                                <![CDATA[Location of the log files: "{{MagentoBaseDir}}/var/log/SagePaySuite/"]]></comment>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1399,7 +1823,8 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_enabledisable</source_model>
                             <config_path>payment/sagepaysuite/sagepay_notifications</config_path>
-                            <comment>Enable/Disable SagePay monitor notifications as well as other Ebizmarts messages.</comment>
+                            <comment>Enable/Disable SagePay monitor notifications as well as other Ebizmarts messages.
+                            </comment>
                             <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -1430,7 +1855,8 @@
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepaysuite/send_basket</config_path>
                             <source_model>adminhtml/system_config_source_enabledisable</source_model>
-                            <comment><![CDATA[Whether Basket (details of the customer's order) content is sent to Sage Pay]]></comment>
+                            <comment>
+                                <![CDATA[Whether Basket (details of the customer's order) content is sent to Sage Pay]]></comment>
                             <sort_order>140</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1441,13 +1867,41 @@
                             <frontend_type>select</frontend_type>
                             <config_path>payment/sagepaysuite/basket_format</config_path>
                             <source_model>sagepaysuite/sagepaysuite_source_basketFormat</source_model>
-                            <comment><![CDATA[Basket XML. Supports fraud screening through ReD. Not compatible with Sage 50.]]></comment>
+                            <comment>
+                                <![CDATA[Basket XML. Supports fraud screening through ReD. Not compatible with Sage 50.]]></comment>
                             <sort_order>145</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><send_basket>1</send_basket></depends>
+                            <depends>
+                                <send_basket>1</send_basket>
+                            </depends>
                         </basket_format>
+                        <auto_fulfill_low_risk_trn translate="label">
+                            <label>Automatically Fulfill Low Risk Transactions</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>This will affect cron fulfillments only</comment>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <config_path>payment/sagepaysuite/auto_fulfill_low_risk_trn</config_path>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auto_fulfill_low_risk_trn>
+                        <auto_fulfill_low_risk_trn_value translate="label comment">
+                            <label>Risk Minimum Value</label>
+                            <comment>
+                                <![CDATA[<span class="suite-low-rsk">Below 30 = Low Risk</span><span class="suite-med-rsk">30 to 49 = Medium Risk</span><span class="suite-high-rsk">50 and above = High Risk</span>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <config_path>payment/sagepaysuite/auto_fulfill_low_risk_trn_value</config_path>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <auto_fulfill_low_risk_trn>1</auto_fulfill_low_risk_trn>
+                            </depends>
+                        </auto_fulfill_low_risk_trn_value>
                         <email_on_invoice translate="label">
                             <label>Send email on automatic invoice?</label>
                             <frontend_type>select</frontend_type>
@@ -1463,18 +1917,32 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <config_path>payment/sagepaysuite/profile_request</config_path>
-                            <comment><![CDATA[Only frontend requests, debugging and performance checking only.]]></comment>
+                            <comment>
+                                <![CDATA[Only frontend requests, debugging and performance checking only.]]></comment>
                             <sort_order>190</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </profile_request>
+                        <deferred_capture translate="label comment">
+                            <label>Autocapture Payment on Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <config_path>payment/sagepaysuite/deferred_capture</config_path>
+                            <comment>
+                                <![CDATA[Automatically capture DEFERRED or AUTHENTICATE orders when reaching success confirmation page.]]></comment>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </deferred_capture>
                         <sync_mode translate="label comment">
                             <label>Sync from API</label>
                             <frontend_type>select</frontend_type>
                             <source_model>sagepaysuite/sagepaysuite_source_syncMode</source_model>
                             <config_path>payment/sagepaysuite/sync_mode</config_path>
-                            <comment><![CDATA[Asynchronous means that data will only we updated every 5 minutes, for new orders within the last 24 hours, if Magentos cron is running. Choose this one if Sales > Order takes long time to load.]]></comment>
+                            <comment>
+                                <![CDATA[Asynchronous means that data will only we updated every 5 minutes, for new orders within the last 24 hours, if Magentos cron is running. Choose this one if Sales > Order takes long time to load.]]></comment>
                             <sort_order>210</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
@@ -1485,7 +1953,8 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <config_path>payment/sagepaysuite/curl_verifypeer</config_path>
-                            <comment><![CDATA[WARNING: disabling verification of the certificate allows bad guys to man-in-the-middle the communication without you knowing it.]]></comment>
+                            <comment>
+                                <![CDATA[WARNING: disabling verification of the certificate allows bad guys to man-in-the-middle the communication without you knowing it.]]></comment>
                             <sort_order>220</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1510,7 +1979,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><layout_rewrites_active>1</layout_rewrites_active></depends>
+                            <depends>
+                                <layout_rewrites_active>1</layout_rewrites_active>
+                            </depends>
                         </layout_rewrites_updates>
                         <layout_rewrites_updates_applyon translate="label comment">
                             <label>Layout updates apply on</label>
@@ -1521,7 +1992,9 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><layout_rewrites_active>1</layout_rewrites_active></depends>
+                            <depends>
+                                <layout_rewrites_active>1</layout_rewrites_active>
+                            </depends>
                         </layout_rewrites_updates_applyon>
                         <ignore_address_validation translate="label comment">
                             <label>Ignore address validation</label>
@@ -1548,7 +2021,8 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <config_path>payment/sagepaysuite/verify_cart_consistency</config_path>
-                            <comment><![CDATA[This will check if the customer has modified the cart while paying on another tab. Please note that the sole action of checking the cart on another tab will turn on this flag.]]></comment>
+                            <comment>
+                                <![CDATA[This will check if the customer has modified the cart while paying on another tab. Please note that the sole action of checking the cart on another tab will turn on this flag.]]></comment>
                             <sort_order>265</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1559,7 +2033,8 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <config_path>payment/sagepaysuite/check_amounts</config_path>
-                            <comment><![CDATA[This will check if the grand total and amount sent to Sage Pay match before saving the order in Magento.]]></comment>
+                            <comment>
+                                <![CDATA[This will check if the grand total and amount sent to Sage Pay match before saving the order in Magento.]]></comment>
                             <sort_order>270</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1591,7 +2066,9 @@
                             <config_path>payment/sagepaysuite/curl_proxy_port</config_path>
                             <comment><![CDATA[i.e: 127.0.0.1:1080]]></comment>
                             <sort_order>282</sort_order>
-                            <depends><curl_proxy>1</curl_proxy></depends>
+                            <depends>
+                                <curl_proxy>1</curl_proxy>
+                            </depends>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -1611,7 +2088,8 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <config_path>payment/sagepaysuite/apply_AVSCV2</config_path>
-                            <comment><![CDATA[If set to YES, SagePay won't apply post code nor address validation for overseas orders. (Only for United Kingdom, Isle Of Man, Guernsey and Jersey)]]></comment>
+                            <comment>
+                                <![CDATA[If set to YES, SagePay won't apply post code nor address validation for overseas orders. (Only for United Kingdom, Isle Of Man, Guernsey and Jersey)]]></comment>
                             <sort_order>291</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1622,7 +2100,8 @@
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <config_path>payment/sagepaysuite/prevent_invoicing</config_path>
-                            <comment><![CDATA[If set to YES, Magento won't create the invoice for Authorise and Capture payment action]]></comment>
+                            <comment>
+                                <![CDATA[If set to YES, Magento won't create the invoice for Authorise and Capture payment action]]></comment>
                             <sort_order>300</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>

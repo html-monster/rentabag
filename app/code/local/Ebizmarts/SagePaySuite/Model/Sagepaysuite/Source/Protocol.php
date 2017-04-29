@@ -9,6 +9,6 @@ class Ebizmarts_SagePaySuite_Model_Sagepaysuite_Source_Protocol
 
     public function toOption()
     {
-        return array('server'=>'Server', 'direct'=>'Direct');
+        return array('server'=>'Server', 'direct'=>'Direct', 'form'=>'From');
     }
 }

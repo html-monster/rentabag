@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Ebizmarts_SagePaySuite>
-            <version>3.6.3</version>
+            <version>4.2.1</version>
         </Ebizmarts_SagePaySuite>
     </modules>
     <adminhtml>
@@ -22,16 +22,16 @@
                 </sagepaysuite>
             </updates>
         </layout>
-		<events>
-	      <controller_action_predispatch_adminhtml_spsDashboard_index>
-	          <observers>
-	              <sagepaysuite_up>
-	                  <type>model</type>
-	                  <class>sagepaysuite/feed_updates</class>
-	                  <method>check</method>
-	              </sagepaysuite_up>
-	          </observers>
-	      </controller_action_predispatch_adminhtml_spsDashboard_index>
+        <events>
+            <controller_action_predispatch_adminhtml_spsDashboard_index>
+                <observers>
+                    <sagepaysuite_up>
+                        <type>model</type>
+                        <class>sagepaysuite/feed_updates</class>
+                        <method>check</method>
+                    </sagepaysuite_up>
+                </observers>
+            </controller_action_predispatch_adminhtml_spsDashboard_index>
             <core_block_abstract_to_html_before>
                 <observers>
                     <order_export_addmassbutton>
@@ -45,9 +45,9 @@
                         <method>addColumnToSalesOrderGrid</method>
                     </sales_order_grid_transaction_state>
                     <sagepay_update_api_add_button>
-                       <type>model</type>
-                       <class>sagepaysuite/observer_sales</class>
-                       <method>addButtonToOrderView</method>
+                        <type>model</type>
+                        <class>sagepaysuite/observer_sales</class>
+                        <method>addButtonToOrderView</method>
                     </sagepay_update_api_add_button>
                 </observers>
             </core_block_abstract_to_html_before>
@@ -76,12 +76,12 @@
                     </profilerequestpost>
                 </observers>
             </controller_action_postdispatch>
-	   </events>
+        </events>
     </adminhtml>
     <global>
         <ignoredModules> <!-- To avoid Mage_Log to slow down things. @TODO: http://tickets.ebizmarts.com/ticket.php?id=1458 -->
             <entities>
-                <sagepaysuite />
+                <sagepaysuite/>
             </entities>
         </ignoredModules>
         <events>
@@ -143,28 +143,51 @@
             </sales_order_payment_cancel>
         </events>
         <fieldsets>
-        	<sales_convert_order_payment>
-                <cc_gift_aid><to_quote_payment>*</to_quote_payment></cc_gift_aid>
-                <remembertoken><to_quote_payment>*</to_quote_payment></remembertoken>
-        	</sales_convert_order_payment>
+            <sales_convert_order_payment>
+                <cc_gift_aid>
+                    <to_quote_payment>*</to_quote_payment>
+                </cc_gift_aid>
+                <remembertoken>
+                    <to_quote_payment>*</to_quote_payment>
+                </remembertoken>
+                <repeat_code>
+                    <to_quote_payment>*</to_quote_payment>
+                </repeat_code>
+            </sales_convert_order_payment>
             <sales_convert_quote_payment>
-                <sagepay_token_cc_id><to_order_payment>*</to_order_payment></sagepay_token_cc_id>
-                <save_token_cc><to_order_payment>*</to_order_payment></save_token_cc>
-                <cc_gift_aid><to_order_payment>*</to_order_payment></cc_gift_aid>
-                <remembertoken><to_order_payment>*</to_order_payment></remembertoken>
+                <sagepay_token_cc_id>
+                    <to_order_payment>*</to_order_payment>
+                </sagepay_token_cc_id>
+                <save_token_cc>
+                    <to_order_payment>*</to_order_payment>
+                </save_token_cc>
+                <cc_gift_aid>
+                    <to_order_payment>*</to_order_payment>
+                </cc_gift_aid>
+                <remembertoken>
+                    <to_order_payment>*</to_order_payment>
+                </remembertoken>
+                <repeat_code>
+                    <to_quote_payment>*</to_quote_payment>
+                </repeat_code>
             </sales_convert_quote_payment>
         </fieldsets>
         <tx_states>
-            <stateid_0><![CDATA[Transaction not found at SagePay. Either your API credentials are not correct or the transaction doesn't exists.]]></stateid_0>
-            <stateid_1><![CDATA[Transaction failed registration. Either an INVALID or MALFORMED response was returned.]]></stateid_1>
+            <stateid_0>
+                <![CDATA[Transaction not found at SagePay. Either your API credentials are not correct or the transaction doesn't exists.]]></stateid_0>
+            <stateid_1>
+                <![CDATA[Transaction failed registration. Either an INVALID or MALFORMED response was returned.]]></stateid_1>
             <stateid_2><![CDATA[User on Card Selection page.]]></stateid_2>
             <stateid_3><![CDATA[User on the Card Details Entry Page.]]></stateid_3>
             <stateid_4><![CDATA[User on Confirmation Page.]]></stateid_4>
             <stateid_5><![CDATA[Transaction at 3D-Secure Authentication Stage.]]></stateid_5>
             <stateid_6><![CDATA[Transaction sent for Authorisation]]></stateid_6>
-            <stateid_7><![CDATA[Vendor Notified of transaction state at their NotificationURL. Awaiting response.]]></stateid_7>
-            <stateid_8><![CDATA[Transaction CANCELLED by Sage Pay after 15 minutes of inactivity.  This is normally because the customer closed their browser.]]></stateid_8>
-            <stateid_9><![CDATA[Transaction completed but Vendor systems returned INVALID or ERROR in response to notification POST. Transaction CANCELLED by the Vendor.]]></stateid_9>
+            <stateid_7>
+                <![CDATA[Vendor Notified of transaction state at their NotificationURL. Awaiting response.]]></stateid_7>
+            <stateid_8>
+                <![CDATA[Transaction CANCELLED by Sage Pay after 15 minutes of inactivity.  This is normally because the customer closed their browser.]]></stateid_8>
+            <stateid_9>
+                <![CDATA[Transaction completed but Vendor systems returned INVALID or ERROR in response to notification POST. Transaction CANCELLED by the Vendor.]]></stateid_9>
             <stateid_10><![CDATA[Transaction REJECTED by the Fraud Rules you have in place.]]></stateid_10>
             <stateid_11><![CDATA[Transaction ABORTED by the Customer on the Payment Pages.]]></stateid_11>
             <stateid_12><![CDATA[Transaction DECLINED by the bank (NOTAUTHED).]]></stateid_12>
@@ -178,10 +201,12 @@
             <stateid_20><![CDATA[Transaction has been timed out by Sage Pay.]]></stateid_20>
             <stateid_21><![CDATA[Successfully REGISTERED transaction, awaiting AUTHORISE.]]></stateid_21>
             <stateid_22><![CDATA[AUTHENTICATED or REGISTERED transaction CANCELLED by the Vendor.]]></stateid_22>
-            <stateid_23><![CDATA[Transaction could not be settled with the bank and has been failed by the Sage Pay systems]]></stateid_23>
+            <stateid_23>
+                <![CDATA[Transaction could not be settled with the bank and has been failed by the Sage Pay systems]]></stateid_23>
             <stateid_24><![CDATA[PayPal Transaction Registered]]></stateid_24>
             <stateid_25><![CDATA[Token Registered.]]></stateid_25>
-            <stateid_26><![CDATA[AUTHENTICATE transaction that can no longer be AUTHORISED against.  It has either expired, or been fully authorised.]]></stateid_26>
+            <stateid_26>
+                <![CDATA[AUTHENTICATE transaction that can no longer be AUTHORISED against.  It has either expired, or been fully authorised.]]></stateid_26>
             <stateid_27><![CDATA[DEFERRED transaction that expired before it was RELEASED or ABORTED.]]></stateid_27>
             <!-- EURO Payment statuses -->
             <stateid_28><![CDATA[Transaction waiting for authorisation.]]></stateid_28>
@@ -277,6 +302,9 @@
                     <sagepaysuite_fraud>
                         <table>sagepaysuite_fraud</table>
                     </sagepaysuite_fraud>
+                    <sagepaysuite_queue>
+                        <table>sagepaysuite_transaction_queue</table>
+                    </sagepaysuite_queue>
                 </entities>
             </sagepaysuite_mysql4>
         </models>
@@ -340,12 +368,12 @@
         </template>
     </global>
     <default>
-    	<sagepayreporting>
-    		<account>
-	    		<vendor>testebizmarts</vendor>
-    			<enviroment>2</enviroment>
-    		</account>
-    	</sagepayreporting>
+        <sagepayreporting>
+            <account>
+                <vendor>testebizmarts</vendor>
+                <enviroment>2</enviroment>
+            </account>
+        </sagepayreporting>
         <sagepayreporting_moto>
             <account>
                 <vendor>testebizmarts</vendor>
@@ -354,7 +382,7 @@
         </sagepayreporting_moto>
         <sagepaysuite>
             <notifications>
-                <updates_url><![CDATA[http://store.ebizmarts.com/media/feeds/]]></updates_url>
+                <updates_url><![CDATA[https://store.ebizmarts.com/media/feeds/]]></updates_url>
                 <check_frequency>86400</check_frequency>
             </notifications>
         </sagepaysuite>
@@ -371,13 +399,18 @@
                 <cms_index_logo>1</cms_index_logo>
                 <sagepay_notifications>1</sagepay_notifications>
                 <orphans_notification>1</orphans_notification>
-                <timeout_message><![CDATA[A connection error prevented your order from being saved, please retry or email {admin_email} for assistance. Thanks, {store_name}]]></timeout_message>
+                <timeout_message>
+                    <![CDATA[A connection error prevented your order from being saved, please retry or email {admin_email} for assistance. Thanks, {store_name}]]></timeout_message>
+                <auto_fulfill_low_risk_trn>0</auto_fulfill_low_risk_trn>
+                <auto_fulfill_low_risk_trn_value>30</auto_fulfill_low_risk_trn_value>
                 <send_basket>1</send_basket>
                 <basket_format>sage</basket_format>
                 <layout_rewrites_active>0</layout_rewrites_active>
                 <layout_rewrites_updates></layout_rewrites_updates>
-                <layout_rewrites_updates_applyon><![CDATA[checkout_onepage_index,onestepcheckout_index_index,onepagecheckout_index_index]]></layout_rewrites_updates_applyon>
+                <layout_rewrites_updates_applyon>
+                    <![CDATA[checkout_onepage_index,onestepcheckout_index_index,onepagecheckout_index_index]]></layout_rewrites_updates_applyon>
                 <curl_verifypeer>0</curl_verifypeer>
+                <deferred_capture>0</deferred_capture>
                 <sync_mode>sync</sync_mode>
                 <sagefifty_basket>0</sagefifty_basket>
                 <ignore_address_validation>1</ignore_address_validation>
@@ -426,7 +459,8 @@
             <sagepaydirectpro_moto>
                 <active>0</active>
                 <accounttype>M</accounttype>
-                <cctypesSagePayDirectPro>VISA,MC,DELTA,SWITCH,MAESTRO,AMEX,UKE,DINERS,JCB,LASER</cctypesSagePayDirectPro>
+                <cctypesSagePayDirectPro>VISA,MC,DELTA,SWITCH,MAESTRO,AMEX,UKE,DINERS,JCB,LASER
+                </cctypesSagePayDirectPro>
                 <cctypes>VISA,MC,DELTA,SWITCH,MAESTRO,AMEX,UKE,DINERS,JCB,LASER</cctypes>
                 <debug>0</debug>
                 <currency>GBP</currency>
@@ -447,7 +481,9 @@
                 <timeout_orders>0</timeout_orders>
                 <threed_iframe_height>500</threed_iframe_height>
                 <threed_iframe_width>600</threed_iframe_width>
-                <timeout_message>A connection error prevented your order from being saved, please retry or email [admin_email] for assistance. Thanks , [store_name]</timeout_message>
+                <timeout_message>A connection error prevented your order from being saved, please retry or email
+                    [admin_email] for assistance. Thanks , [store_name]
+                </timeout_message>
                 <avscv2>0</avscv2>
                 <flag_on_cache>0</flag_on_cache>
             </sagepaydirectpro_moto>
@@ -460,14 +496,17 @@
                 <model>sagepaysuite/sagePayServer</model>
                 <order_status>pending</order_status>
                 <title>Sage Pay Server</title>
+                <secure3d>0</secure3d>
                 <allowspecific>0</allowspecific>
                 <vendor>testebizmarts</vendor>
                 <mode>test</mode>
+                <parameters_in_success_url>0</parameters_in_success_url>
                 <payment_iframe_position>modal</payment_iframe_position>
                 <iframe_label>Sage Pay Server</iframe_label>
                 <payment_action>payment</payment_action>
                 <purchase_description>Purchase of products ECOMMERCE</purchase_description>
-                <selected_description><![CDATA[Enter your credit card details after Order Review<br />{{secured_logo}}]]></selected_description>
+                <selected_description>
+                    <![CDATA[Enter your credit card details after Order Review<br />{{secured_logo}}]]></selected_description>
                 <auto_show_iframe>0</auto_show_iframe>
                 <iframe_height>505</iframe_height>
                 <iframe_width>800</iframe_width>
@@ -490,16 +529,32 @@
                 <template_profile>LOW</template_profile>
             </sagepayserver_moto>
             <sagepayform>
-            	<active>0</active>
-            	<send_email>1</send_email>
-            	<payment_action>payment</payment_action>
-            	<mode>test</mode>
-            	<title>Sage Pay (FORM)</title>
-            	<order_status>pending</order_status>
-                <selected_description><![CDATA[You will be redirected to the Sage Pay website when you place an order.<br />{{secured_logo}}]]></selected_description>
+                <active>0</active>
+                <send_email>1</send_email>
+                <payment_action>payment</payment_action>
+                <mode>test</mode>
+                <title>Sage Pay (FORM)</title>
+                <order_status>pending</order_status>
+                <selected_description>
+                    <![CDATA[You will be redirected to the Sage Pay website when you place an order.<br />{{secured_logo}}]]></selected_description>
                 <model>sagepaysuite/sagePayForm</model>
                 <allowspecific>0</allowspecific>
             </sagepayform>
+            <sagepaypaypal>
+                <active>0</active>
+                <payment_action>payment</payment_action>
+                <title>PayPal via SagePay</title>
+                <model>sagepaysuite/sagePayPayPal</model>
+                <frontend_behaviour>both</frontend_behaviour>
+                <shipping_method_selection>estimate</shipping_method_selection>
+                <send_basketxml_paypal>1</send_basketxml_paypal>
+            </sagepaypaypal>
+            <sagepayrepeat>
+                <active>0</active>
+                <title>Repeat Payments</title>
+                <model>sagepaysuite/sagePayRepeat</model>
+                <order_status>processing</order_status>
+            </sagepayrepeat>
         </payment>
     </default>
     <frontend>
@@ -515,6 +570,15 @@
         <secure_url>
             <sagepaysuite>/sgps/</sagepaysuite>
         </secure_url>
+        <enterprise>
+            <websiterestriction>
+                <full_action_names>
+                    <generic>
+                        <sagepaysuite_ServerPayment_notify/>
+                    </generic>
+                </full_action_names>
+            </websiterestriction>
+        </enterprise>
         <routers>
             <sagepaysuite>
                 <use>standard</use>
@@ -532,14 +596,6 @@
             </updates>
         </layout>
         <events>
-            <!--<checkout_type_onepage_save_order_after>-->
-                <!--<observers>-->
-                    <!--<save_order_after_sagepay>-->
-                        <!--<class>sagepaysuite/observer_checkout</class>-->
-                        <!--<method>serverRegisterRecoverSession</method>-->
-                    <!--</save_order_after_sagepay>-->
-                <!--</observers>-->
-            <!--</checkout_type_onepage_save_order_after>-->
             <customer_login>
                 <observers>
                     <customer_login_sagepay>
@@ -548,6 +604,14 @@
                     </customer_login_sagepay>
                 </observers>
             </customer_login>
+            <controller_action_predispatch_checkout_cart_index>
+                <observers>
+                    <checkout_cart_index>
+                        <class>sagepaysuite/observer_checkout</class>
+                        <method>controllerCheckoutCartIndex</method>
+                    </checkout_cart_index>
+                </observers>
+            </controller_action_predispatch_checkout_cart_index>
             <controller_action_predispatch_onestepcheckout_index_index>
                 <observers>
                     <onepage_sagepay_clear_session>
@@ -572,6 +636,14 @@
                     </onepage_sagepay_clear_session>
                 </observers>
             </controller_action_predispatch_checkout_onepage_success>
+            <checkout_onepage_controller_success_action>
+                <observers>
+                    <sagepay_deferred_capture>
+                        <class>sagepaysuite/observer_checkout</class>
+                        <method>deferredCapture</method>
+                    </sagepay_deferred_capture>
+                </observers>
+            </checkout_onepage_controller_success_action>
             <core_layout_update_updates_get_after>
                 <observers>
                     <sagepaysuite_core_layout_update_updates_get_after>
@@ -682,12 +754,20 @@
     <crontab>
         <jobs>
             <sagepaysuite_sync_trndata_fromapi>
-                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
-                <run><model>sagepaysuite/cron::syncFromApi</model></run>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>sagepaysuite/cron::syncFromApi</model>
+                </run>
             </sagepaysuite_sync_trndata_fromapi>
             <sagepaysuite_cancel_pending_payment_orders>
-                <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
-                <run><model>sagepaysuite/cron::cancelPendingPaymentOrders</model></run>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>sagepaysuite/cron::cancelPendingPaymentOrders</model>
+                </run>
             </sagepaysuite_cancel_pending_payment_orders>
         </jobs>
     </crontab>

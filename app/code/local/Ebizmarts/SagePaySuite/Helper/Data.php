@@ -14,7 +14,7 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
     protected $_ccCards = array();
     protected $_sageMethods = array('sagepayserver', 'sagepayserver_moto',
         'sagepaydirectpro', 'sagepaydirectpro_moto',
-        'sagepaypaypal', 'sagepayform', 'sagepaynit');
+        'sagepaypaypal', 'sagepayform', 'sagepayrepeat', 'sagepaynit');
 
     public function currenciesToOptions()
     {
@@ -49,21 +49,20 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
         return $valid;
     }
 
-    public function getSagePayBasket($quote, $force_xml)
+    public function getSagePayBasket($quote, $forceXml)
     {
 
         $api = Mage::getModel('sagepaysuite/api_payment');
 
         $basket = "";
 
-        if ($force_xml == true) {
+        if ($forceXml == true) {
             $_basket = $api->getBasketXml($quote);
             if ($this->validateBasketXml($_basket)) {
                 $basket = $_basket;
             }
         } else {
             if ($api->getSendBasket()) {
-
                 $basketFormat = (string)$api
                     ->getConfigData('basket_format');
                 if ('sage' === $basketFormat) {
@@ -115,9 +114,10 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
      * Return module User-Agent string
      * @return string User agent
      */
-    public function getUserAgent() {
-        $v = (string) Mage::getConfig()->getNode('modules/Ebizmarts_SagePaySuite/version');
-        return "Ebizmarts/SagePaySuite CE(v{$v})";
+    public function getUserAgent()
+    {
+        $v = (string)Mage::getConfig()->getNode('modules/Ebizmarts_SagePaySuite/version');
+        return "Ebizmarts/SagePaySuite (v{$v})";
     }
 
     public function voidTransaction($vendorTxCode, $integration)
@@ -189,7 +189,19 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
         return (bool)in_array($code, $this->_sageMethods);
     }
 
-    public function F91B2E37D34E5DC4FFC59C324BDC1157C()  { return true; }
+    public function F91B2E37D34E5DC4FFC59C324BDC1157C()
+    {
+        if (false === $this->isSuiteEnabled()) {
+            return true;
+        }
+
+        $r8409EAA6EC0CE2EA307354B2E150F8C2 = str_replace('www.', '', $_SERVER['HTTP_HOST']);
+        $rEBBCEB7D5CE9F8309DCC3226F5DAC53B = Mage::getStoreConfig('payment/sagepaysuite/license_key');
+        $r1A634B62E7FB6CBC3AD8309D17FDC73C = substr(strrev($r8409EAA6EC0CE2EA307354B2E150F8C2), 0, strlen($r8409EAA6EC0CE2EA307354B2E150F8C2));
+        $r7BCAA4FB61D5AD641E1B67637D894EC1 = crypt($r8409EAA6EC0CE2EA307354B2E150F8C2 . 'Ebizmarts_SagePaySuite', $r1A634B62E7FB6CBC3AD8309D17FDC73C);
+        $r835CC35CB400C713B188267E7C10C798 = ($r7BCAA4FB61D5AD641E1B67637D894EC1 === $rEBBCEB7D5CE9F8309DCC3226F5DAC53B);
+        return $r835CC35CB400C713B188267E7C10C798;
+    }
 
     public function getCcImage($cname)
     {
@@ -309,31 +321,31 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getSagePayConfigJson()
     {
-        $_store = Mage::app()->getStore();
-        $_url = Mage::getModel('core/url');
+        $_store    = Mage::app()->getStore();
+        $_url      = Mage::getModel('core/url');
         $_urlAdmin = Mage::getModel('adminhtml/url');
-        $_d = Mage::getDesign();
+        $_d        = Mage::getDesign();
 
         $serverSafeFields = Mage::getModel('sagepaysuite/sagePayServer')->getConfigSafeFields();
         $directSafeFields = Mage::getModel('sagepaysuite/sagePayDirectPro')->getConfigSafeFields();
-        $nitSafeFields = Mage::getModel('sagepaysuite/sagePayNit')->getConfigSafeFields();
+        $nitSafeFields    = Mage::getModel('sagepaysuite/sagePayNit')->getConfigSafeFields();
 
         $conf = array();
 
-        $conf ['global'] = array_intersect_key($_store->getConfig('payment/sagepaysuite'), array_flip(array('debug', 'max_token_card')));
-        $conf ['global']['not_valid_message'] = $this->__('This Sage Pay Suite module\'s license is NOT valid.');
-        $conf ['global']['onepage_progress_url'] = $_url->getUrl('checkout/onepage/progress', array('_secure' => true));
-        $conf ['global']['onepage_success_url'] = $_url->getUrl('checkout/onepage/success', array('_secure' => true));
-        $conf ['global']['valid'] = (int)Mage::helper('sagepaysuite')->F91B2E37D34E5DC4FFC59C324BDC1157C();
-        $conf ['global']['token_enabled'] = (int)Mage::getModel('sagepaysuite/sagePayToken')->isEnabled();
-        $conf ['global']['sgps_saveorder_url'] = Mage::getModel('core/url')->addSessionParam()->getUrl('sgps/payment/onepageSaveOrder', array('_secure' => true));
+        $conf ['global']                                   = array_intersect_key($_store->getConfig('payment/sagepaysuite'), array_flip(array('debug', 'max_token_card')));
+        $conf ['global']['not_valid_message']              = $this->__('This Sage Pay Suite module\'s license is NOT valid.');
+        $conf ['global']['onepage_progress_url']           = $_url->getUrl('checkout/onepage/progress', array('_secure' => true));
+        $conf ['global']['onepage_success_url']            = $_url->getUrl('checkout/onepage/success', array('_secure' => true));
+        $conf ['global']['valid']                          = (int)Mage::helper('sagepaysuite')->F91B2E37D34E5DC4FFC59C324BDC1157C();
+        $conf ['global']['token_enabled']                  = (int)Mage::getModel('sagepaysuite/sagePayToken')->isEnabled();
+        $conf ['global']['sgps_saveorder_url']             = Mage::getModel('core/url')->addSessionParam()->getUrl('sgps/payment/onepageSaveOrder', array('_secure' => true));
         $conf ['global']['sgps_nit_generate_merchant_key'] = Mage::getModel('core/url')->addSessionParam()->getUrl('sgps/nitPayment/generateMerchantKey', array('_secure' => true));
-        $conf ['global']['cart_url'] = Mage::getModel('core/url')->getUrl('checkout/cart', array('_secure' => true));
-        $conf ['global']['osc_loading_image'] = '<img src="' . $_d->getSkinUrl('images/opc-ajax-loader.gif') . '" />&nbsp;&nbsp;' . $this->__('Please wait, processing your order...');
-        $conf ['global']['osc_save_billing_url'] = $_url->getUrl('onestepcheckout/ajax/save_billing', array('_secure' => true));
-        $conf ['global']['osc_set_methods_separate_url'] = $_url->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure' => true));
-        $conf ['global']['ajax_review'] = ($this->mageVersionIs('1.5') ? '1' : '2');
-        $conf ['global']['html_paymentmethods_url'] = $_url->getUrl('sgps/payment/getTokenCardsHtml', array('_secure' => true));
+        $conf ['global']['cart_url']                       = Mage::getModel('core/url')->getUrl('checkout/cart', array('_secure' => true));
+        $conf ['global']['osc_loading_image']              = '<img src="' . $_d->getSkinUrl('images/opc-ajax-loader.gif') . '" />&nbsp;&nbsp;' . $this->__('Please wait, processing your order...');
+        $conf ['global']['osc_save_billing_url']           = $_url->getUrl('onestepcheckout/ajax/save_billing', array('_secure' => true));
+        $conf ['global']['osc_set_methods_separate_url']   = $_url->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure' => true));
+        $conf ['global']['ajax_review']                    = ($this->mageVersionIs('1.5') ? '1' : '2');
+        $conf ['global']['html_paymentmethods_url']        = $_url->getUrl('sgps/payment/getTokenCardsHtml', array('_secure' => true));
 
 
         if ($this->creatingAdminOrder()) {
@@ -341,32 +353,35 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         if (is_array($_store->getConfig('payment/sagepayserver'))) {
-            $conf ['server'] = array_intersect_key($_store->getConfig('payment/sagepayserver'), array_flip($serverSafeFields));
+            $conf ['server']                         = array_intersect_key($_store->getConfig('payment/sagepayserver'), array_flip($serverSafeFields));
             $conf ['server']['sgps_registertrn_url'] = $_url->getUrl('sgps/serverPayment/registertrn', array('_secure' => true));
-            $conf ['server']['sgps_admin_registertrn_url'] = $_urlAdmin->getUrl('adminhtml/spsServerPayment/registertrn', array('_secure' => true));
-            $conf ['server']['osc_savebilling_url'] = $_url->getUrl('onestepcheckout/ajax/save_billing', array('_secure' => true));
-            $conf ['server']['osc_setmethods_url'] = $_url->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure' => true));
-            $conf ['server']['new_token_url'] = $_url->getUrl('sgps/card/serverform', array('_secure' => true));
-            $conf ['server']['secured_by_image'] = $_d->getSkinUrl('sagepaysuite/images/secured-by-sage-pay.png');
+            $conf ['server']['osc_savebilling_url']  = $_url->getUrl('onestepcheckout/ajax/save_billing', array('_secure' => true));
+            $conf ['server']['osc_setmethods_url']   = $_url->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure' => true));
+            $conf ['server']['new_token_url']        = $_url->getUrl('sgps/card/serverform', array('_secure' => true));
+            $conf ['server']['secured_by_image']     = $_d->getSkinUrl('sagepaysuite/images/secured-by-sage-pay.png');
+
+            if ($this->creatingAdminOrder()) {
+                $conf ['server']['sgps_admin_registertrn_url'] = $_urlAdmin->getUrl('adminhtml/spsServerPayment/registertrn', array('_secure' => true));
+            }
         }
 
         $conf ['form']['url'] = $_url->getUrl('sgps/formPayment/go', array('_secure' => true));
 
-        $conf ['direct'] = array_intersect_key($_store->getConfig('payment/sagepaydirectpro'), array_flip($directSafeFields));
-        $conf ['direct']['test_data'] = Mage::helper('sagepaysuite/sandbox')->getTestDataJson();
-        $conf ['direct']['sgps_registertrn_url'] = $_url->getUrl('sgps/directPayment/transaction', array('_secure' => true));
+        $conf ['direct']                            = array_intersect_key($_store->getConfig('payment/sagepaydirectpro'), array_flip($directSafeFields));
+        $conf ['direct']['test_data']               = Mage::helper('sagepaysuite/sandbox')->getTestDataJson();
+        $conf ['direct']['sgps_registertrn_url']    = $_url->getUrl('sgps/directPayment/transaction', array('_secure' => true));
         $conf ['direct']['sgps_registerdtoken_url'] = $_url->getUrl('sgps/directPayment/registerToken', array('_secure' => true));
         $conf ['direct']['html_paymentmethods_url'] = $_url->getUrl('sgps/directPayment/getTokenCardsHtml', array('_secure' => true));
-        $conf ['direct']['threed_before'] = '<h5 class="tdnote">' . $this->__('To increase the security of Internet transactions Visa and Mastercard have introduced 3D-Secure (like an online version of Chip and PIN). You have chosen to use a card that is part of the 3D-Secure scheme, so you will need to authenticate yourself with your bank in the section below.') . '</h5>';
-        $conf ['direct']['threed_after'] = '<div id="direct3d-logos"><img src="' . $_d->getSkinUrl('sagepaysuite/images/mcsc_logo.gif') . '" alt="" /><img src="' . $_d->getSkinUrl('sagepaysuite/images/vbv_logo_small.gif') . '" alt="" /><img src="' . $_d->getSkinUrl('sagepaysuite/images/sage_pay_logo.gif') . '" alt="" /></div>';
+        $conf ['direct']['threed_before']           = '<h5 class="tdnote">' . $this->__('To increase the security of Internet transactions Visa and Mastercard have introduced 3D-Secure (like an online version of Chip and PIN). You have chosen to use a card that is part of the 3D-Secure scheme, so you will need to authenticate yourself with your bank in the section below.') . '</h5>';
+        $conf ['direct']['threed_after']            = '<div id="direct3d-logos"><img src="' . $_d->getSkinUrl('sagepaysuite/images/mcsc_logo.gif') . '" alt="" /><img src="' . $_d->getSkinUrl('sagepaysuite/images/vbv_logo_small.gif') . '" alt="" /><img src="' . $_d->getSkinUrl('sagepaysuite/images/sage_pay_logo.gif') . '" alt="" /></div>';
 
-        $conf ['directmoto'] = array_intersect_key($_store->getConfig('payment/sagepaydirectpro_moto'), array_flip($directSafeFields));
+        $conf ['directmoto']              = array_intersect_key($_store->getConfig('payment/sagepaydirectpro_moto'), array_flip($directSafeFields));
         $conf ['directmoto']['test_data'] = Mage::helper('sagepaysuite/sandbox')->getTestDataJson();
-
+        $conf ['paypal']['redirect_url']  = $_url->getUrl('sgps/paypalexpress/go', array('_secure' => true));
 
         //nit
-        $conf ['nit'] = array_intersect_key($_store->getConfig('payment/sagepaynit'), array_flip($nitSafeFields));
-        $conf ['nit']['test_data'] = Mage::helper('sagepaysuite/sandbox')->getTestDataJson();
+        $conf ['nit']                         = array_intersect_key($_store->getConfig('payment/sagepaynit'), array_flip($nitSafeFields));
+        $conf ['nit']['test_data']            = Mage::helper('sagepaysuite/sandbox')->getTestDataJson();
         $conf ['nit']['sgps_registertrn_url'] = $_url->getUrl('sgps/nitPayment/transaction', array('_secure' => true));
 
         return Zend_Json::encode($conf);
@@ -374,9 +389,15 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function undertocamel($str)
     {
-        $a = new Zend_Filter_Word_UnderscoreToCamelCase;
 
-        return $a->filter($str);
+        $pieces = explode("_", $str);
+
+        for ($i=0;$i<count($pieces);$i++) {
+            $pieces[$i][0] = strtoupper($pieces[$i][0]);
+        }
+
+        return $str = implode($pieces);
+
     }
 
     public function cameltounder($str)
@@ -461,6 +482,7 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
         if (!is_dir($suiteLogPath)) {
             mkdir($suiteLogPath, 0755);
         }
+
         if (!is_dir($profilerPath)) {
             mkdir($profilerPath, 0755);
         }
@@ -474,7 +496,6 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
         $longest = 10;
         $rows = array();
         foreach ($timers as $name => $timer) {
-
             $sum = Varien_Profiler::fetch($name, 'sum');
             $count = Varien_Profiler::fetch($name, 'count');
             $realmem = Varien_Profiler::fetch($name, 'realmem');
@@ -562,7 +583,13 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
         return preg_replace($patterns, $replacements, $request);
     }
 
-    public function validateQuote() {
+    public function surchargesModuleEnabled()
+    {
+        return Mage::getConfig()->getModuleConfig('Ebizmarts_SagePaySurcharges')->is('active', 'true');
+    }
+
+    public function validateQuote()
+    {
 
         if ((int)Mage::getStoreConfig('payment/sagepaysuite/validate_quote') === 1) {
             $quote = Mage::getSingleton('sagepaysuite/api_payment')->getQuote();
@@ -573,6 +600,7 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
                 if ($addressValidation !== true) {
                     Mage::throwException($this->__("\nPlease check shipping address information. \n%s", implode("\n", $addressValidation)));
                 }
+
                 $method = $address->getShippingMethod();
                 $rate = $address->getShippingRateByCode($method);
                 if (!$quote->isVirtual() && (!$method || !$rate)) {
@@ -591,11 +619,9 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
 
             //Stock check, redirect to cart if can't continue
             if (!$quote->getInventoryProcessed()) {
-
                 $items = $this->_getProductsQty($quote->getAllItems());
 
                 try {
-
                     Mage::getModel('cataloginventory/stock')->registerProductsSale($items);
                     //Set flag
                     $quote->setInventoryProcessed(true);
@@ -604,7 +630,6 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
                     Mage::getModel('cataloginventory/stock')->revertProductsSale($items);
                     // Clear flag
                     $quote->setInventoryProcessed(false);
-
                 } catch (Exception $ex) {
                     throw new Exception('REDIRECT_CART');
                 }
@@ -632,6 +657,7 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
             if (!$productId) {
                 continue;
             }
+
             $children = $item->getChildrenItems();
             if ($children) {
                 foreach ($children as $childItem) {
@@ -641,6 +667,7 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
                 $this->_addItemToQtyArray($item, $items);
             }
         }
+
         return $items;
     }
 
@@ -669,6 +696,7 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
             if ($quoteItem->getProduct()) {
                 $stockItem = $quoteItem->getProduct()->getStockItem();
             }
+
             $items[$productId] = array(
                 'item' => $stockItem,
                 'qty' => $quoteItem->getTotalQty()
@@ -728,7 +756,33 @@ class Ebizmarts_SagePaySuite_Helper_Data extends Mage_Core_Helper_Abstract
         } else {
             $output = (int)$avscv2;
         }
+
         return $output;
+    }
+
+    /**
+     * @param array $parameters
+     * @return array
+     */
+    public function sanitizeParamsForQuery(array $parameters)
+    {
+        $return = array();
+
+        foreach ($parameters as $_key => $_param) {
+            $return [$_key]= $this->_encodeParamForQuery($_param);
+        }
+
+        return $return;
+    }
+
+    private function _encodeParamForQuery($string)
+    {
+        return rawurlencode($string);
+    }
+
+    public function decodeParamFromQuery($string)
+    {
+        return rawurldecode($string);
     }
 
 }

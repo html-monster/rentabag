@@ -7,7 +7,8 @@
  * @package    Ebizmarts_SagePaySuite
  * @author     Ebizmarts <info@ebizmarts.com>
  */
-class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_Model_Api_Token {
+class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_Model_Api_Token
+{
 
     protected $_code = 'sagepaytoken';
     protected $_formBlockType = 'sagepaysuite/form_sagePayToken';
@@ -17,21 +18,22 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
      * @return bool
      */
 
-    public function customerCanAddCard($methodCode = null, $ccNumber = null, $ccExpireDate = null, $ccType = null) {
+    public function customerCanAddCard($methodCode = null, $ccNumber = null, $ccExpireDate = null, $ccType = null) 
+    {
         $customerCards = Mage::helper('sagepaysuite/token')->loadCustomerCards()->getSize();
         $maxCards = (int) Mage::getStoreConfig('payment/sagepaysuite/max_token_card');
 
-        if(is_null($ccNumber) && is_null($ccExpireDate) && is_null($ccType)){
+        if (is_null($ccNumber) && is_null($ccExpireDate) && is_null($ccType)) {
             return ($customerCards < $maxCards);
         }
 
-        if(is_string($ccNumber) && strlen($ccNumber) != 4){
-            $lastFour = substr($ccNumber,-4);
-        }else{
+        if (is_string($ccNumber) && strlen($ccNumber) != 4) {
+            $lastFour = substr($ccNumber, -4);
+        } else {
             $lastFour = $ccNumber;
         }
 
-        if(Mage::helper('sagepaysuite/token')->loadCustomerCards($methodCode,$lastFour,$ccType,$ccExpireDate)->getSize() == 0){
+        if (Mage::helper('sagepaysuite/token')->loadCustomerCards($methodCode, $lastFour, $ccType, $ccExpireDate)->getSize() == 0) {
             return ($customerCards < $maxCards);
         }
 
@@ -39,7 +41,8 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
 
     }
 
-    public function getSessionCustomerId() {
+    public function getSessionCustomerId() 
+    {
 
         return $this->getCustomerQuoteId();
     }
@@ -47,31 +50,31 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
     /**
      * Save registered token in local DB
      */
-    public function persistCard(array $info, $customer_id = null) {
+    public function persistCard(array $info, $customerId = null)
+    {
 
         $sessId = $this->getSessionCustomerId();
 
-        if(empty($sessId) && !empty($customer_id)){
-            $sessId = (int)$customer_id;
+        if (empty($sessId) && !empty($customerId)) {
+            $sessId = (int)$customerId;
         }
 
         //Register checkout
-        if(is_string($sessId)) {
+        if (is_string($sessId)) {
             $sessId = null;
         }
 
         $methodCode = null;
 
-        if($info['Protocol'] == 'direct'){
+        if ($info['Protocol'] == 'direct') {
             $methodCode = 'sagepaydirectpro';
-        }else if($info['Protocol'] == 'server'){
+        } else if ($info['Protocol'] == 'server') {
             $methodCode = 'sagepayserver';
         }
 
         // As in some cases we are not able to prevent the token creation we need to delete it after creation if it is not possible to store the token.
 
-        if(!$this->customerCanAddCard($methodCode,$info['CardNumber'],$info['ExpiryDate'],$info['CardType'])){
-
+        if (!$this->customerCanAddCard($methodCode, $info['CardNumber'], $info['ExpiryDate'], $info['CardType'])) {
             $this->removeCard($info['Token']);
 
             $message = Mage::helper('sagepaysuite')->__('Credit card could not be saved for future use. You already have this card attached to your account or you have reached your account\'s maximum card storage capacity.');
@@ -81,8 +84,8 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
         }
 
         $nickname = "";
-        if(array_key_exists('Nickname', $info)){
-            $nickname = $info['Nickname'];
+        if (array_key_exists('Nickname', $info)) {
+            $nickname = filter_var($info['Nickname'], FILTER_SANITIZE_STRING);
         }
 
         $save = Mage::getModel('sagepaysuite2/sagepaysuite_tokencard')
@@ -113,7 +116,8 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
      * Validate if token card is valid for checkout.
      * @return bool
      */
-    public function isTokenValid($cardId) {
+    public function isTokenValid($cardId) 
+    {
 
         $card = Mage::getModel('sagepaysuite2/sagepaysuite_tokencard')
                 ->load($cardId);
@@ -127,7 +131,8 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
         return false;
     }
 
-    protected function _getNotificationUrl() {
+    protected function _getNotificationUrl() 
+    {
         $adminId = Mage::registry('admin_tokenregister');
 
         $frontendUrl = Mage::getUrl('sgps/card/registerPost', array('_secure' => true, '_nosid' => true)) . '?' . $this->getSidParam() . '&cid=' . (is_null($this->getSessionCustomerId()) ? "" : $this->getSessionCustomerId());
@@ -136,7 +141,8 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
         return ($adminId ? $backendUrl : $frontendUrl);
     }
 
-    public function removeCard($token, $protocol = 'direct') {
+    public function removeCard($token, $protocol = 'direct') 
+    {
         return $this->_postRemove($token, $protocol);
     }
 
@@ -146,15 +152,16 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
      * @param  Varien_Object $info
      * @return array
      */
-    public function tokenTransaction(Varien_Object $info) {
+    public function tokenTransaction(Varien_Object $info)
+    {
 
-        $sessT       = $this->getSageSuiteSession()->getLastSavedTokenccid();
+        $sessT = $this->getSageSuiteSession()->getLastSavedTokenccid();
         $tokenLoadId = (!is_null($sessT) ? $sessT : $info->getPayment()->getSagepayTokenCcId());
 
         $_t = Mage::getModel('sagepaysuite2/sagepaysuite_tokencard')->load($tokenLoadId);
 
         $_t->setIsDefault(1)
-           ->save();
+            ->save();
 
         $isGuest = Mage::getSingleton('checkout/type_onepage')->getCheckoutMethod() == Mage_Checkout_Model_Type_Onepage::METHOD_GUEST;
 
@@ -162,18 +169,18 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
             $isGuest = FALSE;
         }
 
-        $postData                   = array();
-        $postData                   += $this->_getGeneralTrnData($info->getPayment(), $info->getParameters())->getData();
-        $postData['vendortxcode']   = substr($postData['vendor_tx_code'], 0, 40);
-        $postData['txtype']         = $info->getPayment()->getTransactionType();
+        $postData = array();
+        $postData += $this->_getGeneralTrnData($info->getPayment(), $info->getParameters())->getData();
+        $postData['vendortxcode'] = substr($postData['vendor_tx_code'], 0, 40);
+        $postData['txtype'] = $info->getPayment()->getTransactionType();
         $postData['InternalTxtype'] = $postData['txtype'];
-        $postData['token']          = $_t->getToken();
-        $postData['storetoken']     = ($isGuest ? '0' : '1');
-        $postData['description']    = '.';
+        $postData['token'] = $_t->getToken();
+        $postData['storetoken'] = ($isGuest ? '0' : '1');
+        $postData['description'] = '.';
         //$postData['CV2']            = $this->getSageSuiteSession()->getTokenCvv();
         //Mage::log($info->getPayment()->getTokenCvv());
-        $postData['CV2']            = $info->getPayment()->getTokenCvv();
-        $postData['vendor']         = $this->getConfigData('vendor'); //@TODO: Check this for token MOTO transactions.
+        $postData['CV2'] = $info->getPayment()->getTokenCvv();
+        $postData['vendor'] = $this->getConfigData('vendor'); //@TODO: Check this for token MOTO transactions.
 
         if (array_key_exists('integration', $postData) && strtolower($postData['integration']) == 'server') {
             $postData['Profile'] = 'LOW';
@@ -181,6 +188,14 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
 
         if (isset($postData['c_v2']) && empty($postData['CV2'])) {
             $postData['CV2'] = $postData['c_v2'];
+        }
+
+        //surcharge XML
+        if (Mage::helper('sagepaysuite')->surchargesModuleEnabled() == true) {
+            $surchargeXML = $this->getSurchargeXml($this->_getQuote());
+            if (!is_null($surchargeXML)) {
+                $postData['SurchargeXML'] = $surchargeXML;
+            }
         }
 
         $postData = Mage::helper('sagepaysuite')->arrayKeysToCamelCase($postData);
@@ -193,8 +208,7 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
         // Do not perform 3D checks on MS checkout
         if ($this->_isMultishippingCheckout()) {
             $postData['Apply3DSecure'] = 2;
-        }
-        else {
+        } else {
             $postData['Apply3DSecure'] = (int) Mage::getStoreConfig("payment/sagepaydirectpro/secure3d");
         }
 
@@ -203,9 +217,10 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
         }
 
         $postData['ApplyAVSCV2'] = $this->_SageHelper()->getApplyAvsCv2(
-                            $this->getConfigData('apply_AVSCV2'),
-                            $postData['BillingCountry'],
-                            $this->getConfigData('avscv2'));
+            $this->getConfigData('apply_AVSCV2'),
+            $postData['BillingCountry'],
+            $this->getConfigData('avscv2')
+        );
 
         $urlPost = $this->getTokenUrl('post', (isset($postData['Integration']) ? $postData['Integration'] : 'direct'));
 
@@ -221,54 +236,55 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
         return $rs;
     }
 
-    public function registerCard(array $data = array(), $persist = false) {
+    public function registerCard(array $data = array(), $persist = false)
+    {
 
-        $postData                = array();
+        $postData = array();
         $postData['VPSProtocol'] = $this->getVpsProtocolVersion();
-        $postData['TxType']      = 'TOKEN';
-        $postData['Vendor']      = $this->getConfigData('vendor');
+        $postData['TxType'] = 'TOKEN';
+        $postData['Vendor'] = $this->getConfigData('vendor');
 
         if ($this->_getQuote()->hasItems()) {//Checkout
-            if ((string) $this->getConfigData('trncurrency') == 'store') {
+            if ((string)$this->getConfigData('trncurrency') == 'store') {
                 $postData['Currency'] = $this->_getQuote()->getQuoteCurrencyCode();
             } else {
                 $postData['Currency'] = $this->_getQuote()->getBaseCurrencyCode();
             }
-        }
-        else {//Customer account
+        } else {//Customer account
             $postData['Currency'] = Mage::app()->getStore()->getCurrentCurrencyCode();
         }
 
-        $postData['VendortxCode']    = $this->getNewTxCode();
+        $postData['VendortxCode'] = $this->getNewTxCode();
         $postData['NotificationURL'] = $this->_getNotificationUrl();
 
         if (array_key_exists('CardType', $data)) { #DIRECT
             $urlPost = $this->getTokenUrl('register', 'direct');
             $methodCode = 'sagepaydirectpro';
             $postData += $data;
-        }
-        else { #SERVER
+        } else { #SERVER
             $urlPost = $this->getTokenUrl('register', 'server');
             $methodCode = 'sagepayserver';
             $postData['Profile'] = 'LOW';
         }
 
-        $CardNumber = null;
-        $ExpiryDate = null;
-        $CardType = null;
-        if(!is_null($data)){
-            if(array_key_exists("CardNumber",$data)){
-                $CardNumber = $data['CardNumber'];
+        $cardNumber = null;
+        $expiryDate = null;
+        $cardType = null;
+        if (!is_null($data)) {
+            if (array_key_exists("CardNumber", $data)) {
+                $cardNumber = $data['CardNumber'];
             }
-            if(array_key_exists("ExpiryDate",$data)){
-                $ExpiryDate = $data['ExpiryDate'];
+
+            if (array_key_exists("ExpiryDate", $data)) {
+                $expiryDate = $data['ExpiryDate'];
             }
-            if(array_key_exists("CardType",$data)){
-                $CardType = $data['CardType'];
+
+            if (array_key_exists("CardType", $data)) {
+                $cardType = $data['CardType'];
             }
         }
 
-        if ($this->customerCanAddCard($methodCode, $CardNumber, $ExpiryDate, $CardType) === false) {
+        if ($this->customerCanAddCard($methodCode, $cardNumber, $expiryDate, $cardType) === false) {
             return array('Status' => 'ERROR', 'StatusDetail' => Mage::helper('sagepaysuite')->__('Credit card could not be saved for future use. You already have this card attached to your account or you have reached your account\'s maximum card storage capacity.'));
         }
 
@@ -285,11 +301,13 @@ class Ebizmarts_SagePaySuite_Model_SagePayToken extends Ebizmarts_SagePaySuite_M
      * Check if TOKEN is enabled on the configuration settings
      * @return bool
      */
-    public function isEnabled() {
+    public function isEnabled() 
+    {
         return (bool) (Mage::getStoreConfig('payment/sagepaysuite/token_integration') != 'false');
     }
 
-    protected function _postRemove($token, $protocol) {
+    protected function _postRemove($token, $protocol) 
+    {
         $rqData = array();
         $rqData['VPSProtocol'] = $this->getVpsProtocolVersion();
         $rqData['TxType'] = 'REMOVETOKEN';
