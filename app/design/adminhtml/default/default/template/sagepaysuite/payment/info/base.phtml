@@ -34,6 +34,7 @@
  }
 
  $stopped = ($sagepay->getVoided() || $sagepay->getAborted() || $sagepay->getCanceled()) ? true : false;
+ $isPayPal = $sagepay->getisPayPalTransaction();
 
  $states = $this->helper('sagepaysuite')->getTxStates();
 
@@ -48,7 +49,11 @@ if(!$sagepay->getCardExpiryDate()){
 
 <p>
 
+<?php if($isPayPal): ?>
+	<?php echo $this->getMethod()->getPayPalTitle(); ?>
+<?php else: ?>
 	<?php echo $this->getMethod()->getTitle() ?>
+<?php endif; ?>
     <br />
 <?php echo $this->__('%s Transaction placed in %s mode.', strtoupper($sagepay->getTxType()), strtoupper($sagepay->getMode())); ?>
 </p>
@@ -100,6 +105,12 @@ if(!$sagepay->getCardExpiryDate()){
 
 	<?php if($stopped): ?>
 		<li><strong class="rd-ntce"><?php echo $this->getStoppedLabel($sagepay); ?></strong></li>
+	<?php else: ?>
+		<?php if($sagepay->getTxType() == 'DEFERRED'): if($sagepay->getReleased()): ?>
+	        <li><strong class="gr-ntce"><?php echo $this->__('Transaction has been successfully RELEASED.'); ?></strong></li>
+	        <?php else: ?>
+	        <li><strong class="rd-ntce"><?php echo $this->__('Waiting RELEASE'); ?></strong></li>
+	    <?php endif; endif; ?>
 	<?php endif; ?>
 
     <li><strong><?php echo $this->__('Vendor TX Code'); ?></strong>: <?php echo $sagepay->getVendorTxCode(); ?></li>
@@ -112,6 +123,13 @@ if(!$sagepay->getCardExpiryDate()){
     	if(!is_null($td_status)): ?>
     <li><strong><?php echo $this->__('3D Status'); ?></strong>: <span class="shield-flag threed-<?php echo strtolower(trim($td_status)); ?>"><?php echo $td_status; ?></span></li>
     <?php endif; ?>
+
+	<?php if($isPayPal): $paypaldata = $sagepay->getPayPalData(); ?>
+		<li><strong><?php echo $this->__('Payer ID:'); ?></strong> <?php echo $paypaldata->getPayerId(); ?></li>
+		<li><strong><?php echo $this->__('Payer Email:'); ?></strong> <?php echo $paypaldata->getCustomerEmail(); ?></li>
+		<li><strong><?php echo $this->__('Payer Status:'); ?></strong> <?php echo $paypaldata->getPayerStatus(); ?></li>
+		<li><strong><?php echo $this->__('Payer Address Status:'); ?></strong> <?php echo $paypaldata->getAddressStatus(); ?></li>
+	<?php endif; ?>
 
 </ul>
 
@@ -129,6 +147,11 @@ if(!$sagepay->getCardExpiryDate()){
     	<li><?php echo $this->__('AVS and CV2 Verification Result: <span class="shield-flag %s">%s</span>', $this->cs($sagepay->getAvscv2()), $sagepay->getAvscv2()); ?></li>
     <?php endif; ?>
 </ul>
+
+<!-- Surcharge Amount -->
+<?php if($sagepay->getSurchargeAmount()): ?>
+    <p style="color:#74007A;font-weight:bold;"><?php echo $this->__('SURCHARGE amount: %s', Mage::app()->getLocale()->currency($sagepay->getTrnCurrency())->toCurrency($sagepay->getSurchargeAmount())); ?></p>
+<?php endif; ?>
 
 <!-- ReD Fraud Response -->
 <?php if($sagepay->getRedFraudResponse()): ?>
@@ -166,6 +189,13 @@ if(!$sagepay->getCardExpiryDate()){
 	<?php echo $this->getChildHtml(); ?>
 
 <?php else: ?>
+
+
+<?php if($this->getOnMemo()): ?>
+	<?php echo $this->getChildHtml('refunds.list'); ?>
+<?php elseif($this->getOnInvoice()): ?>
+	<?php echo $this->getChildHtml('authorise.list'); ?>
+<?php endif; ?>
 
 <?php endif; ?>
 

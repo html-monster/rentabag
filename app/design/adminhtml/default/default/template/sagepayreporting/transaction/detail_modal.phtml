@@ -152,7 +152,7 @@
                     </tr>
                     <tr>
                         <td class="label"><p><?php echo $this->__('Expiry Date'); ?></p></td>
-                        <td class="value"><p><?php echo $_transacion->getExpirydate(); ?></p></td>
+                        <td class="value"><p><?php $str = $_transacion->getExpirydate(); echo substr($str, 0, 2) . " - " . substr($str, 2); ?></p></td>
                     </tr>
                     <tr>
                         <td class="label"><p><?php echo $this->__('Last 4 Digits'); ?></p></td>

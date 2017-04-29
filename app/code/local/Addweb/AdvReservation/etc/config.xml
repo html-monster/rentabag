@@ -5,6 +5,7 @@
         <version>0.1.0</version>
       </Addweb_AdvReservation>
     </modules>
+
     <global>
 		<helpers>
 			<advreservation>
@@ -238,7 +239,7 @@
             </updates>
 
 
-            <!-- wallinole-->
+            <!-- Vlasakh-->
 			<updates>
                 <adv_rent module="Addweb_AdvReservation">
                     <file>addweb/adv_rent.xml</file>
@@ -255,7 +256,7 @@
 				</args>
 			</checkout>
 
-		 	<!-- wallinole -->
+		 	<!-- Vlasakh -->
             <customers>
                 <use>standard</use>
                 <args>
@@ -272,4 +273,42 @@
             </rent>
         </routers>
      </frontend>
+
+
+	<!-- Vlasakh -->
+	<stores>
+		<admin>
+			<design>
+				<package>
+					<name>Adv_rent</name>
+				</package>
+				<theme>
+					<default>rentabag</default>
+				</theme>
+			</design>
+		</admin>
+	</stores>
+<!--
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<Addweb_AdvReservation before="Mage_Adminhtml">Addweb_AdvReservation_Adminhtml</Addweb_AdvReservation>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+-->
+
+	<adminhtml>
+		<layout>
+			<updates>
+				<adv_rent module="Addweb_AdvReservation">
+					<file>addweb/adv_rent_adm.xml</file>
+				</adv_rent>
+			</updates>
+		</layout>
+	</adminhtml>
 </config>

@@ -7,9 +7,11 @@
  * @package    Ebizmarts_SagePaySuite
  * @author     Ebizmarts <info@ebizmarts.com>
  */
-class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySuite_Model_Observer {
+class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySuite_Model_Observer
+{
 
-    protected function _getLastOrderId() {
+    protected function _getLastOrderId() 
+    {
         return (int) (Mage::getSingleton('checkout/type_onepage')->getCheckout()->getLastOrderId());
     }
 
@@ -18,20 +20,21 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
      * @param  $observer
      * @return Ebizmarts_SagePaySuite_Model_Observer_Checkout
      */
-    public function saveMagemavenOrderComment($observer) {
+    public function saveMagemavenOrderComment($observer) 
+    {
 
         //Magemaven_OrderComment
         $comment = $this->getSession()->getOrderComments(true);
-        if($comment) {
-
+        if ($comment) {
             $order = $observer->getEvent()->getOrder();
 
-            if(is_object($order)) {
+            if (is_object($order)) {
                 $order->setCustomerComment($comment);
                 $order->setCustomerNoteNotify(true);
                 $order->setCustomerNote($comment);
             }
         }
+
         //Magemaven_OrderComment
 
         return $this;
@@ -40,7 +43,8 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
     /**
      * Clear SagePaySuite session when loading onepage checkout
      */
-    public function controllerOnePageClear($o) {
+    public function controllerOnePageClear($o) 
+    {
 
         /**
          * Delete register and guest cards when loading checkout
@@ -50,7 +54,6 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
             if ($sessionCards->getSize() > 0) {
                 foreach ($sessionCards as $_c) {
                     if ($_c->getCustomerId() == 0) {
-
                         $delete = Mage::getModel('sagepaysuite/sagePayToken')
                                 ->removeCard($_c->getToken(), $_c->getProtocol());
                         if ($delete['Status'] == 'OK') {
@@ -62,21 +65,27 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
         } catch (Exception $ex) {
             Mage::logException($ex);
         }
+
         /**
          * Delete register and guest cards when loading checkout
          */
+        Mage::getSingleton('core/session')->unsetData('surchargeamount');
+        Mage::getSingleton('core/session')->unsetData('surchargeamounttax');
 
         $this->getSession()->clear();
     }
 
-    public function controllerMultishippingClear($o) {
+    public function controllerMultishippingClear($o) 
+    {
 
-        if($this->getSession()->getCreateInvoicePayment(true)) {
+        Mage::getSingleton('core/session')->unsetData('surchargeamount');
+        Mage::getSingleton('core/session')->unsetData('surchargeamounttax');
+
+        if ($this->getSession()->getCreateInvoicePayment(true)) {
             $orderIds = Mage::getSingleton('checkout/type_multishipping')->getOrderIds();
 
-            if(is_array($orderIds) and !empty($orderIds)) {
-
-                for($i=0;$i<count($orderIds);$i++) {
+            if (is_array($orderIds) and !empty($orderIds)) {
+                for ($i=0;$i<count($orderIds);$i++) {
                     Mage::getModel('sagepaysuite/api_payment')->invoiceOrder(Mage::getModel('sales/order')->load($orderIds[$i]));
                 }
             }
@@ -85,28 +94,48 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
         $this->getSession()->clear();
     }
 
-    public function getOnepage() {
+    /**
+     * Capture DEFERRED or AUTHENTICATE transactions
+     */
+    public function deferredCapture($o) 
+    {
+        $canCapture = (bool) Mage::getStoreConfig('payment/sagepaysuite/deferred_capture');
+        if ($canCapture) {
+            $orderId = $this->_getLastOrderId();
+
+            $trn = $this->_getTransactionsModel()
+                    ->loadByParent($orderId);
+            if ($trn->getId()) {
+                if ($trn->getTxType() == 'DEFERRED' || $trn->getTxType() == 'AUTHENTICATE') {
+                    Mage::getModel('sagepaysuite/api_payment')->invoiceOrder($orderId, Mage_Sales_Model_Order_Invoice::CAPTURE_ONLINE);
+                }
+            }
+        }
+    }
+
+    public function getOnepage() 
+    {
 
         return Mage::getSingleton('checkout/type_onepage');
     }
 
-    public function controllerOnePageSuccess($o) {
+    public function controllerOnePageSuccess($o) 
+    {
 
         //check if session is there
         $sessionCheckout = $this->getOnepage()->getCheckout();
-        if(!$sessionCheckout->getLastSuccessQuoteId() && !is_null(Mage::app()->getRequest()->getParam('qide'))
+        if (!$sessionCheckout->getLastSuccessQuoteId() && !is_null(Mage::app()->getRequest()->getParam('qide'))
             && !is_null(Mage::app()->getRequest()->getParam('incide'))
             && !is_null(Mage::app()->getRequest()->getParam('oide'))) {
-
-            if(Mage::getSingleton('core/session')->getData("sagepay_server_first_arrive") == true){
+            if (Mage::getSingleton('core/session')->getData("sagepay_server_first_arrive") == true) {
                 $sessionCheckout
                     ->setLastSuccessQuoteId(Mage::app()->getRequest()->getParam('qide'))
                     ->setLastQuoteId(Mage::app()->getRequest()->getParam('qide'))
                     ->setLastOrderId(Mage::app()->getRequest()->getParam('oide'))
-                    ->setLastRealOrderId(Mage::app()->getRequest()->getParam('incide'));
+                    ->setLastRealOrderId(Mage::helper('sagepaysuite')->decodeParamFromQuery(Mage::app()->getRequest()->getParam('incide')));
 
                 $autoInvoice = (int)Mage::app()->getRequest()->getParam('inv');
-                if($autoInvoice) {
+                if ($autoInvoice) {
                     Mage::getSingleton('sagepaysuite/session')->setCreateInvoicePayment($autoInvoice);
                 }
             }
@@ -135,10 +164,9 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
 
         //Associate Customer ID for DIRECT transactions without 3D and REGISTER checkout
         $tokenId = $this->getSession()->getLastSavedTokenccid(true);
-        if((int)$tokenId) {
+        if ((int)$tokenId) {
             $token = Mage::getModel('sagepaysuite2/sagepaysuite_tokencard')->load($tokenId);
-            if($token->getId() && ($token->getId() == $tokenId) && !$token->getCustomerId()) {
-
+            if ($token->getId() && ($token->getId() == $tokenId) && !$token->getCustomerId()) {
                 $customerId = Mage::getModel('sales/order')->load($orderId)->getCustomerId();
 
                 $token->setCustomerId($customerId)
@@ -146,7 +174,7 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
             }
         }
 
-        if($this->getSession()->getCreateInvoicePayment(true)) {
+        if ($this->getSession()->getCreateInvoicePayment(true)) {
             Mage::getModel('sagepaysuite/api_payment')->invoiceOrder(Mage::getModel('sales/order')->load($orderId));
         }
 
@@ -156,9 +184,10 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
         $this->getSession()->clear();
     }
 
-    public function sendPaymentFailedEmail($observer) {
+    public function sendPaymentFailedEmail($observer) 
+    {
         //Check if enabled in config.
-        if(0 === (int)Mage::getStoreConfig('payment/sagepaysuite/send_payment_failed_emails')) {
+        if (0 === (int)Mage::getStoreConfig('payment/sagepaysuite/send_payment_failed_emails')) {
             return $this;
         }
 
@@ -166,9 +195,7 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
         $message = $observer->getEvent()->getMessage();
 
         try {
-
             Mage::helper('sagepaysuite/checkout')->sendPaymentFailedEmail($quote, $message);
-
         } catch(Exception $ex) {
             Sage_Log::logException($ex);
         }
@@ -177,40 +204,40 @@ class Ebizmarts_SagePaySuite_Model_Observer_Checkout extends Ebizmarts_SagePaySu
     }
 
     /**
-     * Fix SERVER integration issue when checkout method is REGISTER.
+     * Controller before cart index
      *
      * @param $observer
      * @return $this
      */
-    public function serverRegisterRecoverSession($observer) {
+    public function controllerCheckoutCartIndex($observer)
+    {
 
-//        Sage_Log::log("CHECKOUT OBS: serverRegisterRecoverSession", null, 'SagePaySuite_SERVER_RESPONSE.log');
-//
-//        $quote = $observer->getEvent()->getQuote();
-//        $order = $observer->getEvent()->getOrder();
-//
-//        $isSagePayServer = ($order->getPayment()->getMethod() == 'sagepayserver');
-//        $isRegister      = ($quote->getData('checkout_method') == 'register');
-//
-//        if($isSagePayServer) {
-//
-//            Sage_Log::log("CHECKOUT OBS: Registering vars", null, 'SagePaySuite_SERVER_RESPONSE.log');
-//
-//            Mage::register('sagepay_last_real_order_id', $order->getIncrementId(), true);
-//            Mage::register('sagepay_last_order_id', $order->getId(), true);
-//            Mage::register('sagepay_last_quote_id', $quote->getId(), true);
-//
-//            if($isRegister){
-//                Mage::register('sagepay_customer_id', $quote->getData('customer_id'), true);
-//
-//                //sweet tooth fix
-//                if(Mage::registry('rewards_createPointsTransfers_run')){
-//                    Mage::unregister('rewards_createPointsTransfers_run');
-//                    Mage::dispatchEvent('sales_order_save_commit_after', array('order'=>$order));
-//                }
-//            }
-//        }
-//
-//        return $this;
+        /**
+         * Reload quote and cancel order if it was pre-saved but not completed
+         */
+        $presavedOrderId = Mage::getSingleton('sagepaysuite/session')->getData("sagepaysuite_presaved_order_pending_payment");
+
+        if (!empty($presavedOrderId)) {
+            $order = Mage::getModel('sales/order')->load($presavedOrderId);
+            if (!is_null($order) && !is_null($order->getId()) && $order->getStatus() == "sagepaysuite_pending_payment") {
+                $quote   = $observer->getEvent()->getQuote();
+                if (!$quote || !$quote->getId()) {
+                    //cancel order
+                    $order->cancel()->save();
+
+                    //recover quote
+                    $quote = Mage::getModel('sales/quote')->load($order->getQuoteId());
+                    if ($quote->getId()) {
+                        $quote->setIsActive(1);
+                        $quote->setReservedOrderId(NULL);
+                        $quote->save();
+                        Mage::getModel('checkout/cart')->setQuote($quote);
+                    }
+
+                    //remove flag
+                    Mage::getSingleton('sagepaysuite/session')->setData("sagepaysuite_presaved_order_pending_payment", null);
+                }
+            }
+        }
     }
 }

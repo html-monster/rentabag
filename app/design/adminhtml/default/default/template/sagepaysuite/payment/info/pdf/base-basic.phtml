@@ -18,7 +18,11 @@
  }
 ?>
 
+<?php if($sagepay->getisPayPalTransaction()): ?>
+	<?php echo $this->getMethod()->getPayPalTitle(); ?>
+<?php else: ?>
 	<?php echo $this->getMethod()->getTitle() ?>
+<?php endif; ?>
 
 {{pdf_row_separator}}
 

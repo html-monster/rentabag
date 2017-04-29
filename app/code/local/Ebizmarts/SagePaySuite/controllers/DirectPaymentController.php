@@ -14,7 +14,7 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
     {
         if (!Mage:: getSingleton('checkout/session')->getQuote()->hasItems()) {
             $this->getResponse()->setHeader('HTTP/1.1', '403 Session Expired');
-            exit;
+            return;
         }
     }
 
@@ -36,25 +36,30 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
         $resultData = array();
 
         try {
-
             Mage::helper('sagepaysuite')->validateQuote();
 
             $result = $this->getDirectModel()->registerTransaction($this->getRequest()->getPost());
             $resultData = $result->getData();
 
-            $response_status = $result->getResponseStatus();
+            $responseStatus = $result->getResponseStatus();
 
-            if ($response_status == Ebizmarts_SagePaySuite_Model_Api_Payment :: RESPONSE_CODE_3DAUTH) {
+            if ($responseStatus == Ebizmarts_SagePaySuite_Model_Api_Payment::RESPONSE_CODE_PAYPAL_REDIRECT) {
+                $resultData = array(
+                    'success' => 'true',
+                    'response_status' => 'paypal_redirect',
+                    'redirect' => $result->getData('pay_pal_redirect_url')
+                );
+            } else if ($responseStatus == Ebizmarts_SagePaySuite_Model_Api_Payment :: RESPONSE_CODE_3DAUTH) {
                 $vendorTxCode = $result->getRequest()->getData('VendorTxCode');
                 $resultData = array(
                     'success' => 'true',
                     'response_status' => 'threed',
-                    'redirect' => Mage:: getModel('core/url'
+                    'redirect' => Mage:: getModel(
+                        'core/url'
                     )->getUrl('sgps/DirectPayment/threedPost', array('_secure' => true, 'txc' => $vendorTxCode)));
-            } else if ($response_status == Ebizmarts_SagePaySuite_Model_Api_Payment :: RESPONSE_CODE_APPROVED ||
-                $response_status == Ebizmarts_SagePaySuite_Model_Api_Payment :: RESPONSE_CODE_REGISTERED
+            } else if ($responseStatus == Ebizmarts_SagePaySuite_Model_Api_Payment :: RESPONSE_CODE_APPROVED ||
+                $responseStatus == Ebizmarts_SagePaySuite_Model_Api_Payment :: RESPONSE_CODE_REGISTERED
             ) {
-
                 $op = Mage:: getSingleton('checkout/type_onepage');
 
                 if (Mage::getSingleton('customer/session')->getCreateAccount()) {
@@ -81,7 +86,6 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
             $resultData['response_status_detail'] = $e->getMessage();
 
             Mage::dispatchEvent('sagepay_payment_failed', array('quote' => Mage::getSingleton('checkout/type_onepage')->getQuote(), 'message' => $e->getMessage()));
-
         }
 
         return $this->getResponse()->setBody(Zend_Json:: encode($resultData));
@@ -100,10 +104,14 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
             Ebizmarts_SagePaySuite_Log:: we($e);
         }
 
-        return $this->getResponse()->setBody(str_replace(array(
-            '<div id="tokencards-payment-sagepaydirectpro">',
-            '</div>'
-        ), array(), $html));
+        return $this->getResponse()->setBody(
+            str_replace(
+                array(
+                '<div id="tokencards-payment-sagepaydirectpro">',
+                '</div>'
+                ), array(), $html
+            )
+        );
     }
 
     public function getDirectModel()
@@ -169,38 +177,34 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
 
         $image = Mage:: helper('sagepaysuite')->getIndicator();
 
-        echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN"><html><head></head><body>
-					<div style="background-image:url(' . $image . '); background-position: center center;background-repeat: no-repeat;height: 400px;">&nbsp;</div>';
-        echo $this->__('<small>%s</small>', "Processing order, please stand by...  ");
+        printf('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN"><html><head></head><body>
+					<div style="background-image:url(' . $image . '); background-position: center center;background-repeat: no-repeat;height: 400px;">&nbsp;</div>');
+        printf($this->__('<small>%s</small>', "Processing order, please stand by...  "));
 
         $error = false;
         $quote = Mage::getSingleton('checkout/type_onepage')->getQuote();
 
         try {
-
             //Check cart health on callback.
             if (1 === (int)Mage::getStoreConfig('payment/sagepaysuite/verify_cart_consistency')) {
                 if (Mage::helper('sagepaysuite/checkout')->cartExpire($quote)) {
-
                     Sage_Log::log("Transaction " . $transaction->getVendorTxCode() . " not completed, cart was modified while customer on 3D payment pages.", Zend_Log::CRIT, 'SagePaySuite_REQUEST.log');
 
                     Mage::throwException($this->__('Your order could not be completed, please try again. Thanks.'));
-
                 }
             }
+
             //Check cart health on callback.
 
             if ($pares && $emede) {
                 Mage::getModel('sagepaysuite/sagePayDirectPro')->saveOrderAfter3dSecure($pares, $emede);
-                echo $this->__('<small>%s</small>', "Done. Redirecting...");
+                printf($this->__('<small>%s</small>', "Done. Redirecting..."));
             } else {
-
                 Mage::dispatchEvent('sagepay_payment_failed', array('quote' => $quote, 'message' => $this->__("3D callback error.")));
 
                 Mage::throwException($this->__("Invalid request. PARes and MD are empty."));
             }
         } catch (Exception $e) {
-
             Mage::getSingleton('sagepaysuite/session')->setAcsurl(null)
                 ->setPareq(null)
                 ->setSageOrderId(null)
@@ -218,9 +222,9 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
             $layout = Mage::getModel('sagepaysuite/sagePayDirectPro')->getConfigData('threed_layout');
             if ($layout == 'redirect') {
                 Mage::getSingleton('checkout/session')->addError($message);
-                echo '<script type="text/javascript">window.location.href="' . Mage::getUrl('checkout/cart') . '"</script>';
+                printf('<script type="text/javascript">window.location.href="' . Mage::getUrl('checkout/cart') . '"</script>');
             } else {
-                echo '<script type="text/javascript">
+                printf('<script type="text/javascript">
                     if((typeof window.parent.restoreOscLoad) != "undefined"){
                     window.parent.restoreOscLoad();
                     window.parent.notifyThreedError("' . $message . '");
@@ -228,11 +232,10 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
                     else {
                         alert("' . $message . '");
                     }
-                </script>';
+                </script>');
             }
 
-            echo '</body></html>';
-
+            printf('</body></html>');
         }
 
         if (!$error) {
@@ -240,7 +243,7 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
 
             $successUrl = Mage::getUrl('checkout/onepage/success', array('_secure' => true));
 
-            echo '<script type="text/javascript">
+            printf('<script type="text/javascript">
 //					(parent.location == window.location)? window.location.href="' . $successUrl . '" : window.parent.setLocation("' . $successUrl . '");
                     //thanks jevgenijmokrousov for this fix
                     window.onload = function(){
@@ -252,7 +255,7 @@ class Ebizmarts_SagePaySuite_DirectPaymentController extends Mage_Core_Controlle
                         }
                     }
 				  </script>
-				  </body></html>';
+				  </body></html>');
         }
     }
 

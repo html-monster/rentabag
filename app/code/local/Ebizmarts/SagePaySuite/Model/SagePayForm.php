@@ -7,7 +7,8 @@
  * @package    Ebizmarts_SagePaySuite
  * @author     Ebizmarts <info@ebizmarts.com>
  */
-class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Model_Api_Payment {
+class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Model_Api_Payment
+{
 
     protected $_code = 'sagepayform';
     protected $_formBlockType = 'sagepaysuite/form_sagePayForm';
@@ -17,40 +18,45 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
      * Availability options
      */
     protected $_isGateway = true;
-    protected $_canAuthorize = false;
+    protected $_canAuthorize = true;
     protected $_canCapture = true;
-    protected $_canCapturePartial = false;
-    protected $_canRefund = false;
-    protected $_canRefundInvoicePartial = false;
+    protected $_canCapturePartial = true;
+    protected $_canRefund = true;
+    protected $_canRefundInvoicePartial = true;
     protected $_canVoid = false;
     protected $_canUseInternal = false;
     protected $_canUseCheckout = true;
     protected $_canUseForMultishipping = false;
 
-    public function validate() {
+    public function validate() 
+    {
         Mage_Payment_Model_Method_Abstract::validate();
         return $this;
     }
 
-    public function isAvailable($quote = null) {
+    public function isAvailable($quote = null) 
+    {
         return Mage_Payment_Model_Method_Abstract::isAvailable($quote);
     }
 
     /**
      * Return decrypted "encryption pass" from DB
      */
-    public function getEncryptionPass() {
+    public function getEncryptionPass() 
+    {
         return Mage::helper('core')->decrypt($this->getConfigData('encryption_pass'));
     }
 
-    public function base64Decode($scrambled) {
+    public function base64Decode($scrambled) 
+    {
         // Fix plus to space conversion issue
         $scrambled = str_replace(" ", "+", $scrambled);
         $output = base64_decode($scrambled);
         return $output;
     }
 
-    public function decrypt($strIn) {
+    public function decrypt($strIn) 
+    {
         $cryptPass = $this->getEncryptionPass();
 
         //** remove the first char which is @ to flag this is AES encrypted
@@ -62,7 +68,8 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
         return $this->removePKCS5Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $cryptPass, $strIn, MCRYPT_MODE_CBC, $cryptPass));
     }
 
-    public function makeCrypt() {
+    public function makeCrypt()
+    {
 
         $cryptPass = $this->getEncryptionPass();
 
@@ -87,55 +94,56 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
         $data['CustomerName'] = $billing->getFirstname() . ' ' . $billing->getLastname();
         $data['VendorTxCode'] = $this->_getTrnVendorTxCode();
 
-        if ((string) $this->getConfigData('trncurrency') == 'store') {
-            $data['Amount']   = $this->formatAmount($quoteObj->getGrandTotal(), $quoteObj->getQuoteCurrencyCode());
+        $data['Amount']   = $this->formatAmount($quoteObj->getBaseGrandTotal(), $quoteObj->getBaseCurrencyCode());
+        $data['Currency'] = $quoteObj->getBaseCurrencyCode();
+        if ((string)$this->getConfigData('trncurrency') == 'store') {
+            $data['Amount'] = $this->formatAmount($quoteObj->getGrandTotal(), $quoteObj->getQuoteCurrencyCode());
             $data['Currency'] = $quoteObj->getQuoteCurrencyCode();
-        } else if ((string) $this->getConfigData('trncurrency') == 'switcher') {
-            $data['Amount']   = $this->formatAmount($quoteObj->getGrandTotal(), Mage::app()->getStore()->getCurrentCurrencyCode());
+        } else if ((string)$this->getConfigData('trncurrency') == 'switcher') {
+            $data['Amount'] = $this->formatAmount($quoteObj->getGrandTotal(), Mage::app()->getStore()->getCurrentCurrencyCode());
             $data['Currency'] = Mage::app()->getStore()->getCurrentCurrencyCode();
-        }
-        else {
-            $data['Amount']   = $this->formatAmount($quoteObj->getBaseGrandTotal(), $quoteObj->getBaseCurrencyCode());
-            $data['Currency'] = $quoteObj->getBaseCurrencyCode();
         }
 
         $data['Description'] = $this->cleanInput('product purchase', 'Text');
 
-        $data['SuccessURL'] = Mage::getUrl('sgps/formPayment/success', array(
-                    '_secure' => true,
-                    '_nosid' => true,
-                    'vtxc' => $data['VendorTxCode'],
-                    'utm_nooverride' => 1
-                ));
-        $data['FailureURL'] = Mage::getUrl('sgps/formPayment/failure', array(
-                    '_secure' => true,
-                    '_nosid' => true,
-                    'vtxc' => $data['VendorTxCode'],
-                    'utm_nooverride' => 1
-                ));
+        $data['SuccessURL'] = Mage::getUrl(
+            'sgps/formPayment/success', array(
+                '_secure' => true,
+                '_nosid' => true,
+                'vtxc' => $data['VendorTxCode'],
+                'utm_nooverride' => 1
+            )
+        );
+        $data['FailureURL'] = Mage::getUrl(
+            'sgps/formPayment/failure', array(
+                '_secure' => true,
+                '_nosid' => true,
+                'vtxc' => $data['VendorTxCode'],
+                'utm_nooverride' => 1
+            )
+        );
 
-        $data['BillingSurname']    = $this->ss($billing->getLastname(), 20);
-        $data['ReferrerID']        = $this->getConfigData('referrer_id');
+        $data['BillingSurname'] = $this->ss($billing->getLastname(), 20);
+        $data['ReferrerID'] = $this->getConfigData('referrer_id');
         $data['BillingFirstnames'] = $this->ss($billing->getFirstname(), 20);
-        $data['BillingAddress1']   = ($this->getConfigData('mode') == 'test') ? 88 : $this->ss($billing->getStreet(1), 100);
-        $data['BillingAddress2']   = ($this->getConfigData('mode') == 'test') ? 88 : $this->ss($billing->getStreet(2), 100);
-        $data['BillingPostCode']   = ($this->getConfigData('mode') == 'test') ? 412 : $this->sanitizePostcode($this->ss($billing->getPostcode(), 10));
-        $data['BillingCity']       = $this->ss($billing->getCity(), 40);
-        $data['BillingCountry']    = $billing->getCountry();
-        $data['BillingPhone']      = $this->ss($this->_cphone($billing->getTelephone()), 20);
+        $data['BillingAddress1'] = ($this->getConfigData('mode') == 'test') ? 88 : $this->ss($billing->getStreet(1), 100);
+        $data['BillingAddress2'] = ($this->getConfigData('mode') == 'test') ? 88 : $this->ss($billing->getStreet(2), 100);
+        $data['BillingPostCode'] = ($this->getConfigData('mode') == 'test') ? 412 : $this->sanitizePostcode($this->ss($billing->getPostcode(), 10));
+        $data['BillingCity'] = $this->ss($billing->getCity(), 40);
+        $data['BillingCountry'] = $billing->getCountry();
+        $data['BillingPhone'] = $this->ss($this->_cphone($billing->getTelephone()), 20);
 
         // Set delivery information for virtual products ONLY orders
         if ($quoteObj->getIsVirtual()) {
-            $data['DeliverySurname']    = $this->ss($billing->getLastname(), 20);
+            $data['DeliverySurname'] = $this->ss($billing->getLastname(), 20);
             $data['DeliveryFirstnames'] = $this->ss($billing->getFirstname(), 20);
-            $data['DeliveryAddress1']   = $this->ss($billing->getStreet(1), 100);
-            $data['DeliveryAddress2']   = $this->ss($billing->getStreet(2), 100);
-            $data['DeliveryCity']       = $this->ss($billing->getCity(), 40);
-            $data['DeliveryPostCode']   = $this->sanitizePostcode($this->ss($billing->getPostcode(), 10));
-            $data['DeliveryCountry']    = $billing->getCountry();
-            $data['DeliveryPhone']      = $this->ss($this->_cphone($billing->getTelephone()), 20);
-        }
-        else {
+            $data['DeliveryAddress1'] = $this->ss($billing->getStreet(1), 100);
+            $data['DeliveryAddress2'] = $this->ss($billing->getStreet(2), 100);
+            $data['DeliveryCity'] = $this->ss($billing->getCity(), 40);
+            $data['DeliveryPostCode'] = $this->sanitizePostcode($this->ss($billing->getPostcode(), 10));
+            $data['DeliveryCountry'] = $billing->getCountry();
+            $data['DeliveryPhone'] = $this->ss($this->_cphone($billing->getTelephone()), 20);
+        } else {
             $data['DeliveryPhone']      = $this->ss($this->_cphone($shipping->getTelephone()), 20);
             $data['DeliverySurname']    = $this->ss($shipping->getLastname(), 20);
             $data['DeliveryFirstnames'] = $this->ss($shipping->getFirstname(), 20);
@@ -158,12 +166,11 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
             $data['BillingState'] = $billing->getRegionCode();
         }
 
-        $basket = Mage::helper('sagepaysuite')->getSagePayBasket($this->_getQuote(),false);
-        if(!empty($basket)) {
-            if($basket[0] == "<") {
+        $basket = Mage::helper('sagepaysuite')->getSagePayBasket($this->_getQuote(), false);
+        if (!empty($basket)) {
+            if ($basket[0] == "<") {
                 $data['BasketXML'] = $basket;
-            }
-            else {
+            } else {
                 $data['Basket'] = $basket;
             }
         }
@@ -172,8 +179,8 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
         $data['ApplyAVSCV2']  = $this->getConfigData('avscv2');
 
         //Skip PostCode and Address Validation for overseas orders
-        if((int)Mage::getStoreConfig('payment/sagepaysuite/apply_AVSCV2') === 1){
-            if($this->_SageHelper()->isOverseasOrder($billing->getCountry())){
+        if ((int)Mage::getStoreConfig('payment/sagepaysuite/apply_AVSCV2') === 1) {
+            if ($this->_SageHelper()->isOverseasOrder($billing->getCountry())) {
                 $data['ApplyAVSCV2'] = 2;
             }
         }
@@ -188,8 +195,16 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
         $data['Website'] = substr(Mage::app()->getStore()->getWebsite()->getName(), 0, 100);
 
         $eMessage = $this->getConfigData('email_message');
-        if($eMessage) {
+        if ($eMessage) {
            $data['eMailMessage'] = substr($eMessage, 0, 7500);
+        }
+
+        //surcharge XML
+        if (Mage::helper('sagepaysuite')->surchargesModuleEnabled() == true) {
+            $surchargeXML = $this->getSurchargeXml($this->_getQuote());
+            if (!is_null($surchargeXML)) {
+                $data['SurchargeXML'] = $surchargeXML;
+            }
         }
 
         $customerXML = $this->getCustomerXml($quoteObj);
@@ -205,12 +220,7 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
             $data['BillingPostCode'] = '000';
         }
 
-        $dataToSend = '';
-        foreach ($data as $field => $value) {
-            if ($value != '') {
-                $dataToSend .= ($dataToSend == '') ? "$field=$value" : "&$field=$value";
-            }
-        }
+        $dataToSend = $this->_getDataToSend($data);
 
         ksort($data);
 
@@ -241,8 +251,24 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
         return "@" . bin2hex($strCrypt);
     }
 
+    protected function _getDataToSend($data)
+    {
+
+        $dataToSend = '';
+
+        foreach ($data as $field => $value) {
+            if ($value != '') {
+                $dataToSend .= ($dataToSend == '') ? "$field=$value" : "&$field=$value";
+            }
+        }
+
+        return $dataToSend;
+
+    }
+
     //** PHP's mcrypt does not have built in PKCS5 Padding, so we use this
-    public function addPKCS5Padding($input) {
+    public function addPKCS5Padding($input) 
+    {
         $blocksize = 16;
         $padding = "";
 
@@ -256,13 +282,15 @@ class Ebizmarts_SagePaySuite_Model_SagePayForm extends Ebizmarts_SagePaySuite_Mo
     }
 
     // Need to remove padding bytes from end of decoded string
-    public function removePKCS5Padding($decrypted) {
+    public function removePKCS5Padding($decrypted) 
+    {
         $padChar = ord($decrypted[strlen($decrypted) - 1]);
 
         return substr($decrypted, 0, -$padChar);
     }
 
-    public function capture(Varien_Object $payment, $amount) {
+    public function capture(Varien_Object $payment, $amount) 
+    {
         #Process invoice
         if (!$payment->getRealCapture()) {
             return $this->captureInvoice($payment, $amount);

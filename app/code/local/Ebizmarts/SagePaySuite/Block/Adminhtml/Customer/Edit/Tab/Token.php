@@ -70,29 +70,31 @@ class Ebizmarts_SagePaySuite_Block_Adminhtml_Customer_Edit_Tab_Token
         $hidden = false;
 
         $config = (string) Mage::getStoreConfig('payment/sagepaysuite/token_integration');
-        if($config == 'false') {
+        if ($config == 'false') {
             $hidden = true;
         }
 
         return $hidden;
     }
 
-	protected function _getNewTokenUrl()
-	{
-		return $this->getUrl('adminhtml/spsToken/new', array('customer_id' => Mage::registry('current_customer')->getId()));
-	}
+    protected function _getNewTokenUrl()
+    {
+        return $this->getUrl('adminhtml/spsToken/new', array('customer_id' => Mage::registry('current_customer')->getId()));
+    }
 
-	/**
-	 * GRID methods
-	 */
+    /**
+     * GRID methods
+     */
 
     protected function _prepareLayout()
     {
-    	parent::_prepareLayout();
+        parent::_prepareLayout();
 
-        $this->setChild('new_token_button',
+        $this->setChild(
+            'new_token_button',
             $this->getLayout()->createBlock('adminhtml/widget_button')
-                ->setData(array(
+                ->setData(
+                    array(
                     'label'     => Mage::helper('adminhtml')->__('Add Token'),
                     'onclick' => "new Control.Modal('" . $this->_getNewTokenUrl() . "',{
 								    overlayOpacity: 0.75,
@@ -103,7 +105,8 @@ class Ebizmarts_SagePaySuite_Block_Adminhtml_Customer_Edit_Tab_Token
 								    fade: true
 								}).open();",
                     'class'   => 'add'
-                ))
+                    )
+                )
         );
 
         return Mage_Adminhtml_Block_Widget::_prepareLayout();
@@ -119,8 +122,8 @@ class Ebizmarts_SagePaySuite_Block_Adminhtml_Customer_Edit_Tab_Token
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('sagepaysuite2/sagepaysuite_tokencard')
-        				->getCollection()
-        				->addCustomerFilter(Mage::registry('current_customer'));
+                        ->getCollection()
+                        ->addCustomerFilter(Mage::registry('current_customer'));
         $this->setCollection($collection);
         return Mage_Adminhtml_Block_Widget_Grid::_prepareCollection();
     }
@@ -132,10 +135,11 @@ class Ebizmarts_SagePaySuite_Block_Adminhtml_Customer_Edit_Tab_Token
         foreach ($this->_columns as $key => $value) {
             if (in_array($key, $this->_columnsToRemove)) {
                 unset($this->_columns[$key]);
-            }else{
-            	$this->_columns[$key]->setData('sortable', FALSE);
+            } else {
+                $this->_columns[$key]->setData('sortable', FALSE);
             }
         }
+
         return $result;
     }
 

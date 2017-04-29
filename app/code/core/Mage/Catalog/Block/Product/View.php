@@ -90,6 +90,7 @@ class Mage_Catalog_Block_Product_View extends Mage_Catalog_Block_Product_Abstrac
             $product = Mage::getModel('catalog/product')->load($this->getProductId());
             Mage::register('product', $product);
         }
+
         return Mage::registry('product');
     }
 

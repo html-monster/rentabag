@@ -4,15 +4,18 @@
  */
 ?>
 <div class="sagepay-payment-notice">
-	<img width="270" height="43" src="https://ebizmarts.com/extension-logo.php?<?php echo $this->getPxParams(); ?>" />
+	<img width="224" height="60" src="https://ebizmarts-website.s3.amazonaws.com/Logo_Ebizmarts.png"/>
     <h4>
-        <?php echo $this->__('<strong style="color:#EA7601;">Sage Pay Suite Community Edition v%s by</strong> <a target="_blank" href="http://ebizmarts.com"><strong>ebizmarts</strong></a>', $this->getSagePaySuiteVersion())?>
+        <?php echo $this->__('<strong style="color:#EA7601;">Sage Pay Suite PRO v%s by</strong> <a target="_blank" href="http://ebizmarts.com"><strong>ebizmarts</strong></a>', $this->getSagePaySuiteVersion())?>
     </h4>
     <p>
         <?php echo $this->__('<a target="_blank" href="%s"><strong>ebizmarts</strong></a>  is a <strong>Sage Pay</strong> Approved Partner <a target="_blank" href="%s">Get a Sage Pay Account Now!</a>', 'http://ebizmarts.com', 'http://www.engage.sagepay.com/sign-up-with-ebizmarts'); ?>
     </p>
     <p>
-        <?php echo $this->__("<a target=\"_blank\" href=\"%s\">Subscribe to our newsletter</a>", "http://store.ebizmarts.com/subscribe-to-our-newsletter"); ?>
+	<?php echo $this->__("Need assistance? <a target=\"_blank\" href=\"%s\"%s>Submit a ticket</a>", $this->getHelpDeskUrl(), ' id=""'); ?>
+    </p>
+    <p>
+        <?php echo $this->__("Got feedback? <a target=\"_blank\" href=\"mailto:sagepay@ebizmarts-desk.zendesk.com\">Email us</a>"); ?>  <?php echo $this->__("<a target=\"_blank\" href=\"%s\">Subscribe to our newsletter</a>", "http://store.ebizmarts.com/subscribe-to-our-newsletter"); ?>
     </p>
 </div>
 

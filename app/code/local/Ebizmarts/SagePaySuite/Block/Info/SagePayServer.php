@@ -10,4 +10,6 @@
 class Ebizmarts_SagePaySuite_Block_Info_SagePayServer extends Ebizmarts_SagePaySuite_Block_Info_Suite
 {
 
+    const SPS = true;
+
 }

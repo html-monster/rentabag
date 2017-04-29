@@ -7,11 +7,10 @@
 
 class Addweb_AdvReservation_Block_RentFuture extends Mage_Core_Block_Template
 {
-
     public function __construct()
     {
-$s1 = '$products='.var_export('RentFuture.php/constr', 1)."\n";
-0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, 0);//FILE_APPEND
+//$s1 = '$products='.var_export('RentFuture.php/constr', 1)."\n";
+//0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, 0);//FILE_APPEND
         parent::__construct();
 
         $userId = 0;
@@ -83,7 +82,7 @@ $s1 = '$products='.var_export('RentFuture.php/_prepareLayout', 1)."\n";
         {
             $val['product'] = $images[$val['id_prod']];
         } // end foreach
-        
+
 $s1 = '$products='.var_export($products, 1)."\n";
 0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, 0);//FILE_APPEND
 

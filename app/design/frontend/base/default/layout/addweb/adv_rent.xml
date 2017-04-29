@@ -72,6 +72,27 @@
         </reference>
     </rent_search_index>
 
+
+    <rent_pledge_notify>
+        <!--<update handle="customer_account" />-->
+        <!-- Mage_Customer -->
+        <reference name="content">
+            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
+            <block type="advreservation/rentpledge" name="addweb_advreservation_content" template="addweb/rentPledgeNotify.phtml" />
+        </reference>
+    </rent_pledge_notify>
+
+
+    <rent_pledge_pay>
+        <!--<update handle="customer_account" />-->
+        <!-- Mage_Customer -->
+        <reference name="content">
+            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
+            <block type="advreservation/rentpledge" name="addweb_advreservation_content" template="addweb/rentPledgePay.phtml" />
+        </reference>
+    </rent_pledge_pay>
+
+
     <customer_account>
         <reference name="customer_account_navigation">
             <action method="addLink">

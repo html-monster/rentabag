@@ -1,8 +1,9 @@
 <?php
 
-class Ebizmarts_SagePaySuite_Block_Adminhtml_Transaction_Edit_Tab_Main extends Mage_Adminhtml_Block_Widget_Form {
+class Ebizmarts_SagePaySuite_Block_Adminhtml_Transaction_Edit_Tab_Main extends Mage_Adminhtml_Block_Widget_Form
+{
 
-    public $_formFields = array(
+    public $formFields = array(
         'vendor_tx_code' => array(
             'label'    => 'Vendor TX Code',
             'note'     => '',
@@ -85,7 +86,7 @@ class Ebizmarts_SagePaySuite_Block_Adminhtml_Transaction_Edit_Tab_Main extends M
         ),
     );
 
-    public $_formSecurityFields = array(
+    public $formSecurityFields = array(
         'avscv2' => array(
             'label'    => 'AVS CV2',
             'note'     => '',
@@ -143,7 +144,8 @@ class Ebizmarts_SagePaySuite_Block_Adminhtml_Transaction_Edit_Tab_Main extends M
         ),
     );
 
-    protected function _prepareForm() {
+    protected function _prepareForm() 
+    {
         $model = Mage::registry('sagepaysuite_transaction');
 
         $form = new Varien_Data_Form();
@@ -151,36 +153,38 @@ class Ebizmarts_SagePaySuite_Block_Adminhtml_Transaction_Edit_Tab_Main extends M
         $form->setHtmlIdPrefix('transaction_');
 
         $fieldset = $form->addFieldset('base_fieldset', array('legend' => Mage::helper('sagepaysuite')->__('General')));
-        foreach($this->_formFields as $id => $data) {
-
-            $fieldset->addField($id, 'text', array(
+        foreach ($this->formFields as $id => $data) {
+            $fieldset->addField(
+                $id, 'text', array(
                 'name'     => 'transaction[' . $id . ']',
                 'label'    => Mage::helper('sagepaysuite')->__($data['label']),
                 'id'       => $id,
                 'title'    => Mage::helper('sagepaysuite')->__($data['label']),
                 'required' => $data['required'],
                 'note'     => $data['note'],
-            ));
-
+                )
+            );
         }
 
         $fieldsetSec = $form->addFieldset('security_fieldset', array('legend' => Mage::helper('sagepaysuite')->__('Security')));
-        foreach($this->_formSecurityFields as $id => $data) {
-
-            $fieldsetSec->addField($id, 'text', array(
+        foreach ($this->formSecurityFields as $id => $data) {
+            $fieldsetSec->addField(
+                $id, 'text', array(
                 'name'     => 'transaction[' . $id . ']',
                 'label'    => Mage::helper('sagepaysuite')->__($data['label']),
                 'id'       => $id,
                 'title'    => Mage::helper('sagepaysuite')->__($data['label']),
                 'required' => $data['required'],
                 'note'     => $data['note'],
-            ));
-
+                )
+            );
         }
 
-        $fieldset->addField('id', 'hidden', array(
+        $fieldset->addField(
+            'id', 'hidden', array(
             'name'     => 'transaction[id]',
-        ));
+            )
+        );
 
         $data = $model->getData();
 

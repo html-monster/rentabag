@@ -11,4 +11,6 @@
 class Ebizmarts_SagePaySuite_Model_Api_Token extends Ebizmarts_SagePaySuite_Model_Api_Payment
 {
 
+    const ATK = Null;
+
 }

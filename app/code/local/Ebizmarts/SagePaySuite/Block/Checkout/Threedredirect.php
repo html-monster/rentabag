@@ -9,4 +9,6 @@
 class Ebizmarts_SagePaySuite_Block_Checkout_Threedredirect extends Mage_Core_Block_Template
 {
 
+    const CTD = Null;
+
 }

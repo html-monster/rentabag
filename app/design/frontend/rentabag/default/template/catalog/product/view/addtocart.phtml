@@ -188,7 +188,7 @@
                         var price = [];
                         var percent = [];
                         var ii = 0;
-                        if($j('.tier-prices').length){
+                        if($j('.tier-prices').length != 0){
                             $j('.tier-price').each(function(){
                                 var arr = $j(this).text().split(' ');
                                 days.push(arr[$j.inArray('Buy', arr) + 1]);
@@ -213,7 +213,7 @@
                             {
                                 totalDays.html('Total days: <span class="count">' + Global_totalDays + '</span>');
                             }
-                            if($j('.tier-prices').length){
+                            if($j('.tier-prices').length != 0){
                                 var regularPrice = $j('.regular-price .price').html().slice(1);
                                 for(var ii = 0; ii < price.length; ii++)
                                 {
@@ -230,7 +230,7 @@
                                 }
                                 if(Global_totalDays < +days[0])
                                 {
-                                    //console.log(Global_totalDays);
+                                    console.log(Global_totalDays);
                                     if(!(isNaN(Global_totalDays)))
                                     {
                                         totalprice = Global_totalDays * regularPrice;
@@ -246,7 +246,7 @@
                                     discount.html('');
                                 }
                             }
-                            else if($j('.special-price').length)
+                            else if($j('.special-price').length != 0)
                             {
                                 var specialPrice = +$j('.special-price .price').html().slice(1);
                                 totalprice = Global_totalDays * specialPrice;

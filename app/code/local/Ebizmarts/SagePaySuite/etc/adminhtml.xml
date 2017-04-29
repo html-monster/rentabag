@@ -41,6 +41,18 @@
                             <title>Payment Transactions</title>
                             <sort_order>50</sort_order>
                             <action>adminhtml/spsTransaction/payments</action>
+                            <children>
+                                <direct_refund_list translate="title" module="sagepaysuite">
+                                    <title>Direct Refunds</title>
+                                    <sort_order>10</sort_order>
+                                    <action>adminhtml/spsDirectrefund/index</action>
+                                </direct_refund_list>
+                                <direct_refund translate="title" module="sagepaysuite">
+                                    <title>New Direct Refund</title>
+                                    <sort_order>20</sort_order>
+                                    <action>adminhtml/spsDirectrefund/new</action>
+                                </direct_refund>
+                            </children>
                         </payments>
                         <logs translate="title" module="sagepaysuite">
                             <title>Logs</title>
@@ -139,6 +151,12 @@
                                             <edit_transaction translate="title" module="sagepaysuite">
                                                 <title>Edit Transaction</title>
                                             </edit_transaction>
+                                            <direct_refund_list translate="title" module="sagepaysuite">
+                                                <title>Direct Refund List</title>
+                                            </direct_refund_list>
+                                            <direct_refund translate="title" module="sagepaysuite">
+                                                <title>New Direct Refund</title>
+                                            </direct_refund>
                                         </children>
                                     </payments>
                                     <logs translate="title">

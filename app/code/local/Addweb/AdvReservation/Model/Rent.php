@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by Wallinole
+ * Created by Vlasakh
  * Date: 13.04.2016
  * Time: 5:25
  */

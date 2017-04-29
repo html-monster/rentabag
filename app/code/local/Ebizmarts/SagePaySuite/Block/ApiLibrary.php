@@ -28,9 +28,10 @@ class Ebizmarts_SagePaySuite_Block_ApiLibrary extends Mage_Core_Block_Template
      */
     protected function _toHtml()
     {
-        if(false === Mage::getStoreConfigFlag('payment/sagepaynit/active')){
+        if (false === Mage::getStoreConfigFlag('payment/sagepaynit/active')) {
             return '';
         }
+
         return parent::_toHtml();
     }
 }

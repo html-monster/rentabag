@@ -5,7 +5,7 @@
  */
 
 
-class Addweb_AdvReservation_Block_RentSearch extends Mage_Core_Block_Template  
+class Addweb_AdvReservation_Block_RentSearch extends Mage_Core_Block_Template
 {
     private $from;
     private $to;
@@ -15,8 +15,8 @@ class Addweb_AdvReservation_Block_RentSearch extends Mage_Core_Block_Template
     {
         parent::__construct();
 
-$s1 = 'Addweb_AdvReservation_Block_RentSearch='.var_export('Addweb_AdvReservation_Block_RentSearch', 1)."\n";
-0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, FILE_APPEND*0);//FILE_APPEND
+//$s1 = 'Addweb_AdvReservation_Block_RentSearch='.var_export('Addweb_AdvReservation_Block_RentSearch', 1)."\n";
+//0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/var/file', "\n--------------------\n".date("H:i:s")."\n".$s1, FILE_APPEND*0);//FILE_APPEND
 
         $daterange = $this->getRequest()->getParams('daterange');
         list($from, $to) = explode('-', $daterange['daterange']);

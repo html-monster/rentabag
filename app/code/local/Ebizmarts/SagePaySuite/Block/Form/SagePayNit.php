@@ -30,6 +30,7 @@ class Ebizmarts_SagePaySuite_Block_Form_SagePayNit extends Ebizmarts_SagePaySuit
                 }
             }
         }
+
         return $types;
     }
 
@@ -43,6 +44,7 @@ class Ebizmarts_SagePaySuite_Block_Form_SagePayNit extends Ebizmarts_SagePaySuit
         if ($availableTypes && count($ssPresenations) > 0) {
             return true;
         }
+
         return false;
     }
 
@@ -55,8 +57,7 @@ class Ebizmarts_SagePaySuite_Block_Form_SagePayNit extends Ebizmarts_SagePaySuit
     {
         $years = $this->getData('cc_start_years');
 
-        if(is_null($years))
-        {
+        if (is_null($years)) {
             $years = $this->_getConfig()->getYearsStart();
             $years = array(0 => $this->__('Year'))+$years;
             $this->setData('cc_start_years', $years);
@@ -78,6 +79,7 @@ class Ebizmarts_SagePaySuite_Block_Form_SagePayNit extends Ebizmarts_SagePaySuit
             $months = array_merge($months, $this->_getConfig()->getMonths());
             $this->setData('cc_start_months', $months);
         }
+
         return $months;
     }
 

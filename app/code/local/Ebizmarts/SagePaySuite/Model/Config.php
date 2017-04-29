@@ -9,17 +9,18 @@ class Ebizmarts_SagePaySuite_Model_Config extends Mage_Payment_Model_Config
      * @param bool $includePaypal
      * @return array
      */
-    public function getCcTypesSagePayDirect($includePaypal = false)
+    public function getCcTypesSagePayDirect($includePaypal = true)
     {
         $types = array();
         foreach (Mage::getConfig()->getNode('global/payment/cc_sgps/types')->asArray() as $data) {
-            if($includePaypal === false && $data['code'] == 'PAYPAL'){
+            if ($includePaypal === false && $data['code'] == 'PAYPAL') {
                 continue;
             }
+
             $types[$data['code']] = $data['name'];
         }
 
-        if(is_array($types) and !empty($types)) {
+        if (is_array($types) and !empty($types)) {
             uasort($types, array($this, "cctypesSort"));
         }
 
@@ -30,28 +31,32 @@ class Ebizmarts_SagePaySuite_Model_Config extends Mage_Payment_Model_Config
     {
         $types = array();
         foreach (Mage::getConfig()->getNode('global/payment/cc_sgps/types')->asArray() as $data) {
-            if($data['code'] == 'PAYPAL'){
+            if ($data['code'] == 'PAYPAL') {
                 continue;
             }
+
             $types[$data['code']] = $data['name'];
         }
 
-        if(is_array($types) and !empty($types)) {
+        if (is_array($types) and !empty($types)) {
             uasort($types, array($this, "cctypesSort"));
         }
 
         return $types;
     }
 
-    public function cctypesSort($a, $b) {
+    public function cctypesSort($a, $b) 
+    {
         return strcmp($a, $b);
     }
 
-    public function alterY(&$item, $key) {
+    public function alterY(&$item, $key) 
+    {
         $item = $key;
     }
 
-    public function getYearsStart() {
+    public function getYearsStart() 
+    {
       $first = date('Y');
       $_y = range($first-5, $first);
       $_y = array_flip($_y);
