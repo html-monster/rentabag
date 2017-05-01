@@ -40,8 +40,8 @@ return array(
 // Optional  parameter supported protocol version (3.00 is the newest and the only available)
     'protocolVersion' => 3.00,
 // Mandatory. Set this value to the Vendor Name assigned to you by Sage Pay or chosen when you applied
-    'vendorName' => 'rentabag',
 //    'vendorName' => 'protxross',
+    'vendorName' => 'rentabag',
 // Mandatory. Set this to indicate the currency in which you wish to trade.
 // You will need a merchant number in this currency
     'currency' => 'GBP',
@@ -58,8 +58,8 @@ return array(
     'siteFqdns' =>
     array(
         'live' => '',
-        'test' => 'http://rentabag.dev/VspPHPKit/demo/',
 //        'test' => 'http://192.168.13.11/VspPHPKit/',
+        'test' => 'http://rentabag.dev/VspPHPKit/demo/',
     ),
 // Optional setting. If you are a Sage Pay Partner and wish to flag the transactions
 // with your unique partner id, it should be set here
@@ -101,8 +101,8 @@ return array(
 //  Mandatory property, set this value to the Encryption password assigned to you by Sage Pay
     'formPassword' =>
     array(
-        'test' => 'TPjs72eMz5qBnaTa',
 //        'test' => 'qFsNGEJwBYXRaWw8PoecgBF0w78dfA0B8RA7cT0gQEhVwfir2s',
+        'test' => 'TPjs72eMz5qBnaTa',
         'live' => '',
     ),
 // Mandatory parameters form notifications URLs appended to siteFQDN value
