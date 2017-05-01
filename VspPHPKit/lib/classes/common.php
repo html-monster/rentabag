@@ -165,8 +165,8 @@ class SagepayCommon
         $query = array(
             'VPSProtocol' => $settings->getProtocolVersion(),
             'Vendor' => $settings->getVendorName(),
-            'VendorTxCode' => 'my-custom-order-222',
-//            'VendorTxCode' => self::vendorTxCode($basket->getId(), $txType, $settings->getVendorName()),
+//            'VendorTxCode' => 'my-custom-order-222',
+            'VendorTxCode' => self::vendorTxCode($basket->getId(), $txType, $settings->getVendorName()),
             'Amount' => number_format($basket->getAmount(), 2, '.', ''),
             'Currency' => $settings->getCurrency(),
             'Description' => $basket->getDescription(),

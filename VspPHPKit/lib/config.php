@@ -101,9 +101,9 @@ return array(
 //  Mandatory property, set this value to the Encryption password assigned to you by Sage Pay
     'formPassword' =>
     array(
-//        'test' => 'qFsNGEJwBYXRaWw8PoecgBF0w78dfA0B8RA7cT0gQEhVwfir2s',
-        'test' => 'TPjs72eMz5qBnaTa',
-        'live' => '',
+        'test' => '6892e5680e9a4d12',
+//        'test' => 'TPjs72eMz5qBnaTa',
+        'live' => 'b4b8d2c9f699a16c',
     ),
 // Mandatory parameters form notifications URLs appended to siteFQDN value
     'formSuccessUrl' => 'form/success',
