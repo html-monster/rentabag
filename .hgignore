@@ -1,7 +1,0 @@
-syntax: glob
-_Source
-var
-11
-*.docx
-.idea
-app/etc/local.xml

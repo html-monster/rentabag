@@ -31,7 +31,8 @@
         <?php if ($_item->getParentItem()) continue; ?>
         <tbody>
             <?php echo $this->getItemHtml($_item) ?>
-            <?php if( is_array($pledges[$id = $_item->getProductId()]) && !($pledges[$id]['price'] > 0) ): $flag = true; ?>
+            <?php if( is_array($pledges[$id = $_item->getProductId()]) && !($pledges[$id]['price'] > 0) && $pledges[$id]['pledge'] > 0 ): ?>
+                <?php $flag = true ?>
                 <tr class="pledge">
                     <td colspan="5">
                         <div>
