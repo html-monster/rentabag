@@ -10,3 +10,67 @@
 #2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
 #3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
 #4 {main}
+[2017-05-03 07:47:59] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-03 07:48:04] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-03 17:06:24] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-11 05:16:24] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-11 05:30:49] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-11 05:31:24] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-11 05:32:07] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-11 05:33:24] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-12 06:17:16] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-14 10:13:09] :: Exception:SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'test', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-14 11:33:27] :: Called invalid action "getFormModel" with params: []
+[2017-05-14 11:33:27] :: Called invalid action "getLayout" with params: []
+[2017-05-14 11:33:32] :: Called invalid action "getFormModel" with params: []
+[2017-05-14 11:33:32] :: Called invalid action "getLayout" with params: []

@@ -15,7 +15,7 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
      */
     protected $_quote = false;
 
-    public function getOnepage() 
+    public function getOnepage()
     {
 
         return Mage::getSingleton('checkout/type_onepage');
@@ -26,7 +26,7 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
      *
      * @return Ebizmarts_SagePaySuite_Model_Session
      */
-    private function _getSession() 
+    private function _getSession()
     {
 
         return Mage::getSingleton('checkout/session');
@@ -37,7 +37,7 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
      *
      * @return Mage_Checkout_Model_Session
      */
-    private function _getCheckoutSession() 
+    private function _getCheckoutSession()
     {
 
         return Mage::getSingleton('checkout/session');
@@ -48,7 +48,7 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
      *
      * @return Mage_Sale_Model_Quote
      */
-    private function _getQuote() 
+    private function _getQuote()
     {
 
         if (!$this->_quote) {
@@ -58,12 +58,12 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
         return $this->_quote;
     }
 
-    private function getFormModel() 
+    private function getFormModel()
     {
         return Mage::getModel('sagepaysuite/sagePayForm');
     }
 
-    protected function _getTransaction() 
+    protected function _getTransaction()
     {
 
         return Mage::getModel('sagepaysuite2/sagepaysuite_transaction');
@@ -73,7 +73,7 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
      * Instantiate quote and checkout
      * @throws Mage_Core_Exception
      */
-    private function _initCheckout() 
+    private function _initCheckout()
     {
 
         $quote = $this->_getQuote();
@@ -84,7 +84,7 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
         }
     }
 
-    public function saveOrderAction() 
+    public function saveOrderAction()
     {
         try {
             Mage::helper('sagepaysuite')->validateQuote();
@@ -108,15 +108,16 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
     /**
      * Post to SagePay form
      */
-    public function goAction() 
+    public function goAction()
     {
 
         $this->_initCheckout();
-        $this->getResponse()->setBody($this->getLayout()->createBlock('sagepaysuite/checkout_formpost')->toHtml());
+        $html = $this->getLayout()->createBlock('sagepaysuite/checkout_formpost')->toHtml();
+        $this->getResponse()->setBody($html);
         return;
     }
 
-    public function successAction() 
+    public function successAction()
     {
 
         $_r = $this->getRequest();
@@ -224,7 +225,7 @@ class Ebizmarts_SagePaySuite_FormPaymentController extends Mage_Core_Controller_
         return;
     }
 
-    public function failureAction() 
+    public function failureAction()
     {
 
         $_r = $this->getRequest();
