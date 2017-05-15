@@ -49,7 +49,8 @@ return array(
 // account supports those payment types
 // NB Ideally all DEFERRED transaction should be released within 6 days (according to card scheme rules).
 // DEFERRED transactions can be ABORTed before a RELEASE if necessary
-    'txType' => 'PAYMENT',
+//    'txType' => 'PAYMENT',
+    'txType' => 'DEFERRED',
 // Mandatory
 // Qualified Domain Name of your server.
 // This should start http:// or https:// and should be the name by which our servers can call back to yours

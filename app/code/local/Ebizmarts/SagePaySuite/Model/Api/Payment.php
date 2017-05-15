@@ -2651,5 +2651,4 @@ class Ebizmarts_SagePaySuite_Model_Api_Payment extends Mage_Payment_Model_Method
             }
         }
     }
-
 }
