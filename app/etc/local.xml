@@ -43,7 +43,7 @@
                     <host><![CDATA[localhost]]></host>
                     <username><![CDATA[rentabag-magento]]></username>
                     <password><![CDATA[22]]></password>
-                    <dbname><![CDATA[p-rentabag]]></dbname>
+                    <dbname><![CDATA[vh11072_p-rentabag]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>
