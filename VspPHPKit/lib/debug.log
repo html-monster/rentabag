@@ -74,3 +74,15 @@
 [2017-05-14 11:33:27] :: Called invalid action "getLayout" with params: []
 [2017-05-14 11:33:32] :: Called invalid action "getFormModel" with params: []
 [2017-05-14 11:33:32] :: Called invalid action "getLayout" with params: []
+[2017-05-16 05:27:00] :: Exception:SQLSTATE[HY000] [1044] Access denied for user 'rentabag-magento'@'localhost' to database 'vh11072_p-rentabag'
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'rentabag-magent...', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
+[2017-05-16 05:41:42] :: Exception:SQLSTATE[HY000] [1044] Access denied for user 'rentabag-magento'@'localhost' to database 'vh11072_p-rentabag'
+#0 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(83): PDO->__construct('mysql:host=loca...', 'rentabag-magent...', '22')
+#1 D:\Project\p-rentabag\VspPHPKit\demo\helper\database.php(192): HelperDatabase->__construct()
+#2 D:\Project\p-rentabag\VspPHPKit\demo\app.php(37): HelperDatabase::getInstance()
+#3 D:\Project\p-rentabag\VspPHPKit\demo\index.php(16): App->__construct(Object(SagepaySettings))
+#4 {main}
