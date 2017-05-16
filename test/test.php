@@ -30,8 +30,8 @@ class Payment
     {
         $CryptInfo = [
             'VendorTxCode' => 'rentabag-DEFERRED-10000084-2-Test',
-            'Amount' => '350',
-            'Currency' => 'GPB',
+            'Amount' => 350,
+            'Currency' => 'GBP',
             'Description' => 'Some payment test 100084',
             'SuccessURL' => 'http://rentabag.dev/test/test.php?success=1',
             'FailureURL' => 'http://rentabag.dev/test/test.php?fail=1',
@@ -57,8 +57,8 @@ class Payment
             'BillingFirstnames' => 'Fedorka',
             'BillingAddress1' => 'Frunse 55',
             'BillingCity' => 'Pervomaisk',
-            'BillingPostCode' => '39610',
-//            'BillingPostCode' => 'W1A1BL',
+//            'BillingPostCode' => '39610',
+            'BillingPostCode' => 'W1A 1BL',
             'BillingCountry' => 'GB',
             'DeliverySurname' => 'Boyarin',
             'DeliveryFirstnames' => 'Fedorka',
@@ -67,12 +67,7 @@ class Payment
             'DeliveryPostCode' => '39610',
             'DeliveryCountry' => 'GB',
         ];
-//BillingAddress2=BillAddress Line 2&
-//    BillingPhone=44 (0)7933 000 000&
-//    BillingState=&
-//    DeliveryState=&
-//    DeliveryPhone=44 (0)7933 000 000&
-//    BasketXML=<basket><item><description>Batman - The Dark Knight</description><productSku>DVD2SKU</productSku><productCode>9256370</productCode><quantity>1</quantity><unitNetAmount>10.99</unitNetAmount><unitTaxAmount>0.50</unitTaxAmount><unitGrossAmount>11.49</unitGrossAmount><totalGrossAmount>11.49</totalGrossAmount></item><item><description>IronMan</description><productSku>DVD3SKU</productSku><productCode>84661832</productCode><quantity>5</quantity><unitNetAmount>8.75</unitNetAmount><unitTaxAmount>0.10</unitTaxAmount><unitGrossAmount>8.85</unitGrossAmount><totalGrossAmount>44.25</totalGrossAmount></item><deliveryNetAmount>1.50</deliveryNetAmount><deliveryTaxAmount>0.05</deliveryTaxAmount><deliveryGrossAmount>1.55</deliveryGrossAmount></basket>&SurchargeXML=<surcharges><surcharge><paymentType>MC</paymentType><percentage>5</percentage></surcharge><surcharge><paymentType>VISA</paymentType><fixed>3.5</fixed></surcharge></surcharges>&
+//VendorTxCode=rentabag-DEFERRED-1494902510-255249023&Amount=57.29&Currency=GBP&Description=DVDs from Sagepay Demo Page&CustomerName=Fname Mname Surname&CustomerEMail=customer@example.com&VendorEMail=&SendEMail=0&eMailMessage=&BillingSurname=Surname&BillingFirstnames=Fname Mname&BillingAddress1=BillAddress Line 1&BillingAddress2=BillAddress Line 2&BillingCity=BillCity&BillingPostCode=W1A 1BL&BillingCountry=GB&BillingPhone=44 (0)7933 000 000&ApplyAVSCV2=0&Apply3DSecure=0&AllowGiftAid=1&BillingAgreement=1&BillingState=&customerEmail=customer@example.com&DeliveryFirstnames=Fname Mname&DeliverySurname=Surname&DeliveryAddress1=BillAddress Line 1&DeliveryAddress2=BillAddress Line 2&DeliveryCity=BillCity&DeliveryPostCode=W1A 1BL&DeliveryCountry=GB&DeliveryState=&DeliveryPhone=44 (0)7933 000 000&VendorData=some my vendor data&BasketXML=<basket><item><description>Batman - The Dark Knight</description><productSku>DVD2SKU</productSku><productCode>9256370</productCode><quantity>1</quantity><unitNetAmount>10.99</unitNetAmount><unitTaxAmount>0.50</unitTaxAmount><unitGrossAmount>11.49</unitGrossAmount><totalGrossAmount>11.49</totalGrossAmount></item><item><description>IronMan</description><productSku>DVD3SKU</productSku><productCode>84661832</productCode><quantity>5</quantity><unitNetAmount>8.75</unitNetAmount><unitTaxAmount>0.10</unitTaxAmount><unitGrossAmount>8.85</unitGrossAmount><totalGrossAmount>44.25</totalGrossAmount></item><deliveryNetAmount>1.50</deliveryNetAmount><deliveryTaxAmount>0.05</deliveryTaxAmount><deliveryGrossAmount>1.55</deliveryGrossAmount></basket>&SurchargeXML=<surcharges><surcharge><paymentType>MC</paymentType><percentage>5</percentage></surcharge><surcharge><paymentType>VISA</paymentType><fixed>3.5</fixed></surcharge></surcharges>&SuccessURL=http://rentabag.dev/VspPHPKit/demo/form/success&FailureURL=http://rentabag.dev/VspPHPKit/demo/form/failure
 
         return ['VPSProtocol' => '3.00',
             'TxType' => 'DEFERRED',

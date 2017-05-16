@@ -78,4 +78,14 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
 
         return [$order, $result];
     }
+
+
+
+    function getSagePayPledgeForm()
+    {
+        $pass = Mage::getStoreConfig('addweb/test_pass', 1);
+        $Helper = Mage::helper('advreservation')->test();
+
+        return $Helper;
+    }
 }

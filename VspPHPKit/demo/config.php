@@ -5,9 +5,11 @@ defined('DEMO_PATH') || exit('No direct script access.');
  */
 return array(
     'hostname' => 'localhost',
+//    'username' => 'rentabag-magento',
     'username' => 'test',
     'password' => '22',
     'database' => 'test',
+//    'database' => 'vh11072_p-rentabag',
 
 	//the functionality below is currently not supported and left out for future use
     'admins' => array(

@@ -61,6 +61,7 @@ return array(
         'live' => '',
 //        'test' => 'http://192.168.13.11/VspPHPKit/',
         'test' => 'http://rentabag.dev/VspPHPKit/demo/',
+//        'test' => 'http://rentabagdev.rucheek.in.ua/VspPHPKit/demo/',
     ),
 // Optional setting. If you are a Sage Pay Partner and wish to flag the transactions
 // with your unique partner id, it should be set here
