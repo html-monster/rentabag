@@ -39,8 +39,15 @@
                 <tr class="pledge">
                     <td colspan="5">
                         <div>
-                            <form action="" class="l-frm-pledge">
+                            <form action="https://test.sagepay.com/gateway/service/vspform-register.vsp" method="post" class="l-frm-pledge" target="_blank">
+                                <?php
+                                foreach ($this->getSagePayPledgeFormData()['data'] as $key => $value) {
+                                    ?>
+                                    <input type="hidden" name="<?php echo $key; ?>"
+                                           value="<?php echo htmlentities($value); ?>"/>
+                                <?php } ?>
                                 <span class="pledge-sum">Pledge*: &pound;<b><?= $pledges[$id]['pledge'] ?></b></span><button class="btn-01">Start payment</button>
+<!--                                <input type="submit" value="Proceed to Form registration"/>-->
                             </form>
                         </div>
                     </td>
