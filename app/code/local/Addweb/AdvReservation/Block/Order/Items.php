@@ -63,10 +63,13 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
                     if ($datetime1->getTimestamp() < $datetime2->getTimestamp()) {
                         $itemData = $Item->getData();
 
-                        $result[$id] = ['name' => $Item->getName(),
+                        $result[$id] = [
+                            'id' => $id,
+                            'name' => $Item->getName(),
                             'url' => $Item->getProductUrl(),
                             'img' => $Item->getImageUrl(),
                             'pledge' => number_format($itemData['pledge'], 2),
+                            'tdate' => date('d M Y', strtotime($rentInfo[$id]['tdate'])),
                             'fdate' => date('d M Y', strtotime($rentInfo[$id]['fdate'])),
                             'price' => number_format($rentInfo[$id]['price'], 2),
                         ];
@@ -81,19 +84,20 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
 
 
 
-    function getSagePayPledgeFormData()
+    function getSagePayPledgeFormData($order, $prodPledge)
     {
+        $orderData = $order->getData();
         $CryptInfo = [
-            'VendorTxCode' => 'rentabag-DEFERRED-10000084-4-Test',
-            'Amount' => 350,
+            'VendorTxCode' => "{$order->getRealOrderId()}-{$prodPledge['id']}-PL-".time(),
+            'Amount' => $prodPledge['pledge'],
             'Currency' => 'GBP',
-            'Description' => 'Some payment test 100084',
+            'Description' => "{$order->getRealOrderId()} - {$prodPledge['name']} ({$prodPledge['fdate']}-{$prodPledge['tdate']})",
 //            'SuccessURL' => 'http://rentabag.dev/test/test.php?success=1',
-            'SuccessURL' => 'http://rentabagdev.rucheek.in.ua/test/test.php?success=1',
-            'FailureURL' => 'http://rentabagdev.rucheek.in.ua/test/test.php?fail=1',
+            'SuccessURL' => "http://{$_SERVER['SERVER_NAME']}/test/test.php?success=1",
+            'FailureURL' => "http://{$_SERVER['SERVER_NAME']}/test/test.php?fail=1",
 //            'FailureURL' => 'http://rentabag.dev/test/test.php?fail=1',
-            'CustomerName' => 'Fedor Boyarin',
-            'CustomerEMail' => 'fe@boya.rin',
+            'CustomerName' => "{$orderData['customer_firstname']} {$orderData['customer_lastname']}",
+            'CustomerEMail' => $orderData['customer_email'],
 
             'VendorEMail' => '',
             'SendEMail' => '0',
@@ -102,34 +106,35 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
             'Apply3DSecure' => '0',
             'AllowGiftAid' => '0',
             'BillingAgreement' => '1',
-            'VendorData' => 'some my vendor data',
-            'BillingAddress2' => 'Frunse 55',
-            'BillingPhone' => '44 (0)7933 000 000',
+            'VendorData' => '', //some my vendor data
+            'BillingAddress2' => '-', //Frunse 55
+//            'BillingPhone' => '44 (0)7933 000 000',
             'BillingState' => '',
             'DeliveryState' => '',
-            'DeliveryPhone' => '44 (0)7933 000 000',
-            'BasketXML' => '',
+//            'DeliveryPhone' => '44 (0)7933 000 000',
+//            'BasketXML' => '',
 
-            'BillingSurname' => 'Boyarin',
-            'BillingFirstnames' => 'Fedorka',
-            'BillingAddress1' => 'Frunse 55',
-            'BillingCity' => 'Pervomaisk',
-//            'BillingPostCode' => '39610',
-            'BillingPostCode' => 'W1A 1BL',
+            'BillingSurname' => $orderData['customer_lastname'],
+            'BillingFirstnames' => $orderData['customer_firstname'],
+            'BillingAddress1' => '-',
+            'BillingCity' => '-',
+            'BillingPostCode' => '-', // W1A 1BL
             'BillingCountry' => 'GB',
-            'DeliverySurname' => 'Boyarin',
-            'DeliveryFirstnames' => 'Fedorka',
-            'DeliveryAddress1' => 'Frunse 55',
-            'DeliveryCity' => 'Pervomaisk',
-            'DeliveryPostCode' => '39610',
+            'DeliverySurname' => $orderData['customer_lastname'],
+            'DeliveryFirstnames' => $orderData['customer_firstname'],
+            'DeliveryAddress1' => '-',
+            'DeliveryCity' => '-',
+            'DeliveryPostCode' => '-',
             'DeliveryCountry' => 'GB',
         ];
-//VendorTxCode=rentabag-DEFERRED-1494902510-255249023&Amount=57.29&Currency=GBP&Description=DVDs from Sagepay Demo Page&CustomerName=Fname Mname Surname&CustomerEMail=customer@example.com&VendorEMail=&SendEMail=0&eMailMessage=&BillingSurname=Surname&BillingFirstnames=Fname Mname&BillingAddress1=BillAddress Line 1&BillingAddress2=BillAddress Line 2&BillingCity=BillCity&BillingPostCode=W1A 1BL&BillingCountry=GB&BillingPhone=44 (0)7933 000 000&ApplyAVSCV2=0&Apply3DSecure=0&AllowGiftAid=1&BillingAgreement=1&BillingState=&customerEmail=customer@example.com&DeliveryFirstnames=Fname Mname&DeliverySurname=Surname&DeliveryAddress1=BillAddress Line 1&DeliveryAddress2=BillAddress Line 2&DeliveryCity=BillCity&DeliveryPostCode=W1A 1BL&DeliveryCountry=GB&DeliveryState=&DeliveryPhone=44 (0)7933 000 000&VendorData=some my vendor data&BasketXML=<basket><item><description>Batman - The Dark Knight</description><productSku>DVD2SKU</productSku><productCode>9256370</productCode><quantity>1</quantity><unitNetAmount>10.99</unitNetAmount><unitTaxAmount>0.50</unitTaxAmount><unitGrossAmount>11.49</unitGrossAmount><totalGrossAmount>11.49</totalGrossAmount></item><item><description>IronMan</description><productSku>DVD3SKU</productSku><productCode>84661832</productCode><quantity>5</quantity><unitNetAmount>8.75</unitNetAmount><unitTaxAmount>0.10</unitTaxAmount><unitGrossAmount>8.85</unitGrossAmount><totalGrossAmount>44.25</totalGrossAmount></item><deliveryNetAmount>1.50</deliveryNetAmount><deliveryTaxAmount>0.05</deliveryTaxAmount><deliveryGrossAmount>1.55</deliveryGrossAmount></basket>&SurchargeXML=<surcharges><surcharge><paymentType>MC</paymentType><percentage>5</percentage></surcharge><surcharge><paymentType>VISA</paymentType><fixed>3.5</fixed></surcharge></surcharges>&SuccessURL=http://rentabag.dev/VspPHPKit/demo/form/success&FailureURL=http://rentabag.dev/VspPHPKit/demo/form/failure
 
         $pass = Mage::getStoreConfig('addweb/test_pass', 1);
 
         return [
-            'data' => ['VPSProtocol' => '3.00',
+            'data' => [
+                'VendorTxCode' => "{$order->getRealOrderId()}-{$prodPledge['id']}-PLEDGE-".time(),
+                'Amount' => $prodPledge['pledge'],
+                'VPSProtocol' => '3.00',
                 'TxType' => 'DEFERRED',
                 'Vendor' => 'rentabag',
                 'Crypt' => Mage::helper('advreservation')->encryptAes(Mage::helper('advreservation')->arrayToQueryString($CryptInfo), $pass),

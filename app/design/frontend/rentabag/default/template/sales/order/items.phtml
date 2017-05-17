@@ -41,7 +41,7 @@
                         <div>
                             <form action="https://test.sagepay.com/gateway/service/vspform-register.vsp" method="post" class="l-frm-pledge" target="_blank">
                                 <?php
-                                foreach ($this->getSagePayPledgeFormData()['data'] as $key => $value) {
+                                foreach ($this->getSagePayPledgeFormData($_order, $pledges[$id])['data'] as $key => $value) {
                                     ?>
                                     <input type="hidden" name="<?php echo $key; ?>"
                                            value="<?php echo htmlentities($value); ?>"/>
