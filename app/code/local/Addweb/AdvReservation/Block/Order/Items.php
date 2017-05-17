@@ -93,8 +93,8 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
             'Currency' => 'GBP',
             'Description' => "{$order->getRealOrderId()} - {$prodPledge['name']} ({$prodPledge['fdate']}-{$prodPledge['tdate']})",
 //            'SuccessURL' => 'http://rentabag.dev/test/test.php?success=1',
-            'SuccessURL' => "http://{$_SERVER['SERVER_NAME']}/test/test.php?success=1",
-            'FailureURL' => "http://{$_SERVER['SERVER_NAME']}/test/test.php?fail=1",
+            'SuccessURL' => "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}?success=1",
+            'FailureURL' => "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}?fail=1",
 //            'FailureURL' => 'http://rentabag.dev/test/test.php?fail=1',
             'CustomerName' => "{$orderData['customer_firstname']} {$orderData['customer_lastname']}",
             'CustomerEMail' => $orderData['customer_email'],
@@ -132,8 +132,10 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
 
         return [
             'data' => [
+                'FailureURL' => "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}?fail=1",
                 'VendorTxCode' => "{$order->getRealOrderId()}-{$prodPledge['id']}-PLEDGE-".time(),
                 'Amount' => $prodPledge['pledge'],
+
                 'VPSProtocol' => '3.00',
                 'TxType' => 'DEFERRED',
                 'Vendor' => 'rentabag',
