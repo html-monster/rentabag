@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * Class Addweb_AdvReservation_Helper_Data
+ *
+ * @author Vlasakh
+ */
+
+//include $_SERVER['DOCUMENT_ROOT']."/test/util.php";
+
+
 class Addweb_AdvReservation_Helper_Data extends Mage_Core_Helper_Abstract
 {
     public function getProductOptionsHtml(Addweb_AdvReservation_Model_Catalog_Product_Option $product)
@@ -21,7 +31,7 @@ class Addweb_AdvReservation_Helper_Data extends Mage_Core_Helper_Abstract
      * @param bool $urlencoded
      * @return bool|string
      */
-    static public function arrayToQueryString(array $data, $delimiter = '&', $urlencoded = false)
+    public function arrayToQueryString(array $data, $delimiter = '&', $urlencoded = false)
     {
         $queryString = '';
         $delimiterLength = strlen($delimiter);

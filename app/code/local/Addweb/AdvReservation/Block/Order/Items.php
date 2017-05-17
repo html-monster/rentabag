@@ -84,7 +84,7 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
     function getSagePayPledgeFormData()
     {
         $CryptInfo = [
-            'VendorTxCode' => 'rentabag-DEFERRED-10000084-3-Test',
+            'VendorTxCode' => 'rentabag-DEFERRED-10000084-4-Test',
             'Amount' => 350,
             'Currency' => 'GBP',
             'Description' => 'Some payment test 100084',
