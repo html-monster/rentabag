@@ -754,4 +754,19 @@ class Addweb_AdvReservation_Model_Observer
             $results = $readConnection->query($query);
         }
     }
+
+
+
+    public function onCmsControllerRouterMatchBefore($observer)
+    {
+//        if ($_GET['fail']) Mage::log("Pladge payment fails", LOG_ALERT);
+//        Mage::getSingleton('core/session')->addError("Pladge payment fails");
+//        pledgepay=&order={$order->getId()}&id={$prodPledge['id']}&fail
+        if (Mage::app()->getRequest()->getParams()['pledgepay'])
+            if (Mage::app()->getRequest()->getParams()['fail'])
+            {
+                Mage::getSingleton('core/session')->addError("Pladge payment fails");
+            }
+        return true;
+    }
 }

@@ -110,6 +110,13 @@
 							<product_option>Addweb_AdvReservation_Model_Catalog_Resource_Product_Option</product_option>
 					</rewrite>
 			</catalog_resource>
+
+
+            <sales>
+                <rewrite>
+                    <order>Addweb_AdvReservation_Model_Order</order>
+                </rewrite>
+            </sales>
 		</models>
 		<events>
 			<checkout_cart_product_add_after> <!-- identifier of the event we want to catch -->
@@ -184,13 +191,33 @@
 
 			<sales_order_save_after>
 				<observers>
-					<sales_order_save_after_handler>
+					<cms>
 						<type>advreservation/observer</type>
 						<class>advreservation/observer</class>
-						<method>onSalesOrderSaveAfter</method>
-					</sales_order_save_after_handler>
+						<method>onCmsControllerRouterMatchBefore</method>
+					</cms>
 				</observers>
 			</sales_order_save_after>
+
+			<!--<controller_front_init_routers>-->
+				<!--<observers>-->
+					<!--<cms_controller_router_match_before_handler>-->
+						<!--<type>advreservation/observer</type>-->
+						<!--<class>advreservation/observer</class>-->
+						<!--<method>onCmsControllerRouterMatchBefore</method>-->
+					<!--</cms_controller_router_match_before_handler>-->
+				<!--</observers>-->
+			<!--</controller_front_init_routers>-->
+
+			<!--<cms_page_render1>-->
+				<!--<observers>-->
+					<!--<cms_page_render_handler>-->
+						<!--<type>singleton</type>-->
+						<!--<class>advreservation/observer</class>-->
+						<!--<method>onCmsControllerRouterMatchBefore</method>-->
+					<!--</cms_page_render_handler>-->
+				<!--</observers>-->
+			<!--</cms_page_render1>-->
 		</events>
 		<catalog>
 			<product>

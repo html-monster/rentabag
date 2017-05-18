@@ -6,6 +6,16 @@
  */
 class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abstract
 {
+//    function __construct()
+//    {
+//        parent::__construct();
+//
+////        if ($_GET['fail']) Mage::log("Pladge payment fails", LOG_ALERT);
+////        Mage::getSingleton('core/session')->addError("Pladge payment fails");
+//    }
+
+
+
     /**
      * Retrieve current order rent
      */
@@ -25,7 +35,7 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
                   DATE_FORMAT(fdate, '%Y-%m-%d') fdate,
                   DATE_FORMAT(tdate, '%Y-%m-%d') tdate
                 FROM adv_rent
-                WHERE id_order = {$this->getRequest()->getParams()['order_id']} 
+                WHERE id_order = {$order->getId()} 
                   AND mailletters < 4";
             $results = $readConnection->fetchAll($query);
 
@@ -94,7 +104,7 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
             'Description' => "{$order->getRealOrderId()} - {$prodPledge['name']} ({$prodPledge['fdate']}-{$prodPledge['tdate']})",
 //            'SuccessURL' => 'http://rentabag.dev/test/test.php?success=1',
             'SuccessURL' => "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}?success=1",
-            'FailureURL' => "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}?fail=1",
+            'FailureURL' => "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}?pledgepay=1&order={$order->getId()}&id={$prodPledge['id']}&fail=1",
 //            'FailureURL' => 'http://rentabag.dev/test/test.php?fail=1',
             'CustomerName' => "{$orderData['customer_firstname']} {$orderData['customer_lastname']}",
             'CustomerEMail' => $orderData['customer_email'],
@@ -132,9 +142,9 @@ class Addweb_AdvReservation_Block_Order_Items extends Mage_Sales_Block_Items_Abs
 
         return [
             'data' => [
-                'FailureURL' => "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}?fail=1",
-                'VendorTxCode' => "{$order->getRealOrderId()}-{$prodPledge['id']}-PLEDGE-".time(),
-                'Amount' => $prodPledge['pledge'],
+//                'FailureURL' => "http://{$_SERVER['SERVER_NAME']}{$_SERVER['REQUEST_URI']}?fail=1",
+//                'VendorTxCode' => "{$order->getRealOrderId()}-{$prodPledge['id']}-PLEDGE-".time(),
+//                'Amount' => $prodPledge['pledge'],
 
                 'VPSProtocol' => '3.00',
                 'TxType' => 'DEFERRED',
