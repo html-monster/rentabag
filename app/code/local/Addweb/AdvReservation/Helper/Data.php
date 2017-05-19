@@ -54,6 +54,37 @@ class Addweb_AdvReservation_Helper_Data extends Mage_Core_Helper_Abstract
 
 
     /**
+     * Convert string to data array.
+     *
+     * @param string  $data       Query string
+     * @param string  $delimeter  Delimiter used in query string
+     *
+     * @return array
+     */
+    public function queryStringToArray($data, $delimeter = "&")
+    {
+        // Explode query by delimiter
+        $pairs = explode($delimeter, $data);
+        $queryArray = array();
+
+        // Explode pairs by "="
+        foreach ($pairs as $pair)
+        {
+            $keyValue = explode('=', $pair);
+
+            // Use first value as key
+            $key = array_shift($keyValue);
+
+            // Implode others as value for $key
+            $queryArray[$key] = implode('=', $keyValue);
+        }
+        return $queryArray;
+    }
+
+
+
+
+    /**
      * Crypt string for Sage Pay
      * @param $string
      * @param $key
@@ -75,11 +106,78 @@ class Addweb_AdvReservation_Helper_Data extends Mage_Core_Helper_Abstract
 
 
     /**
+     * Decode a returned string from SagePay.
+     *
+     * @param string $strIn         The encrypted String.
+     * @param string $password      The encyption password used to encrypt the string.
+     *
+     * @return string The unecrypted string.
+     * @throws SagepayApiException
+     */
+    public function decryptAes($strIn, $password)
+    {
+        // HEX decoding then AES decryption, CBC blocking with PKCS5 padding.
+        // Use initialization vector (IV) set from $str_encryption_password.
+        $strInitVector = $password;
+
+        // Remove the first char which is @ to flag this is AES encrypted and HEX decoding.
+        $hex = substr($strIn, 1);
+
+        // Throw exception if string is malformed
+        if (!preg_match('/^[0-9a-fA-F]+$/', $hex))
+        {
+            throw new Exception('Invalid encryption string');
+        }
+        $strIn = pack('H*', $hex);
+
+        // Perform decryption with PHP's MCRYPT module.
+        $string = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $password, $strIn, MCRYPT_MODE_CBC, $strInitVector);
+        return $this->removePKCS5Padding($string);
+    }
+
+
+
+    /**
+     * Remove PKCS5 Padding from a string.
+     *
+     * @param string $input The decrypted string.
+     *
+     * @return string String without the padding.
+     * @throws SagepayApiException
+     */
+    private function removePKCS5Padding($input)
+    {
+        $blockSize = 16;
+        $padChar = ord($input[strlen($input) - 1]);
+
+        /* Check for PadChar is less then Block size */
+        if ($padChar > $blockSize)
+        {
+            throw new Exception('Invalid encryption string');
+        }
+        /* Check by padding by character mask */
+        if (strspn($input, chr($padChar), strlen($input) - $padChar) != $padChar)
+        {
+            throw new Exception('Invalid encryption string');
+        }
+
+        $unpadded = substr($input, 0, (-1) * $padChar);
+        /* Chech result for printable characters */
+        if (preg_match('/[[:^print:]]/', $unpadded))
+        {
+            throw new Exception('Invalid encryption string');
+        }
+        return $unpadded;
+    }
+
+
+
+    /**
      * PHP's mcrypt does not have built in PKCS5 Padding, so we use this.
      * @param string $input The input string.
      * @return string The string with padding.
      */
-    protected function addPKCS5Padding($input)
+    private function addPKCS5Padding($input)
     {
         $blockSize = 16;
         $padd = "";

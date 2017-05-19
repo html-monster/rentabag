@@ -93,6 +93,17 @@
     </rent_pledge_pay>
 
 
+    <rent_pledge_payresult>
+        <!--<update handle="customer_account" />-->
+        <!-- Mage_Customer -->
+        <reference name="content">
+            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
+            <block type="advreservation/rentpledge" name="addweb_advreservation_content" template="addweb/rentPledgePayResult.phtml" />
+        </reference>
+    </rent_pledge_payresult>
+
+
+
     <customer_account>
         <reference name="customer_account_navigation">
             <action method="addLink">

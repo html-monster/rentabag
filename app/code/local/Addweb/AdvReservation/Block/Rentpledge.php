@@ -199,64 +199,22 @@ class Addweb_AdvReservation_Block_Rentpledge extends Mage_Core_Block_Template
      */
     public function getProdPlege()
     {
-        // *** Get prod pledge payment info ***
-        $resource = Mage::getSingleton('core/resource');
-        $readConnection = $resource->getConnection('core_read');
+        $order = Mage::getModel('sales/order')->load(Mage::app()->getRequest()->getParams()['o']);
 
-        $query = "SELECT
-                  id, mailletters, price, id_prod,
-                  DATE_FORMAT(fdate, '%Y-%m-%d') fdate,
-                  DATE_FORMAT(tdate, '%Y-%m-%d') tdate
-                FROM adv_rent
-                WHERE id_order = {$this->getRequest()->getParams()['o']}
-                  AND id_prod = {$this->getRequest()->getParams()['g']} ";
-        $rentInfo = $readConnection->fetchAll($query)[0];
+        $model = Mage::getModel('advreservation/pledge');
+        return $model->getOrderProductsPledge($order);
+    }
 
 
 
-        // process orders product without pledge
-        $orders = Mage::getResourceModel('sales/order_collection')
-            ->addFieldToSelect('*')
-//            ->addFieldToFilter('customer_id', Mage::getSingleton('customer/session')->getCustomer()->getId())
-            ->addFieldToFilter('entity_id', Mage::app()->getRequest()->getParams('o'));
+    public function getFailResult()
+    {
+        $model = Mage::getModel('advreservation/pledge');
+        $paymentData = $model->getPaymentResultInfo(Mage::app()->getRequest()->getParams()['crypt']);
 
-        $result = [];
-        $this->setOrders($orders);
-        foreach ($orders as $order)
-        {
-            $order_id = $order->getRealOrderId();
-            $order = Mage::getModel('sales/order')->load($order_id, 'increment_id');
-            $order->getAllVisibleItems();
-            $orderItems = $order->getItemsCollection()
-                ->addAttributeToSelect('*')
-                ->addAttributeToFilter('product_type', array('eq' => 'simple'))
-                ->load();
+//        Mage::getSingleton('core/session')->addError("Pledge payment fails 1111");
 
-
-            $result = false;
-            $result[$order_id] = ['id' => $order->getId()];
-            foreach ($orderItems as $Item)
-            {
-                $Item = Mage::getModel('catalog/product')->setStoreId($Item->getStoreId())->load($Item->getProductId());
-                // check each product
-                if( ($id = $Item->getId()) && $id == $rentInfo['id_prod'] )
-                {
-                    $itemData = $Item->getData();
-
-                    $result = ['name' => $Item->getName(),
-                        'url' => $Item->getProductUrl(),
-                        'img' => $Item->getImageUrl(),
-                        'pledge' => number_format($itemData['pledge'], 2 ),
-                        'fdate' => date('d M Y', strtotime($rentInfo['fdate'])),
-                        'price' => number_format($rentInfo['price'], 2 ),
-                    ];
-
-                    return $result;
-                }
-            }
-        }
-
-        return $result;
+        return ['StatusDetail' => $paymentData['StatusDetail']];
     }
 
 
