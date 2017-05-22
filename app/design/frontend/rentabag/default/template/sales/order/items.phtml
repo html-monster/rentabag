@@ -32,12 +32,13 @@
         <?php if ($_item->getParentItem()) continue; ?>
         <tbody>
             <?php echo $this->getItemHtml($_item) ?>
-            <?php if( is_array($pledges[$id = $_item->getProductId()]) && !($pledges[$id]['price'] > 0) && $pledges[$id]['pledge'] > 0 ): ?>
+            <?php // Pledge payment form
+                if( is_array($pledges[$id = $_item->getProductId()]) && !($pledges[$id]['price'] > 0) && $pledges[$id]['pledge'] > 0 ): ?>
                 <?php $flag = true ?>
                 <tr class="pledge">
                     <td colspan="5">
                         <div>
-                            <form action="https://test.sagepay.com/gateway/service/vspform-register.vsp" method="post" class="l-frm-pledge" target="">
+                            <form action="<?= Mage::helper('advreservation')->getSagePayUrl() ?>" method="post" class="l-frm-pledge" target="">
                                 <?php
                                 foreach ($this->getSagePayPledgeFormData($_order, $pledges[$id])['data'] as $key => $value) {
                                     ?>
@@ -50,7 +51,15 @@
                         </div>
                     </td>
                 </tr>
-            <?php else: ?>
+            <?php // pledge payed successfully
+                elseif( is_array($pledges[$id = $_item->getProductId()]) && $pledges[$id]['price'] > 0 && $pledges[$id]['pledge'] > 0 ): ?>
+                <tr class="pledge">
+                    <td colspan="5">
+                        <div>
+                            <span class="pledge-sum" style="margin-right: 0;">Pledge: &pound;<b><?= $pledges[$id]['pledge'] ?></b> payed (<?= $pledges[$id]['pldate'] ?>)</span>
+                        </div>
+                    </td>
+                </tr>
             <?php endif; ?>
             <?php if($this->helper('giftmessage/message')->getIsMessagesAvailable('order_item', $_item) && $_item->getGiftMessageId()): ?>
                 <tr class="border<?php echo ($_index++ > $_count ?' last':'') ?>" id="order-item-gift-message-<?php echo $_item->getId() ?>" style="display:none;">

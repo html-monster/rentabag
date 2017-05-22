@@ -17,9 +17,14 @@ class Addweb_AdvReservation_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
 
-    public function test()
+    public function getSagePayUrl()
     {
-        return "hello";
+        $url = Mage::getStoreConfig('addweb/sagepay_is_test_mode', 1) == 1 ?
+            Mage::getStoreConfig('addweb/sagepay_test_url', 1)
+            :
+            Mage::getStoreConfig('addweb/sagepay_live_url', 1);
+
+        return $url;
     }
 
 

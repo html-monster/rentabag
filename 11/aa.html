@@ -1,1 +1,19 @@
-can not get property
+{{template config_path="design/email/header"}} {{inlinecss file="email-inline.css"}}
+
+<h2>Dear customer,</h2>
+<p>You made an order on {{var orderDate}} number #{{var orderNum}}.</p>
+
+<p>You have ordered rent for "<b>{{var goodsName}}</b>" and payed it. <br />
+Your order will begin at <b>{{var rentStart}}</b>.</p>
+
+<p>Please, pay the pledge for this goods and we will send it for You in said date. <br />
+Pledge sum is <b>{{var pledge}}£</b>.</p>
+
+<p></p>
+<p style="text-align: center"><a href="{{var baseUrl}}rent/pledge/pay?o={{var orderId}}&g={{var prodId}}" style="display: inline-block; padding: 0 25px; line-height: 40px; font-size: 14px; color: #fff; border: 2px solid #abb820; background: #abb820; border-radius: 5px; text-align: center; text-transform: uppercase; text-decoration: none;">Go Payment</a></p>
+<p></p>
+<p>Pledge sum will be returned to You after rent was ended.</p>
+<p></p>
+<p>If you do not want to receive these notifications more - contact us and cancel the order, go to the <a href="{{var baseUrl}}contact">contact page</a>.</p>
+
+{{template config_path="design/email/footer"}}

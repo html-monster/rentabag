@@ -76,7 +76,8 @@ class Addweb_AdvReservation_Block_Adminhtml_Sales_Order_View_Items extends Mage_
         $query = "SELECT
                   id, mailletters, price, id_prod,
                   DATE_FORMAT(fdate, '%Y-%m-%d') fdate,
-                  DATE_FORMAT(tdate, '%Y-%m-%d') tdate
+                  DATE_FORMAT(tdate, '%Y-%m-%d') tdate,
+                  DATE_FORMAT(pldate, '%d %b %Y %H:%i') pldate
                 FROM adv_rent
                 WHERE id_order = {$orderId} ";
         $results = $readConnection->fetchAll($query);
