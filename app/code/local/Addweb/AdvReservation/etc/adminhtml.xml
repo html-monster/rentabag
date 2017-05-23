@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+<!--
+    <menu>
+        <adminhello_config translate="title" module="adminhello">
+            <title>Adminhello Settings</title>
+            <sort_order>100</sort_order>
+            <children>
+                <list_action translate="title" module="adminhello">
+                    <title>Manage Hellos</title>
+                    <sort_order>4</sort_order>
+                <action>adminhtml/AdvReservation_adminhellobackend</action>
+                </list_action>
+            </children>
+        </adminhello_config>
+    </menu>
+-->
+</config>

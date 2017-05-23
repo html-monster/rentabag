@@ -337,5 +337,17 @@
 				</adv_rent>
 			</updates>
 		</layout>
-	</adminhtml>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <!--<Addweb_AdvReservation before="Mage_Adminhtml">Addweb_AdvReservation_Adminhtml</Addweb_AdvReservation>-->
+                        <Addweb_AdvReservation before="Mage_Adminhtml">Addweb_AdvReservation</Addweb_AdvReservation>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>
