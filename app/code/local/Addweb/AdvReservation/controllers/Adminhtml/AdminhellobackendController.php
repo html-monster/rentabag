@@ -7,13 +7,16 @@
  */
 
 //class Addweb_AdvReservation_Adminhtml_AdminhellobackendController extends Mage_Adminhtml_Controller_Action
-class Addweb_AdvReservation_AdminhellobackendController extends Mage_Adminhtml_Controller_Action
+class Addweb_AdvReservation_Adminhtml_AdminhellobackendController extends Mage_Adminhtml_Controller_Action
 {
-    public function pledgenotifyemailAction()
+//    public function pledgenotifyemailAction()
+    public function indexAction()
     {
         $aa = "here";
 
-        $this->loadLayout();
+        $this->loadLayout()
+            ->_setActiveMenu('mycustomtab')
+            ->_title($this->__('Index Action'));
         $this->renderLayout();
     }
 }

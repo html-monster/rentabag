@@ -343,8 +343,8 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <!--<Addweb_AdvReservation before="Mage_Adminhtml">Addweb_AdvReservation_Adminhtml</Addweb_AdvReservation>-->
-                        <Addweb_AdvReservation before="Mage_Adminhtml">Addweb_AdvReservation</Addweb_AdvReservation>
+                        <addweb_advreservation before="Mage_Adminhtml">Addweb_AdvReservation_Adminhtml</addweb_advreservation>
+                        <!--<Addweb_AdvReservation before="Mage_Adminhtml">Addweb_AdvReservation</Addweb_AdvReservation>-->
                     </modules>
                 </args>
             </adminhtml>
