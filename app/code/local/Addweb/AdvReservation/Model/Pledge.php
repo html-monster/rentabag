@@ -99,7 +99,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                   DATE_FORMAT(pldate, '%Y-%m-%d %H:%i') pldate
                 FROM adv_rent
                 WHERE id_order = {$order->getId()} 
-                  AND mailletters < 4";
+                  -- AND mailletters < 4";
             $results = $readConnection->fetchAll($query);
 
             foreach ($results as $key => $val) {
@@ -132,22 +132,26 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                 if (($id = $Item->getId()) && count($rentInfo[$id])) {
                     $datetime1 = new DateTime("now");
                     $datetime2 = (new DateTime())->createFromFormat('Y-m-d', $rentInfo[$id]['fdate']);
+                    $interval = $datetime1->diff($datetime2);
 
-                    if ($datetime1->getTimestamp() < $datetime2->getTimestamp()) {
-                        $itemData = $Item->getData();
+                    $itemData = $Item->getData();
 
-                        $result[$id] = [
-                            'id' => $id,
-                            'name' => $Item->getName(),
-                            'url' => $Item->getProductUrl(),
-                            'img' => $Item->getImageUrl(),
-                            'pledge' => number_format($itemData['pledge'], 2),
-                            'tdate' => date('d M Y', strtotime($rentInfo[$id]['tdate'])),
-                            'fdate' => date('d M Y', strtotime($rentInfo[$id]['fdate'])),
-                            'pldate' => date('d M Y H:i', strtotime($rentInfo[$id]['pldate'])),
-                            'price' => number_format($rentInfo[$id]['price'], 2),
-                        ];
-                    } // endif
+
+                    $result[$id] = [
+                        'id' => $id,
+                        'name' => $Item->getName(),
+                        'url' => $Item->getProductUrl(),
+                        'img' => $Item->getImageUrl(),
+                        'pledge' => number_format($itemData['pledge'], 2),
+                        'tdate' => date('d M Y', strtotime($rentInfo[$id]['tdate'])),
+                        'fdate' => date('d M Y', strtotime($rentInfo[$id]['fdate'])),
+                        'pldate' => date('d M Y H:i', strtotime($rentInfo[$id]['pldate'])),
+                        'price' => number_format($rentInfo[$id]['price'], 2),
+                        'expired' => $datetime1->getTimestamp() < $datetime2->getTimestamp() ? false : true,
+                        'greaterT7' => $interval->y == 0 && $interval->m == 0 && $interval->d > 7, // greater the 7 days
+                    ];
+//                    if ($datetime1->getTimestamp() < $datetime2->getTimestamp()) {
+//                    } // endif
                 }
             }
         } // endif
@@ -242,7 +246,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                   AND fdate <= DATE_ADD(CURDATE(), INTERVAL 7 DAY)
                   AND status < 2
                   AND mailletters < 4
-                  -- AND price < 1
+                  AND price < 1
                 ORDER BY fdate ";
         $rents = $readConnection->fetchAll($query);
 
@@ -281,6 +285,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                 // check each product
                 if ($id = $Item->getId())
                 {
+                    $mailletter = false;
                     if( (int)$Item->getData()['pledge'] > 0 && ($prod = $this->searchProduct($rents, $id, $order->getId())) )
                     {
 //                        $timezone = new DateTimeZone("Europe/Kiev");
@@ -289,7 +294,6 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                         $interval = $datetime1->diff($datetime2);
 
                         // check 7 days
-                        $mailletter = false;
                         if( $prod['mailletters'] == 0 && $interval->y == 0 && $interval->m == 0
                             && $interval->d <= 7 && $interval->d > 2 )
                         {
@@ -386,7 +390,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                         } // endif
                     } // endif
 
-                    $result[$order_id]['items'][] = [$Item->getName(), $Item->getPrice(), $Item->getProductUrl(), $Item->getImageUrl(), $Item->getData()['pledge'], date('d M Y', strtotime($prod['fdate']))];
+                    $result[$order_id]['items'][] = [$Item->getId(), $Item->getName(), $Item->getPrice(), $Item->getProductUrl(), $Item->getImageUrl(), $Item->getData()['pledge'], date('d M Y', strtotime($prod['fdate'])), $mailletter];
                 }
             }
         }

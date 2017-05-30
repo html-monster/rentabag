@@ -33,7 +33,7 @@
         <tbody>
             <?php echo $this->getItemHtml($_item) ?>
             <?php // Pledge payment form
-                if( is_array($pledges[$id = $_item->getProductId()]) && !($pledges[$id]['price'] > 0) && $pledges[$id]['pledge'] > 0 ): ?>
+                if( is_array($pledges[$id = $_item->getProductId()]) && !($pledges[$id]['price'] > 0) && $pledges[$id]['pledge'] > 0 && !$pledges[$id]['expired'] && !$pledges[$id]['greaterT7'] ): ?>
                 <?php $flag = true ?>
                 <tr class="pledge">
                     <td colspan="5">

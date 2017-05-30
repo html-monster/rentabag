@@ -102,6 +102,15 @@
         </reference>
     </rent_pledge_payresult>
 
+<!--
+    <rentajax_pledgenotify_email>
+        <reference name="content">
+            &lt;!&ndash;<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>&ndash;&gt;
+            <block type="advreservation/rentpledge" name="addweb_advreservation_content" template="addweb/rentPledgeEmailNotify.phtml" />
+        </reference>
+    </rentajax_pledgenotify_email>
+-->
+
 
 
     <customer_account>

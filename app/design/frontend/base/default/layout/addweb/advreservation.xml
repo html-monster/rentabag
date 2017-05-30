@@ -16,7 +16,8 @@
 			<action method="addItem"><type>skin_js</type><name>js/addweb/daterangepicker.js</name></action>
 			<action method="addItem"><type>skin_css</type><name>css/addweb/daterangepicker.css</name></action>
             <!--<action method="addItem"><type>custom_css</type><name>dist/css/index.css</name></action>-->
-            <action method="addCss"><stylesheet>css/addweb/index-custom.css</stylesheet></action>
+            <!--<action method="addCss"><stylesheet>css/addweb/index-custom.css</stylesheet></action>-->
+            <!--<action method="addCss"><stylesheet>css/addweb/rentabag-style.css</stylesheet></action>-->
 			<!--<action method="addItem"><type>skin_css</type><name>css/addweb/jquery-ui.css</name></action>-->
         </reference>
     </default>

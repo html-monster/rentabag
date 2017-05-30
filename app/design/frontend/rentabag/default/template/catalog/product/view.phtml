@@ -27,8 +27,7 @@
 /**
  * Product view template
  *
- * @see Mage_Catalog_Block_Product_View
- * @see Mage_Review_Block_Product_View
+ * @see Addweb_AdvReservation_Block_Catalog_Product_View
  */
 ?>
 <?php $_helper = $this->helper('catalog/output'); ?>
@@ -65,6 +64,9 @@
 
                 <div class="price-info">
                     <?php echo $this->getPriceHtml($_product); ?>
+                    <?php if( ($pledge = $this->getPledgePrice()) > 0 ): ?>
+                        <span>Pledge: &pound;<?= sprintf("%01.2f", (float)$pledge); ?></span>
+                    <?php endif; ?>
                     <?php echo $this->getChildHtml('bundle_prices') ?>
                     <?php echo $this->getTierPriceHtml() ?>
                 </div>
