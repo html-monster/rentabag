@@ -9,6 +9,11 @@
 //include $_SERVER['DOCUMENT_ROOT']."/test/util.php";
 
 
+/*class Mage_Addweb_Advreservation_Helper_Data extends Mage_Core_Helper_Abstract
+{
+}*/
+
+
 class Addweb_AdvReservation_Helper_Data extends Mage_Core_Helper_Abstract
 {
     public function getProductOptionsHtml(Addweb_AdvReservation_Model_Catalog_Product_Option $product)
