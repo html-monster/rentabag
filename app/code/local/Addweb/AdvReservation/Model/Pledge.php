@@ -271,6 +271,9 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
         {
             $order_id = $order->getRealOrderId();
             $order = Mage::getModel('sales/order')->load($order_id, 'increment_id');
+
+            if ($order->getData()['state'] != 'processing') continue;
+
             $email = $order->getCustomerEmail();
             $order->getAllVisibleItems();
             $orderItems = $order->getItemsCollection()
