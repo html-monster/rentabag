@@ -5,7 +5,10 @@
  * Time: 8:44
  */
 
-
+/**
+ * Заказчик отказался от этой страницы !!!!!!!!!!!!!!!!
+ * @deprecated
+ */
 class Addweb_AdvReservation_Block_BytoRent extends Mage_Core_Block_Template
 {
     public function __construct()
