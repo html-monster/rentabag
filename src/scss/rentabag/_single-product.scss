@@ -95,12 +95,17 @@
 			margin-top: 10px;
 		}
 	}
-	.product-shop .price-box .price-excluding-tax .price,
-	.product-shop .price-box .price-including-tax .price,
-	.product-shop .price-box .regular-price .price,
-	.product-shop .price-box .special-price .price,
-	.product-shop .price-box .full-product-price .price{
-		font-weight: bold;
+	.product-shop{
+		.price-box{
+			margin-bottom: 0;
+			.price-excluding-tax .price, .price-including-tax .price, .regular-price .price, .special-price .price,
+			.full-product-price .price{
+				display: inline-block;
+				width: 130px;
+				font-weight: bold;
+			}
+		}
+		.pledge .price{ display: inline-block; width: 130px; }
 	}
 }
 

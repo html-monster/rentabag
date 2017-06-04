@@ -207,8 +207,8 @@ $ModelAdvRent = Mage::getSingleton('advreservation/observer');
                     <span class="regular-price 3" style="  display: inline-block; vertical-align: top; margin-top: -6px;"><?php echo $_coreHelper->formatPrice($_price, true) ?></span><br/>
                     <?php foreach ($_weeeTaxAttributes as $_weeeTaxAttribute): ?>
                         <span class="weee" style="position: absolute; top: 19px; right: 0;">
-                        <?php echo $_coreHelper->currency($_weeeTaxAttribute->getAmount(), true, true); ?>
-                    </span>
+                            <?php echo $_coreHelper->currency($_weeeTaxAttribute->getAmount(), true, true); ?>
+                        </span>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <span class="regular-price 3"><?php echo $_coreHelper->formatPrice($_price, true) ?></span><br/>
