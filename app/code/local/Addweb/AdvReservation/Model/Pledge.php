@@ -86,7 +86,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
         if (is_numeric($order)) $order = Mage::getModel('sales/order')->load($order);
 
 
-        if( $order->getData()['state'] == 'processing' )
+        if( $order->getData()['status'] == 'processing' && $order->getData()['state'] == 'processing' )
         {
             // *** Get prod pledge payment info ***
             $resource = Mage::getSingleton('core/resource');
