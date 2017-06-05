@@ -116,6 +116,9 @@
     Options +FollowSymLinks
     RewriteEngine on
 
+    # disable mysterious cache
+    RewriteRule .* - [E=Cache-Control:no-cache]
+
 ############################################
 ## you can put here your magento root folder
 ## path relative to web root
