@@ -359,7 +359,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                             $emailTemplateVariables['orderNum'] = $order->getIncrementId();
                             $emailTemplateVariables['goodsName'] = trim($itemData['name']);
                             $emailTemplateVariables['rentStart'] = date('d M Y', strtotime($prod['fdate']));
-                            $emailTemplateVariables['pledge'] = $itemData['pledge'];
+                            $emailTemplateVariables['pledge'] = number_format($itemData['pledge'], 2);
                             $emailTemplateVariables['orderId'] = $order->getId();
                             $emailTemplateVariables['prodId'] = $id;
 
