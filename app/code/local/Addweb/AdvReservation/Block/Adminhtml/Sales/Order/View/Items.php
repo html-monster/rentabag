@@ -69,6 +69,8 @@ class Addweb_AdvReservation_Block_Adminhtml_Sales_Order_View_Items extends Mage_
      */
     public function getOrderProductsPledge($orderId)
     {
+        $res = Mage::getModel('adminhtml/url')->getUrl('admin/helloback/some');
+
         // *** Get prod pledge payment info ***
         $resource = Mage::getSingleton('core/resource');
         $readConnection = $resource->getConnection('core_read');

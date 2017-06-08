@@ -10,6 +10,8 @@ module.exports = {
     def: function (options) {
         return function ()
         {
+            var scssOpts = {outputStyle: options.isDevelopment ? 'compact' : 'compressed'};
+
             return gulp.src('src/scss/*.scss')
                 .pipe($.plumber({
                     errorHandler: $.notify.onError(function (err) {
@@ -20,7 +22,7 @@ module.exports = {
                     })
                 }))
                 .pipe($.if(options.isDevelopment, $.sourcemaps.init()))
-                .pipe($.sass({outputStyle: "compact"}))
+                .pipe($.sass({outputStyle: scssOpts}))
                 .pipe($.autoprefixer({
                     browsers: ['last 4 versions']
                 }))

@@ -5,7 +5,7 @@
  */
 
 
- class Addweb_AdvReservation_AjaxController extends Mage_Core_Controller_Front_Action
+ class Addweb_AdvReservation_Adminhtml_AjaxactionsController extends Mage_Adminhtml_Controller_Action
 {
      /**
       * Current rent
@@ -13,6 +13,8 @@
     public function pledgenotifyemailAction()
     {
         $aa = "here";
+
+        print "some";
 
         $this->loadLayout();
         $this->renderLayout();

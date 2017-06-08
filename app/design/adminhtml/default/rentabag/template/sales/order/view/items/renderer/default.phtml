@@ -25,7 +25,7 @@
  */
 ?>
 <script type="text/javascript">
- 0||console.log( 'here', 33 );
+    G_CURRENTPAGE = 'admin/sales_order/view';
 </script>
 <?php $_item = $this->getItem() ?>
 <?php $this->setPriceDataObject($_item) ?>
@@ -254,6 +254,8 @@
                 <i title="pledge payment date"><?= $this->getData()['rent'][$_item->getData()["product_id"]]["pldate"] ?></i>
             <?php else: ?>
                 <i style="color: red;">not payed</i>
+                <br />
+                <button title="Send pledge payment email notification" type="button" data-js-send-pledge-email=""><span><span><span>Send Email</span></span></span></button>
             <?php endif; ?>
         </span>
     </td>

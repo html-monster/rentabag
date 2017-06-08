@@ -9,17 +9,26 @@
        </reference>
     </default>
 -->
-<!--
-    <adminhtml_sales_order_view>
-        <reference name="left">
-            <block type="advreservation/adminhtml_sales_order_view_items" name="order_items" template="sales/order/view/items.phtml">
-                <action method="addItemRender"><type>default</type><block>adminhtml/sales_order_view_items_renderer_default</block><template>sales/order/view/items/renderer/default.phtml</template></action>
-                <action method="addColumnRender"><column>qty</column><block>adminhtml/sales_items_column_qty</block><template>sales/items/column/qty.phtml</template></action>
-                <action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name</block><template>sales/items/column/name.phtml</template></action>
-                <action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name_grouped</block><template>sales/items/column/name.phtml</template><type>grouped</type></action>
-                <block type="core/text_list" name="order_item_extra_info" />
-            </block>
+    <default>
+        <reference name="head">
+            <!--<action method="removeItem"><type>js</type><name>mgt_developertoolbar/jquery-1.7.2.min.js</name></action>-->
+            <action method="addJs"><script>lib/jquery/jquery-1.10.2.min.js</script></action>
+            <action method="addJs"><script>rentabag/custom.js</script><params><![CDATA[name="js001_first"]]></params></action>
         </reference>
-    </adminhtml_sales_order_view>
--->
+    </default>
+
+    <adminhtml_helloback_some>
+        <reference name="content">
+            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
+            <block type="advreservation/adminhtml_hellobacksome" name="addweb_advreservation_hellobacksome" template="addweb/hellobacksome.phtml" />
+        </reference>
+    </adminhtml_helloback_some>
+
+    <adminhtml_ajaxactions_pledgenotifyemail>
+        <reference name="content">
+            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
+            <block type="advreservation/adminhtml_ajaxactions" name="addweb_advreservation_ajax" template="addweb/hellobacksome.phtml" />
+        </reference>
+    </adminhtml_ajaxactions_pledgenotifyemail>
+
 </layout>
