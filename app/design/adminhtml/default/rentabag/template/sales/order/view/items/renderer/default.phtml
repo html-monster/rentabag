@@ -254,8 +254,10 @@
                 <i title="pledge payment date"><?= $this->getData()['rent'][$_item->getData()["product_id"]]["pldate"] ?></i>
             <?php else: ?>
                 <i style="color: red;">not payed</i>
+                <?php /*
                 <br />
                 <button title="Send pledge payment email notification" type="button" data-js-send-pledge-email=""><span><span><span>Send Email</span></span></span></button>
+                */ ?>
             <?php endif; ?>
         </span>
     </td>
