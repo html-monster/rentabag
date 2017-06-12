@@ -6,31 +6,49 @@
 
 class AdminOrderPage
 {
-    constructor()
+    /**@private*/ orderId = 0;
+
+
+    /**@public*/ bindSendEmail()
     {
-        $("[data-js-send-pledge-email]").click(::this.onSendEmail);
+        // bind send email btn
+        $j("[data-js-send-pledge-email]").click((ee) => this.onSendEmail(ee));
     }
 
-    onSendEmail()
+
+    /**@public*/ setOrderId(inId)
     {
+        this.orderId = inId;
+    }
+
+
+    /**@private*/ onSendEmail(ee)
+    {
+        const $that = ee.currentTarget;
+        0||console.log( 'clicked', $that, $that.dataset['url'] );
+
+        Loading.show();
+
         const ajaxPromise = (new AjaxSend()).send({
-            formData: values,
+            formData: {orderId: this.orderId},
             message: `Error while registering user, please, try again`,
             // url: ABpp.baseUrl + $form.attr('action'),
-            url: $form.attr('action'), // DEBUG: remove it
+            url: $that.dataset['url'], // DEBUG: remove it
             respCodeName: 'ErrorCode',
             respCodes: [
                 {code: 100, message: ""},
                 // {code: -101, message: "Some custom error"},
             ],
-            // beforeChkResponse: (data) =>
-            // {
-            //     // DEBUG: emulate
-            //     data = {Error: 101};
-            //     // data.Param1 = "TOR-PHI-3152017"; // id
-            //
-            //     return data;
-            // },
+            beforeChkResponse: (data) =>
+            {
+                Loading.hide();
+
+                // DEBUG: emulate
+                // data = {Error: 101};
+                // data.Param1 = "TOR-PHI-3152017"; // id
+
+                return data;
+            },
         });
 
 
@@ -44,10 +62,10 @@ class AdminOrderPage
                 switch( result.code )
                 {
                     case -101:
-                        serverValidation({error: 'User name failed, correct it, please', FirstName: "User name failed"});
+                        // serverValidation({error: 'User name failed, correct it, please', FirstName: "User name failed"});
                         break;
                     default:
-                        serverValidation({error: 'User registration failed, please, refresh the page and try again'});
+                        // serverValidation({error: 'User registration failed, please, refresh the page and try again'});
                 }
             });
     }

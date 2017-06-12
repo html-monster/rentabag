@@ -40,7 +40,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
 <head>
+    <script type="text/javascript">
+     <?php
+         $controller = Mage::app()->getFrontController();
+     ?>
+     var G_CURRENT_CONTROLLER = '<?= $controller->getRequest()->getControllerName() ?>';
+     var G_CURRENT_ACTION = '<?= $controller->getRequest()->getActionName() ?>';
+    </script>
     <?php echo $this->getChildHtml('head') ?>
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+    </script>
 </head>
 
 <body id="html-body"<?php echo $this->getBodyClass() ? ' class="' . $this->getBodyClass() . '"' : ''; ?>>

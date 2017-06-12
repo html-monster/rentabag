@@ -14,10 +14,13 @@
     {
         $aa = "here";
 
-        print "some";
 
-        $this->loadLayout();
-        $this->renderLayout();
+//        $this->loadLayout();
+//        $this->renderLayout();
+
+        0||$notpr||print  "<pre> \$_POST :".$s1
+              .$s1 . print_r($_POST, 1)."\n"
+              ."</pre>";$notpr;
     }
 
 

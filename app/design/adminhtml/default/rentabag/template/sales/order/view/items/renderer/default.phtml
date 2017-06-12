@@ -24,9 +24,6 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<script type="text/javascript">
-    G_CURRENTPAGE = 'admin/sales_order/view';
-</script>
 <?php $_item = $this->getItem() ?>
 <?php $this->setPriceDataObject($_item) ?>
 <tr<?php if (!$this->canDisplayGiftmessage()): ?> class="border"<?php endif; ?>>
@@ -254,10 +251,16 @@
                 <i title="pledge payment date"><?= $this->getData()['rent'][$_item->getData()["product_id"]]["pldate"] ?></i>
             <?php else: ?>
                 <i style="color: red;">not payed</i>
-                <?php /*
                 <br />
-                <button title="Send pledge payment email notification" type="button" data-js-send-pledge-email=""><span><span><span>Send Email</span></span></span></button>
-                */ ?>
+                <?php /*
+                <?= Mage::getModel('adminhtml/url')->getUrl('/helloback/some') ?>
+                <br />
+                <button title="Send pledge payment email notification" type="button" class="js-send-pledge-email" data-js-send-pledge-email="" data-url="<?= Mage::getModel('adminhtml/url')->getUrl('/ajaxactions/pledgenotifyemail') ?>"><span><span><span>Send Email</span></span></span></button>
+                <script type="text/javascript">
+                    App.currentController.setOrderId('<?= $this->getData()['orderId'] ?>');
+                    App.currentController.bindSendEmail();
+                </script>
+ */ ?>
             <?php endif; ?>
         </span>
     </td>

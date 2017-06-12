@@ -13,8 +13,10 @@ module.exports = {
     def: function (options) {
         return function ()
         {
-            return gulp.src(['src/js/admin/**/*.js',
+            return gulp.src([
                     'src/js/inc/*.js',
+                    'src/js/admin/pages/*.js',
+                    'src/js/admin/*.js',
                 ])
                 .pipe($.plumber({
                     errorHandler: $.notify.onError(err => ({

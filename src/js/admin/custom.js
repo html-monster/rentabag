@@ -3,13 +3,14 @@
  * @date 08.06.17.
  */
 
+var App = {
+	currentController: null, // current page controller class
+};
 
-// set current page
-var G_CURRENTPAGE = '';
 
+// call admin order page scripts
+if (G_CURRENT_CONTROLLER === 'sales_order' && G_CURRENT_ACTION === 'view') App.currentController = new AdminOrderPage();
 
 jQuery(document).ready(function ()
 {
-	// call admin order page scripts
-	if (G_CURRENTPAGE === 'admin/sales_order/view') new AdminOrderPage();
 });

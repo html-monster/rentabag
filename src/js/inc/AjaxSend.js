@@ -2,7 +2,8 @@
  * Created by Vlasakh on 08.03.2017.
  */
 
-// var __LDEV__ = true;
+const __DEBUG__ = true;
+
 
 class AjaxSend
 {
@@ -13,7 +14,7 @@ class AjaxSend
             respCodeName: 'Error',
             respCodes: [],
             beforeChkResponse: null,
-        }
+        };
 
 
     /**@public*/ send(inProps)
@@ -24,7 +25,7 @@ class AjaxSend
 
         let promise = new Promise((resolve, reject) =>
         {
-            $.ajax({
+            jQuery.ajax({
                 url: props.url,
                 // url: MainConfig.BASE_URL + DS + MainConfig.AJAX_TEST,
                 type: 'POST',
@@ -33,7 +34,9 @@ class AjaxSend
                     var error = -1001;
                     try
                     {
-                        __LDEV__&&console.debug( 'data AJAX', data );
+                        __DEBUG__&&console.log( 'data AJAX', data );
+
+                        data = JSON.parse(data);
 
                         // before check response callback
                         if (props.beforeChkResponse) data = props.beforeChkResponse(data);
@@ -100,7 +103,7 @@ class AjaxSend
                 cache: false,
                 //contentType: false,
                 //processData: false
-            }, 'json');
+            });
             // .always(function () {
             //     // form.find('.loading-ico').fadeOut(200);
             // })
