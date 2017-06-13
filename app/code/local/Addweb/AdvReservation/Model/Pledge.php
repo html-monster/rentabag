@@ -86,7 +86,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
         if (is_numeric($order)) $order = Mage::getModel('sales/order')->load($order);
 
 
-        if( $order->getData()['state'] == 'processing' )
+        if( $order->getData()['status'] == 'processing' && $order->getData()['state'] == 'processing' )
         {
             // *** Get prod pledge payment info ***
             $resource = Mage::getSingleton('core/resource');
@@ -271,6 +271,9 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
         {
             $order_id = $order->getRealOrderId();
             $order = Mage::getModel('sales/order')->load($order_id, 'increment_id');
+
+            if ($order->getData()['state'] != 'processing') continue;
+
             $email = $order->getCustomerEmail();
             $order->getAllVisibleItems();
             $orderItems = $order->getItemsCollection()
@@ -356,7 +359,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                             $emailTemplateVariables['orderNum'] = $order->getIncrementId();
                             $emailTemplateVariables['goodsName'] = trim($itemData['name']);
                             $emailTemplateVariables['rentStart'] = date('d M Y', strtotime($prod['fdate']));
-                            $emailTemplateVariables['pledge'] = $itemData['pledge'];
+                            $emailTemplateVariables['pledge'] = number_format($itemData['pledge'], 2);
                             $emailTemplateVariables['orderId'] = $order->getId();
                             $emailTemplateVariables['prodId'] = $id;
 

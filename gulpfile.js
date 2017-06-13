@@ -40,13 +40,19 @@ function lazyRequire(taskName, inTaskName, path, options)
     });
 }
 
-// BMS: --- MORDA TASKS ------------------------------------------------------------------------------------------------
 
-// BM: ========================================================================================== MORDA CSS REVISION ===
+// BM: =================================================================================================== MORDA CSS ===
 lazyRequire('index-custom', 'def', './gulpinc/index-custom', {
     // src: $pathDestServer + '/Content/dist',
     // dst: $pathDestServer + '/Content/css-assets',
 });
+
+// BM: ==================================================================================================== MORDA JS ===
+lazyRequire('common-js', 'def', './gulpinc/common', {});
+
+
+// BM: ==================================================================================================== ADMIN JS ===
+lazyRequire('admin-custom-js', 'def', './gulpinc/admin-custom', {});
 
 
 /*
@@ -109,34 +115,9 @@ gulp.task('index-custom', function() {
 
 
 
-gulp.task('js',function(){
-    return gulp.src(['frontend/js/nonReact/**/*.js',
-        '!frontend/js/nonReact/browserCheck.js',
-        '!frontend/js/nonReact/test.js',
-        '!frontend/js/nonReact/access.js',
-        '!frontend/js/nonReact/pageFirst.js',
-        '!frontend/js/react/localization/**',
-        ])
-    .pipe(sourcemaps.init())
-    .pipe(babel({
-      presets: ['es2015', 'stage-0'],
-      plugins: [['transform-class-properties', { "spec": true }], ["remove-comments"]],
-    }))
-    .pipe($.concat('all.js'))
-    // $.uglify(),
-    .pipe(sourcemaps.write())
-    .pipe($.notify(function (file) {
-        var options = {hour: 'numeric', minute: 'numeric', second: 'numeric'};
-        return "Compiled " + file.relative + ' ' + (new Date()).toLocaleString("ru", options);
-    }))
-    // .pipe(gulp.dest('./public/js'))
-    .pipe(gulp.dest($pathDestServer + '/Scripts/dist'));
-});
-
-
 
 // BM: ============================================================================================== ONE TIME BUILD ===
-gulp.task('build', gulp.series(gulp.parallel('index-custom'/*, 'js', 'vendor'*/)));
+gulp.task('build', gulp.series(gulp.parallel('index-custom', 'common-js', 'admin-custom-js')));
 
 
 
@@ -144,7 +125,10 @@ gulp.task('build', gulp.series(gulp.parallel('index-custom'/*, 'js', 'vendor'*/)
 // BM: ========================================================================================== FRONT DEV BUILDING ===
 gulp.task('watch-front-js-styles', function () {
     gulp.watch('src/scss/**/*.scss', gulp.series('index-custom'));
-    // gulp.watch('frontend/js/nonReact/**/*.js', gulp.series('js'));
+    gulp.watch('src/js/front/**/*.js', gulp.series('common-js'));
+    gulp.watch('src/js/admin/**/*.js', gulp.series('admin-custom-js'));
+    // commont admin and front js
+    gulp.watch('src/js/inc/**/*.js', gulp.series(gulp.parallel('common-js', 'admin-custom-js')));
 });
 
 

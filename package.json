@@ -18,8 +18,16 @@
   },
   "devDependencies": {
     "gulp-autoprefixer": "^3.1.0",
-    "gulp-sass": "^2.3.1"
-  },
+    "gulp-sass": "^2.3.1",
+    "gulp-babel": "^6.1.1",
+    "babel-plugin-remove-comments": "*",
+    "babel-plugin-transform-class-properties": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-stage-0": "*",
+    "gulp-uglify": "^1.5.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-concat": "^2.6.0"
+},
   "name": "altbet",
   "version": "1.0.0",
   "repository": {
