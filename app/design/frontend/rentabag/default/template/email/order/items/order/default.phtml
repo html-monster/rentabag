@@ -28,7 +28,7 @@
 <?php $_order = $this->getItem()->getOrder() ?>
 <tbody>
     <tr>
-        <td class="cell-content product-info">
+        <td class="cell-content product-info" style="padding: 10px; border: 1px solid #dcdcdc;">
         <p class="product-name"><?php echo $this->escapeHtml($_item->getName()) ?></p>
         <p class="sku"><?php echo $this->__('SKU'); ?>: <?php echo $this->escapeHtml($this->getSku($_item)) ?></p>
             <?php if ($this->getItemOptions()): ?>
@@ -47,8 +47,8 @@
                 <?php endif; ?>
                 <?php echo $this->escapeHtml($_item->getDescription()) ?>
             </td>
-            <td class="cell-content align-center"><?php echo $_item->getQtyOrdered()*1 ?></td>
-            <td class="cell-content align-right">
+            <td class="cell-content align-center" style="padding: 10px; border: 1px solid #dcdcdc;"><?php echo $_item->getQtyOrdered()*1 ?></td>
+            <td class="cell-content align-right" style="padding: 10px; border: 1px solid #dcdcdc;">
                 <?php if ($this->helper('tax')->displaySalesPriceExclTax($_order->getStore()) || $this->helper('tax')->displaySalesBothPrices($_order->getStore())): ?>
                     <?php if ($this->helper('tax')->displaySalesBothPrices($_order->getStore())): ?>
                         <span class="label"><?php echo Mage::helper('tax')->__('Excl. Tax'); ?>:</span>

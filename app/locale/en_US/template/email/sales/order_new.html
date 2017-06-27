@@ -21,10 +21,10 @@
 {{template config_path="design/email/header"}}
 {{inlinecss file="email-inline.css"}}
 
-<table cellpadding="0" cellspacing="0" border="0">
+<table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
     <tr>
         <td>
-            <table cellpadding="0" cellspacing="0" border="0">
+            <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
                 <tr>
                     <td class="email-heading">
                         <h1>Thank you for your order from {{var store.getFrontendName()}}.</h1>
@@ -65,15 +65,15 @@
             </table>
             {{/if}}
             {{layout handle="sales_email_order_items" order=$order}}
-            <table cellpadding="0" cellspacing="0" border="0">
+            <table cellpadding="0" cellspacing="0" border="0" style="width: 500px;">
                 <tr>
                     <td class="address-details" style="padding-right: 15px;">
-                        <h6>Bill to:</h6>
+                        <h6 style="font-size: 16px; margin-bottom: 10px;">Bill to:</h6>
                         <p><span class="no-link">{{var order.getBillingAddress().format('html')}}</span></p>
                     </td>
                     {{depend order.getIsNotVirtual()}}
                     <td class="address-details" style="padding-right: 15px;">
-                        <h6>Ship to:</h6>
+                        <h6 style="font-size: 16px; margin-bottom: 10px;">Ship to:</h6>
                         <p><span class="no-link">{{var order.getShippingAddress().format('html')}}</span></p>
                     </td>
                     {{/depend}}
@@ -81,12 +81,12 @@
                 <tr>
                     {{depend order.getIsNotVirtual()}}
                     <td class="method-info" style="padding-right: 15px;">
-                        <h6>Shipping method:</h6>
+                        <h6 style="font-size: 16px; margin-bottom: 10px;">Shipping method:</h6>
                         <p>{{var order.shipping_description}}</p>
                     </td>
                     {{/depend}}
                     <td class="method-info" style="padding-right: 15px;">
-                        <h6>Payment method:</h6>
+                        <h6 style="font-size: 16px; margin-bottom: 10px;">Payment method:</h6>
                         {{var payment_html}}
                     </td>
                 </tr>
