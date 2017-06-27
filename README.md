@@ -22,4 +22,6 @@
 
 ##Links
 - Wiki (http://wiki.ebizmarts.com/sage-pay-installation)
- 
+
+###Plugins
+- AOE Scheduler (https://www.magentocommerce.com/magento-connect/aoe-scheduler.html)
