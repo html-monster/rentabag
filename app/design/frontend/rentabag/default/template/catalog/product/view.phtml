@@ -56,7 +56,6 @@
                 </div>
                 <?php echo $this->getChildHtml('media') ?>
             </div>
-
             <div class="product-shop">
                 <div class="product-name">
                     <span class="h1"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></span>
@@ -65,7 +64,7 @@
                 <div class="price-info">
                     <?php echo $this->getPriceHtml($_product); ?>
                     <?php if( ($pledge = $this->getPledgePrice()) > 0 ): ?>
-                        <span>Pledge: &pound;<?= sprintf("%01.2f", (float)$pledge); ?></span>
+                        <span class="pledge">Pledge: <span class="price">&pound;<?= sprintf("%01.2f", (float)$pledge); ?></span></span>
                     <?php endif; ?>
                     <?php echo $this->getChildHtml('bundle_prices') ?>
                     <?php echo $this->getTierPriceHtml() ?>
