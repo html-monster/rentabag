@@ -246,7 +246,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                   AND fdate <= DATE_ADD(CURDATE(), INTERVAL 7 DAY)
                   AND status < 2
                   AND mailletters < 4
-                  AND price < 1
+                  AND (price < 1 OR price IS NULL)
                 ORDER BY fdate ";
         $rents = $readConnection->fetchAll($query);
 
@@ -393,7 +393,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                         } // endif
                     } // endif
 
-                    $result[$order_id]['items'][] = [$Item->getId(), $Item->getName(), $Item->getPrice(), $Item->getProductUrl(), $Item->getImageUrl(), $Item->getData()['pledge'], date('d M Y', strtotime($prod['fdate'])), $mailletter];
+                    $result[$order_id]['items'][] = [$Item->getId(), $Item->getName(), $Item->getPrice(), $Item->getProductUrl(), $Item->getImageUrl(), $Item->getData()['pledge'], date('d M Y', strtotime($prod['fdate'])), $mailletter, (int)$Item->getData()['pledge'] > 0 && ($prod = $this->searchProduct($rents, $id, $order->getId()))];
                 }
             }
         }
