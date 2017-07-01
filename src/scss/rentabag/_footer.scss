@@ -41,6 +41,12 @@
 		//	}
 		//  }
 		//}
+		.sharing-links{ display: flex; justify-content: space-around;
+			a{ display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #000;
+				&:hover{ border-color: #FB1C5B; }
+				&:after{ display: none; }
+			}
+		}
 		@include mdmax($mdmax) {
 			display: inline-block;
 			float: none;
@@ -79,6 +85,7 @@
 		@include border-top;
 	}
 	a {
+		transition: 0.4s ease-out;
 		@include text-decoration;
 	}
 	//&, .button{  font-family: "RobotoRegular", sans-serif; }
