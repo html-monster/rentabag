@@ -765,7 +765,7 @@ class Addweb_AdvReservation_Model_Observer
         if (Mage::app()->getRequest()->getParams()['pledgepay'])
             if (Mage::app()->getRequest()->getParams()['fail'])
             {
-                Mage::getSingleton('core/session')->addError("Pladge payment fails");
+                Mage::getSingleton('core/session')->addError("Deposit payment fails");
             }
         return true;
     }
