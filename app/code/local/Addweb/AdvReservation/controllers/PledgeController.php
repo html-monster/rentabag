@@ -25,7 +25,7 @@ class Addweb_AdvReservation_PledgeController extends Mage_Core_Controller_Front_
     public function payAction()
     {
         $this->loadLayout();
-        $this->getLayout()->getBlock('head')->setTitle("Pledge payment page");
+        $this->getLayout()->getBlock('head')->setTitle("Deposit payment page");
         $this->renderLayout();
     }
 

@@ -50,7 +50,7 @@
                                     <input type="hidden" name="<?php echo $key; ?>"
                                            value="<?php echo htmlentities($value); ?>"/>
                                 <?php } ?>
-                                <span class="pledge-sum">Pledge*: &pound;<b><?= $pledges[$id]['pledge'] ?></b></span><button class="btn-01">Start payment</button>
+                                <span class="pledge-sum">Deposit*: &pound;<b><?= $pledges[$id]['pledge'] ?></b></span><button class="btn-01">Start payment</button>
 <!--                                <input type="submit" value="Proceed to Form registration"/>-->
                             </form>
                         </div>
@@ -61,7 +61,7 @@
                 <tr class="pledge">
                     <td colspan="5">
                         <div>
-                            <span class="pledge-sum" style="margin-right: 0;">Pledge: &pound;<b><?= $pledges[$id]['pledge'] ?></b> payed (<?= $pledges[$id]['pldate'] ?>)</span>
+                            <span class="pledge-sum" style="margin-right: 0;">Deposit: &pound;<b><?= $pledges[$id]['pledge'] ?></b> payed (<?= $pledges[$id]['pldate'] ?>)</span>
                         </div>
                     </td>
                 </tr>
@@ -85,7 +85,7 @@
 
 <?php if( $flag ): ?>
     <br />
-    <p class="p"><b>* Pledge sum was not payed. Please, pay pledge for goods, and we would send You this goods at specified time. Pledge sum will be returned to You after rent was ended.</b></p>
+    <p class="p"><b>* Deposit sum was not payed. Please, pay deposit for goods, and we would send You this goods at specified time. Deposit sum will be returned to You after rent was ended.</b></p>
 <?php endif; ?>
 
 <script type="text/javascript">decorateTable('my-orders-table', {'tbody' : ['odd', 'even'], 'tbody tr' : ['first', 'last']})</script>
