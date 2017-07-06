@@ -223,6 +223,8 @@ $j(document).ready(function () {
 
     "minDate": today,
 
+    "endDate": moment(today_unix + 86400000).format('DD/MM/YYYY'),
+
     "dateLimit": { days: 13 },
 
     "isInvalidDate": function isInvalidDate(date) {
