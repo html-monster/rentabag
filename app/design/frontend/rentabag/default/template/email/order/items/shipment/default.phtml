@@ -27,7 +27,7 @@
 <?php $_item = $this->getItem() ?>
 <tbody>
     <tr>
-        <td class="cell-content product-info">
+        <td class="cell-content product-info" style="padding: 10px; border: 1px solid #dcdcdc;">
             <p class="product-name"><?php echo $this->escapeHtml($_item->getName()) ?></p>
             <?php if ($this->getItemOptions()): ?>
                 <dl style="margin:0; padding:0;">
@@ -43,7 +43,7 @@
             <?php endif; ?>
             <?php echo $this->escapeHtml($_item->getDescription()) ?>
         </td>
-        <td class="cell-content align-center"><?php echo $this->escapeHtml($this->getSku($_item)) ?></td>
-        <td class="cell-content align-right"><?php echo $_item->getQty()*1 ?></td>
+        <td class="cell-content align-center" style="padding: 10px; border: 1px solid #dcdcdc;"><?php echo $this->escapeHtml($this->getSku($_item)) ?></td>
+        <td class="cell-content align-right" style="padding: 10px; border: 1px solid #dcdcdc;"><?php echo $_item->getQty()*1 ?></td>
     </tr>
 </tbody>
