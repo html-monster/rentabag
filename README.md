@@ -22,6 +22,20 @@
 
 ##Links
 - Wiki (http://wiki.ebizmarts.com/sage-pay-installation)
+- Run url via cron (https://stackoverflow.com/questions/11375260/cron-command-to-run-url-address-every-5-minutes)
 
 ###Plugins
 - AOE Scheduler (https://www.magentocommerce.com/magento-connect/aoe-scheduler.html)
+- TB Developer Toolbar (https://www.magentocommerce.com/magento-connect/tb-developer-toolbar.html)
+
+##Cron
+- sh /home/rentabag/public_html/cron.sh
+- wget http://trendystash.com/rent/pledge/notify
+
+##Admin Ajax
+Session budy:
+http://www.bubblecode.net/en/2012/02/08/magento-create-your-own-admin-controller-in-a-new-tab/
+https://magento.stackexchange.com/questions/88045/how-to-update-admin-routers-of-custom-module-for-patch-supee-6788
+https://stackoverflow.com/questions/6389081/magento-admin-routing-isnt-working
+https://magento.stackexchange.com/questions/76291/trying-to-run-an-ajax-script-from-the-admin-area-in-magento
+http://alanstorm.com/magento_admin_hello_world_revisited/
