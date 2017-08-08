@@ -55,15 +55,15 @@
     <td class="bundle-item-parent product-info">
         <p class="product-name"><?php echo $this->escapeHtml($_item->getName()) ?></p>
     </td>
-    <td class="bundle-item-parent align-center">
-        <?php echo $this->escapeHtml($_item->getSku()) ?>
-    </td>
+<!--    <td class="bundle-item-parent align-center">-->
+<!--        --><?php //echo $this->escapeHtml($_item->getSku()) ?>
+<!--    </td>-->
     <td class="bundle-item-parent align-right">
     <?php else: ?>
     <td class="bundle-item bundle-details product-info"><div><?php echo $this->getValueHtml($_item)?></div></td>
-    <td class="bundle-item bundle-details align-center">
-        <?php echo $this->escapeHtml($_item->getSku()) ?>
-    </td>
+<!--    <td class="bundle-item bundle-details align-center">-->
+<!--        --><?php //echo $this->escapeHtml($_item->getSku()) ?>
+<!--    </td>-->
     <td class="bundle-item align-right">
     <?php endif; ?>
     <?php if (($this->isShipmentSeparately() && $_item->getParentItem()) || (!$this->isShipmentSeparately() && !$_item->getParentItem())): ?>

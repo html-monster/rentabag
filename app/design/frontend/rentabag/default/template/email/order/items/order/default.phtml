@@ -30,7 +30,7 @@
     <tr>
         <td class="cell-content product-info" style="padding: 10px; border: 1px solid #dcdcdc;">
         <p class="product-name"><?php echo $this->escapeHtml($_item->getName()) ?></p>
-        <p class="sku"><?php echo $this->__('SKU'); ?>: <?php echo $this->escapeHtml($this->getSku($_item)) ?></p>
+<!--        <p class="sku">--><?php //echo $this->__('SKU'); ?><!--: --><?php //echo $this->escapeHtml($this->getSku($_item)) ?><!--</p>-->
             <?php if ($this->getItemOptions()): ?>
                 <dl style="margin:0; padding:0;">
             <?php foreach ($this->getItemOptions() as $option): ?>

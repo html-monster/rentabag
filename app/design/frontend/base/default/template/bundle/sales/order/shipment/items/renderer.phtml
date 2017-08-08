@@ -57,7 +57,7 @@
     <?php else: ?>
     <td><div class="option-value"><?php echo $this->getValueHtml($_item) ?></div></td>
     <?php endif; ?>
-    <td><?php echo $this->escapeHtml($_item->getSku()) ?></td>
+<!--    <td>--><?php //echo $this->escapeHtml($_item->getSku()) ?><!--</td>-->
     <td class="a-center">
         <?php if (($this->isShipmentSeparately() && $_item->getParentItem()) || (!$this->isShipmentSeparately() && !$_item->getParentItem())): ?>
             <?php if (isset($shipItems[$_item->getId()])): ?>

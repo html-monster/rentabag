@@ -6,29 +6,33 @@
 body.checkout-onepage-index{
   .col2-right-layout a{  @include text-decoration;  }
   .opc .section{
-	&.active .step-title{
-	  border-bottom: none;
-	}
-	&.allow:not(.active){
-	  .step-title:hover{
-		background: linear-gradient(to right, #ffffff, #f4f4f4, #ffffff);
-	  }
-	}
-	.step-title{
-	  border-top: none;
-	  @include border-top;
-	  a:after{  display: none;  }
-	}
+		&.active .step-title{
+			border-bottom: none;
+		}
+		&.allow:not(.active){
+			.step-title:hover{
+			background: linear-gradient(to right, #ffffff, #f4f4f4, #ffffff);
+			}
+		}
+		.step-title{
+			border-top: none;
+			@include border-top;
+			a:after{  display: none;  }
+		}
   }
   .block-progress{
-	border-left: none;
-	position: relative;
-	@include border-left;
+		border-left: none;
+		position: relative;
+		@include border-left;
   }
 }
+
 .opc{
 	&>li{  position: relative;  }
-	li#opc-review button.button{  float: none !important;  }
+	li#opc-review {
+		button.button{  float: none !important;  }
+		.please-wait{ @media (min-width: 600px) {  margin-top: -27px;  } }
+	}
 	.buttons-set{  text-align: center;
 		button.button{
 			min-width: 180px;

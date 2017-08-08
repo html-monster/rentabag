@@ -54,7 +54,7 @@
         <?php endif; ?>
         <?php echo $this->escapeHtml($_item->getDescription()) ?>
     </td>
-    <td align="left" valign="top" style="padding:3px 9px"><?php echo $this->escapeHtml($this->getSku($_item)) ?></td>
+<!--    <td align="left" valign="top" style="padding:3px 9px">--><?php //echo $this->escapeHtml($this->getSku($_item)) ?><!--</td>-->
     <td align="center" valign="top" style="padding:3px 9px"><?php echo $_item->getQty() * 1 ?></td>
     <td align="right" valign="top" style="padding:3px 9px">
         <?php if ($taxHelper->displayCartPriceExclTax($_order->getStore()) || $taxHelper->displayCartBothPrices($_order->getStore())): ?>
