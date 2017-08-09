@@ -69,7 +69,7 @@
                 onclick="return giftMessageToogle('<?php echo $_item->getId() ?>')"><?php echo $this->__('Gift Message') ?></a>
     <?php endif; ?>
 </td>
-<td data-rwd-label="<?php echo $this->__('SKU') ?>"><?php echo $this->escapeHtml(Mage::helper('core/string')->splitInjection($this->getSku())) ?></td>
+<!--<td data-rwd-label="--><?php //echo $this->__('SKU') ?><!--">--><?php //echo $this->escapeHtml(Mage::helper('core/string')->splitInjection($this->getSku())) ?><!--</td>-->
 
 <td class="a-right nowrap<?php if (!$this->helper('tax')->displayCartBothPrices() && !$this->helper('tax')->displayCartPriceExclTax()): ?> lin-hide<?php endif; ?>" data-rwd-label="<?php echo $this->__('Price') ?>">
     <?php if ($this->helper('tax')->displayCartBothPrices() || $this->helper('tax')->displayCartPriceExclTax()): ?>

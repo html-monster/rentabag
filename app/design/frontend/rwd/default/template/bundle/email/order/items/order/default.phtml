@@ -55,7 +55,7 @@
     <?php if (!$_item->getParentItem()): ?>
         <td class="bundle-item-parent product-info">
             <p class="product-name"><?php echo $this->escapeHtml($_item->getName()) ?></p>
-            <p class="sku"><?php echo $this->__('SKU'); ?>: <?php echo $this->escapeHtml($this->getSku($_item)) ?></p>
+<!--            <p class="sku">--><?php //echo $this->__('SKU'); ?><!--: --><?php //echo $this->escapeHtml($this->getSku($_item)) ?><!--</p>-->
         </td>
         <td class="bundle-item-parent align-center">
             <?php echo $_item->getQtyOrdered()*1 ?>

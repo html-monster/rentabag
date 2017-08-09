@@ -29,7 +29,8 @@
                 <tr>
                     <td class="email-heading">
                         <h1>Thank you for your order from {{var store.getFrontendName()}}.</h1>
-                        <p>You can check the status of your order by <a href="{{store url="customer/account/"}}"">logging into your account</a>.</p>
+                        <p style="padding-right: 5px;">Once your package ships we will send an email with a link to track your order. Your order summary is below. Thank you again for your business should be changed to this: </p>
+                        <p style="padding-right: 5px;">We will be in touch with you 7 days before shipping your order to prompt you to make a deposit. We never keep the deposit, this always is being held by our trusted third party merchant bank. Meanwhile, please find your order summary below. Thank you again for your business. </p>
                     </td>
                     <td class="store-info">
                         <h4>Order Questions?</h4>
@@ -95,6 +96,7 @@
             {{block type='core/template' area='frontend' template='email/order/shipment/track.phtml' shipment=$shipment order=$order}}
         </td>
     </tr>
+    <tr><td style="text-align: right;"><a href="{{store url=""}}trendystash_terms_and_conditions/" target="_blank">TERMS &amp; CONDITIONS</a></td></tr>
 </table>
 
 {{template config_path="design/email/footer"}}

@@ -68,7 +68,7 @@
             <div class="option-value"><?php echo $this->getValueHtml($_item) ?></div>
         </td>
     <?php endif; ?>
-    <td><?php echo $this->escapeHtml($_item->getSku()) ?></td>
+<!--    <td>--><?php //echo $this->escapeHtml($_item->getSku()) ?><!--</td>-->
     <td class="a-right">
         <?php if ($this->canShowPriceInfo($_item)): ?>
         <?php if ($this->helper('tax')->displaySalesBothPrices() || $this->helper('tax')->displaySalesPriceExclTax()): ?>
