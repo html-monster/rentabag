@@ -71,6 +71,12 @@
 						<catalog_product_options>Addweb_AdvReservation_Block_XmlConnect_Catalog_Product_Options</catalog_product_options>
 				</rewrite>
 			</xmlconnect>
+
+            <checkout>
+                <rewrite>
+                    <cart_item_renderer>Addweb_AdvReservation_Block_Cart_Item_Renderer</cart_item_renderer>
+                </rewrite>
+            </checkout>
 		</blocks>
 		<models>
 			<advreservation>

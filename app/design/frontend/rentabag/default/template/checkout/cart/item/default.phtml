@@ -57,12 +57,13 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         </div>
 
 
-        <?php if ($_options = $this->getOptionList()):?>
+            <?php if ($_options = $this->getOptionList()):?>
         <dl class="item-options">
             <?php foreach ($_options as $_option) :  ?>
                 <?php
                     // -- sakharov 2016-03-04 -------------
                     $flag = 0;
+                    if ($_option['option_type'] == 'days') continue;
                     if($_option['option_type'] == 'to_date' || $_option['option_type'] == 'from_date')
                     {
                         $value = explode(' ', $_option['print_value']);
@@ -202,7 +203,13 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <?php endif; ?>
     <?php endif; ?>
     <td class="product-cart-actions" data-rwd-label="<?php echo $this->__('Qty'); ?>">
-        <span>1</span>
+        <span>
+            <?php if( $days = $this->getProductOption($_options, 'days') ): ?>
+                <?= $days['value'] ?>
+            <?php else: ?>
+                &dash;
+            <?php endif; ?>
+        </span>
         <input type="hidden" name="cart[<?php echo $_item->getId() ?>][qty]" value="1" />
         <?php /* <input type="text" pattern="\d*" name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4"
                data-cart-item-id="<?php echo $this->jsQuoteEscape($_item->getSku()) ?>"
