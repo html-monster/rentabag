@@ -44,6 +44,7 @@
                     <username><![CDATA[rentabag-magento]]></username>
                     <password><![CDATA[80675354351voice]]></password>
                     <!--<dbname><![CDATA[vh11072_p-rentabag]]></dbname>-->
+                    <!--<dbname><![CDATA[rentabag-magento]]></dbname>-->
                     <dbname><![CDATA[p-rentabag]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>

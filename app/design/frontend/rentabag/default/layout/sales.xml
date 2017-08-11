@@ -274,7 +274,8 @@ Email layouts section
 -->
     <sales_email_order_items>
         <block type="sales/order_email_items" name="items" template="email/order/items.phtml">
-            <action method="addItemRender"><type>default</type><block>sales/order_email_items_order_default</block><template>email/order/items/order/default.phtml</template></action>
+            <!--<action method="addItemRender"><type>default</type><block>advreservation/order_email_items_order_default</block><template>email/order/items/order/default.phtml</template></action>-->
+            <action method="addItemRender"><type>default</type><block>advreservation/Some</block><template>email/order/items/order/default.phtml</template></action>
             <action method="addItemRender"><type>grouped</type><block>sales/order_email_items_order_grouped</block><template>email/order/items/order/default.phtml</template></action>
             <block type="core/template" name="order_totals_wrapper" as="order_totals" template="email/order/totals/wrapper.phtml">
                 <block type="sales/order_totals" name="order_totals" template="sales/order/totals.phtml">

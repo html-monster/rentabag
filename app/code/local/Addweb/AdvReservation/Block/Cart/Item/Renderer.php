@@ -144,7 +144,7 @@ class Addweb_AdvReservation_Block_Cart_Item_Renderer extends Mage_Checkout_Block
 
     /**
      * Get item product option by name
-     *
+     * @author Vlasakh
      * @return string
      */
     public function getProductOption($options, $name)
@@ -157,7 +157,7 @@ class Addweb_AdvReservation_Block_Cart_Item_Renderer extends Mage_Checkout_Block
 
     /**
      * Get product customize options
-     *
+     * @author Vlasakh
      * @return array || false
      */
     public function getProductOptions()
@@ -165,6 +165,7 @@ class Addweb_AdvReservation_Block_Cart_Item_Renderer extends Mage_Checkout_Block
         /* @var $helper Mage_Catalog_Helper_Product_Configuration */
         $helper = Mage::helper('catalog/product_configuration');
         $customOptions = $helper->getCustomOptions($this->getItem());
+
 
         // get period in days
         $datetime1 = $datetime2 = null;

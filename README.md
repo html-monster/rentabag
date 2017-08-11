@@ -8,6 +8,15 @@
 - app/design/frontend/rentabag/default/template/checkout/cart/item/default.phtml
 - app/design/frontend/rentabag/default/template/catalog/product/view.phtml
 
+
+## Changed templates
+- emails templates - app/locale/en_US/template/email/
+
+
+## Changed xml
+- app/design/frontend/rentabag/default/layout/sales.xml
+
+
 ## Changed tables
 - core_config_data
 - core_email_template 
@@ -23,6 +32,7 @@
 ##Links
 - Wiki (http://wiki.ebizmarts.com/sage-pay-installation)
 - Run url via cron (https://stackoverflow.com/questions/11375260/cron-command-to-run-url-address-every-5-minutes)
+- How to create and edit order emails in Magento (https://www.youtube.com/watch?v=KcqutcejpXE)
 
 ###Plugins
 - AOE Scheduler (https://www.magentocommerce.com/magento-connect/aoe-scheduler.html)
