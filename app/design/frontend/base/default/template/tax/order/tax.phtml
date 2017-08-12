@@ -91,7 +91,7 @@
         <?php if ($this->displayFullSummary() && !$this->getIsPlaneMode()): ?>
             <div class="summary-collapse"><?php echo $this->__('Tax'); ?></div>
         <?php else: ?>
-            <?php echo $this->__('Tax'); ?>
+            <?php echo $this->__('Insurance'); ?>
         <?php endif;?>
     </td>
     <td <?php echo $this->getValueProperties()?>><?php echo $_order->formatPrice($_source->getTaxAmount()) ?></td>
