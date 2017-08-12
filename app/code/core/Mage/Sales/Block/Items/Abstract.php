@@ -133,6 +133,9 @@ class Mage_Sales_Block_Items_Abstract extends Mage_Core_Block_Template
 
         $block = $this->getItemRenderer($type)
             ->setItem($item);
+
+//$s1 = 'get_class($block)='.var_export(get_class($block), 1)."\n";
+//0||$notpr||file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/11/file', "\n--------------------\n".date("H:i:s")."\n".$s1, 0);//FILE_APPEND
         $this->_prepareItem($block);
         return $block->toHtml();
     }
