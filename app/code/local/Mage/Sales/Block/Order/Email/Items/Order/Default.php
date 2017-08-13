@@ -1,12 +1,12 @@
 <?php
 /**
- * Sales Order Email items default renderer
- * прописывается в sales.xml, но не работает на хостинге
- * Перебит в app/code/local/Mage/Sales/Block/Order/Email/Items/Order/Default.php
- *
- * @author     Vlasakh
+ * User: Vlasakh
+ * Date: 13.08.2017
+ * Time: 18:05
  */
-class Addweb_AdvReservation_Block_Order_Email_Items_Order_Default extends Mage_Core_Block_Template
+
+class Mage_Sales_Block_Order_Email_Items_Order_Default extends Mage_Core_Block_Template
+//class Addweb_AdvReservation_Block_Order_Email_Items_Order_Default extends Mage_Core_Block_Template
 {
     /**
      * Retrieve current order model instance

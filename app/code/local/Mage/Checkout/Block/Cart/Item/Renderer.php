@@ -1,12 +1,6 @@
 <?php
 
-/**
- * подключается в config.xml, но не работает на хостинге !!!
- * перебит в app/code/local/Mage/Checkout/Block/Cart/Item/Renderer.php
- */
-
-class Addweb_AdvReservation_Block_Cart_Item_Renderer extends Mage_Checkout_Block_Cart_Item_Renderer
-//class Mage_Checkout_Block_Cart_Item_Renderer extends Mage_Core_Block_Template
+class Mage_Checkout_Block_Cart_Item_Renderer extends Mage_Core_Block_Template
 {
     /** @var Mage_Checkout_Model_Session */
     protected $_checkoutSession;
