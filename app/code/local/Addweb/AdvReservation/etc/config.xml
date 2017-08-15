@@ -2,7 +2,7 @@
 <config>
     <modules>
       <Addweb_AdvReservation>
-        <version>0.1.0</version>
+        <version>2.0.0</version>
       </Addweb_AdvReservation>
     </modules>
 
@@ -72,11 +72,13 @@
 				</rewrite>
 			</xmlconnect>
 
+<!--
             <checkout>
                 <rewrite>
                     <cart_item_renderer>Addweb_AdvReservation_Block_Cart_Item_Renderer</cart_item_renderer>
                 </rewrite>
             </checkout>
+-->
 		</blocks>
 		<models>
 			<advreservation>

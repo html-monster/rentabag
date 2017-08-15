@@ -12,14 +12,14 @@
 <!--        <p class="sku">--><?php //echo $this->__('SKU'); ?><!--: --><?php //echo $this->escapeHtml($this->getSku($_item)) ?><!--</p>-->
             <?php if ($this->getItemOptions()): ?>
                 <dl style="margin:0; padding:0;">
-            <?php foreach ($_options = $this->getItemOptions() as $option): ?>
-                            <dt><strong><em><?php echo $option['label'] ?></em></strong></dt>
-                            <dd style="margin:0; padding:0 0 0 9px;">
-                                <?php echo nl2br($option['value']) ?>
-                            </dd>
-                        <?php endforeach; ?>
-                    </dl>
-                    <?= 'CLASS ' . get_class($this) ?>
+                    <?php foreach ($_options = $this->getItemOptions() as $option): ?>
+                        <?php if ($option['display'] === false) continue; ?>
+                        <dt><strong><em><?php echo $option['label'] ?></em></strong></dt>
+                        <dd style="margin:0; padding:0 0 0 9px;">
+                            <?php echo nl2br($option['value']) ?>
+                        </dd>
+                    <?php endforeach; ?>
+                </dl>
                 <?php endif; ?>
                 <?php $addInfoBlock = $this->getProductAdditionalInformationBlock(); ?>
                 <?php if ($addInfoBlock) :?>
