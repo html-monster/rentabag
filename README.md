@@ -2,6 +2,7 @@
 - Тестовый контроллер админки, если понадобится /admin/helloback/some/key/2c575ee9935d7fb2e1346541796fc010/ (обязательно нужен ключ для запуска иначе редиректит на dashboard)
 - Кастомные стили сайта представлены двумя файлами index-custom.css и rentabag-style.css в /src/scss
 - Дополнительные библиотеки подключаются в /app/design/frontend/base/default/layout/addweb/advreservation.xml
+- После изменения Observer - нужно сбрасывать cache
 
 
 ## Changed views
@@ -49,3 +50,10 @@ https://magento.stackexchange.com/questions/88045/how-to-update-admin-routers-of
 https://stackoverflow.com/questions/6389081/magento-admin-routing-isnt-working
 https://magento.stackexchange.com/questions/76291/trying-to-run-an-ajax-script-from-the-admin-area-in-magento
 http://alanstorm.com/magento_admin_hello_world_revisited/
+
+
+##Urls
+###Любой Url: 
+- в config.xml прописываем url перфикс, например, http://rentabag.dev/rent/ в routers
+- В adv_rent.xml прописываем полный путь, например, rent_newssubscribe_success это соответствует http://rentabag.dev/rent/newssubscribe/success, newssubscribe - это контроллер, success - action, если не указать success - это будет index
+- В adv_rent.xml прописываем type="advreservation/newssubscribe" это будет блок и соответствующий ему View 

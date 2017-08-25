@@ -95,6 +95,17 @@
         </reference>
     </rent_pledge_payresult>
 
+
+    <!--Заготовка под любой контроллер см. README-->
+    <rent_newssubscribe_success>
+        <!--<update handle="customer_account" />-->
+        <!-- Mage_Customer -->
+        <reference name="content">
+            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
+            <block type="advreservation/newssubscribe" name="addweb_advreservation_content" template="addweb/newsSubscribeSuccess.phtml" />
+        </reference>
+    </rent_newssubscribe_success>
+
 <!--
     <rentajax_pledgenotify_email>
         <reference name="content">

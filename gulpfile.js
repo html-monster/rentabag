@@ -55,75 +55,14 @@ lazyRequire('common-js', 'def', './gulpinc/common', {});
 lazyRequire('admin-custom-js', 'def', './gulpinc/admin-custom', {});
 
 
-/*
-gulp.task('index-custom', function() {
-
-    return gulp.src('src/scss/!**!/!*.scss')
-        .pipe(plumber({
-            errorHandler: notify.onError(function (err) {
-                return {
-                    title: 'Styles',
-                    message: err.message
-                }
-            })
-        }))
-        .pipe(gulpIf(isDevelopment, sourcemaps.init()))
-        .pipe(sass({outputStyle: "compact"}))
-        .pipe(autoprefixer({
-            browsers: ['last 4 versions']
-        }))
-        .pipe(gulpIf(isDevelopment, sourcemaps.write()))
-        .pipe($.notify(function (file) {
-            var options = {hour: 'numeric', minute: 'numeric', second: 'numeric'};
-            return "Compiled " + file.relative + ' ' + (new Date()).toLocaleString("ru", options);
-        }))
-        .pipe(gulp.dest(OPTIONS.path.destDirCSS))
-        ;
-});
-*/
-
-// skin/frontend/rentabag/default/scss/rentabag-style.scss
-
-
-// TODEL is used anymore?
-/*gulp.task('assets', function() {
-  return gulp.src('frontend/assets/!**!/!*.html', {since: gulp.lastRun('assets')})
-      //.pipe(jade())
-      // .pipe(gulpIf(!isDevelopment, revReplace({
-      //   manifest: gulp.src('manifest/css.json', {allowEmpty: true})
-      // })))
-      .pipe(gulp.dest('public'));
-});*/
-
-
-// gulp.task('ts:process', function () {
-//   return gulp.src('test/theme/.ts/**/*.ts')
-//              .pipe(plumber())
-//              .pipe(sourcemaps.init())
-//              .pipe(ts({
-//                noImplicitAny: false,
-//                removeComments: true,
-//                // suppressImplicitAnyIndexErrors: true,
-//                module: 'umd',
-//                target: 'ES5',
-//                out: 'index.js'
-//              }))
-//              // .pipe(sourcemaps.write('.'))
-//              .pipe(notify("Compiled: <%= file.relative %>!"))
-//              .pipe(gulp.dest('test/theme/js'));
-// });
-
-
-
-
 // BM: ============================================================================================== ONE TIME BUILD ===
-gulp.task('build', gulp.series(gulp.parallel('index-custom', 'common-js', 'admin-custom-js')));
+gulp.task('BUILD', gulp.series(gulp.parallel('index-custom', 'common-js', 'admin-custom-js')));
 
 
 
 // BMS: --- WATCHES ----------------------------------------------------------------------------------------------------
 // BM: ========================================================================================== FRONT DEV BUILDING ===
-gulp.task('watch-front-js-styles', function () {
+gulp.task('WATCH-FRONT-JS-STYLES', function () {
     gulp.watch('src/scss/**/*.scss', gulp.series('index-custom'));
     gulp.watch('src/js/front/**/*.js', gulp.series('common-js'));
     gulp.watch('src/js/admin/**/*.js', gulp.series('admin-custom-js'));

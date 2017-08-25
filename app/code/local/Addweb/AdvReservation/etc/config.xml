@@ -207,25 +207,25 @@
 				</observers>
 			</sales_order_save_after>
 
-			<!--<controller_front_init_routers>-->
-				<!--<observers>-->
-					<!--<cms_controller_router_match_before_handler>-->
-						<!--<type>advreservation/observer</type>-->
-						<!--<class>advreservation/observer</class>-->
-						<!--<method>onCmsControllerRouterMatchBefore</method>-->
-					<!--</cms_controller_router_match_before_handler>-->
-				<!--</observers>-->
-			<!--</controller_front_init_routers>-->
+			<model_save_after>
+				<observers>
+					<model_save_after_handler>
+						<type>advreservation/observer</type>
+						<class>advreservation/observer</class>
+						<method>onModelSaveAfter</method>
+					</model_save_after_handler>
+				</observers>
+			</model_save_after>
 
-			<!--<cms_page_render1>-->
-				<!--<observers>-->
-					<!--<cms_page_render_handler>-->
-						<!--<type>singleton</type>-->
-						<!--<class>advreservation/observer</class>-->
-						<!--<method>onCmsControllerRouterMatchBefore</method>-->
-					<!--</cms_page_render_handler>-->
-				<!--</observers>-->
-			<!--</cms_page_render1>-->
+			<controller_action_layout_load_before>
+				<observers>
+					<controller_action_layout_load_before_handler>
+						<type>advreservation/observer</type>
+						<class>advreservation/observer</class>
+						<method>onControllerActionLayoutLoadBefore</method>
+					</controller_action_layout_load_before_handler>
+				</observers>
+			</controller_action_layout_load_before>
 		</events>
 		<catalog>
 			<product>
