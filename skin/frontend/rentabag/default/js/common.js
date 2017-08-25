@@ -201,8 +201,6 @@ $j(document).ready(function () {
 
   var today_unix = +moment(moment(today, 'DD/MM/YYYY')).format('x');
 
-  var endDate = today_unix;
-
   var some_date_range = G_VARS.rentRanges;
 
   var input_date = $j('input[name="daterange"]');
@@ -224,8 +222,6 @@ $j(document).ready(function () {
     "opens": "center",
 
     "minDate": today,
-
-    "endDate": moment(endDate).format('DD/MM/YYYY'),
 
     "dateLimit": { days: 13 },
 
