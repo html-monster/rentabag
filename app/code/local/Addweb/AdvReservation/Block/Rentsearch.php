@@ -71,7 +71,7 @@ class Addweb_AdvReservation_Block_RentSearch extends Mage_Core_Block_Template
 
         $pager = $this->getLayout()->createBlock('page/html_pager', 'custom.pager');
 //        $pager->setAvailableLimit(array(10=>10, 20=>20, 'all'=>'all'));
-        $pager->setAvailableLimit(array(10=>10, 20=>20));
+        $pager->setAvailableLimit(array(12=>12, 21=>21));
         $pager->setCollection($this->getCollection());
         $this->setChild('pager', $pager);
         $this->getCollection()->load();
@@ -103,7 +103,7 @@ class Addweb_AdvReservation_Block_RentSearch extends Mage_Core_Block_Template
         {
             $prod = Mage::getModel('catalog/product')->load($product->getId()); //Product ID
             $price = explode('.', $prod->getPrice())[0] . "." . substr(explode('.', $prod->getPrice())[1], 0, 2);
-            $images[$product->getEntityId()] = [$prod->getName(), $this->helper('catalog/image')->init($prod, 'small_image')->resize(80) . ' ', $prod->getProductUrl(), $price];
+            $images[$product->getEntityId()] = [$prod->getName(), $this->helper('catalog/image')->init($prod, 'small_image')->resize(210) . ' ', $prod->getProductUrl(), $price];
         }
 
         foreach ($products as $key => &$val)

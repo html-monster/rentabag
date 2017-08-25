@@ -1,5 +1,11 @@
+@import "rentabag/font-Awesome.min";
 @import "rentabag/fonts";
 @import "rentabag/media";
+@import "rentabag/mixins";
+@import "rentabag/vars";
+@import "rentabag/layout";
+@import "rentabag/default";
+@import "rentabag/animation";
 @import "rentabag/header";
 @import "rentabag/sidebar";
 @import "rentabag/pages";
@@ -9,3 +15,4 @@
 @import "rentabag/cart";
 @import "rentabag/checkout";
 @import "rentabag/footer";
+@import "rentabag/search-page";
