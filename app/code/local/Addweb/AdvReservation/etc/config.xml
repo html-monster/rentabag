@@ -209,11 +209,11 @@
 
 			<model_save_after>
 				<observers>
-					<Addweb_AdvReservation_Model_Observer>
+					<model_save_after_handler>
 						<type>advreservation/observer</type>
 						<class>advreservation/observer</class>
 						<method>onModelSaveAfter</method>
-					</Addweb_AdvReservation_Model_Observer>
+					</model_save_after_handler>
 				</observers>
 			</model_save_after>
 
