@@ -46,12 +46,15 @@ Default layout, loads most of the pages
                 -->
                 <action method="setBlockId"><block_id>footer_links_company_2</block_id></action>
             </block>
-            <block type="cms/block" name="cms_footer_address">
+            <block type="cms/block" name="cms_footer_payments">
+                <action method="setBlockId"><block_id>payments</block_id></action>
+            </block>
+            <block type="cms/block" name="cms_footer_social">
                 <!--
                     The content of this block is taken from the database by its block_id.
                     You can manage it in admin CMS -> Static Blocks
                 -->
-                <action method="setBlockId"><block_id>address</block_id></action>
+                <action method="setBlockId"><block_id>social</block_id></action>
             </block>
         </reference>
     </default>
