@@ -22,7 +22,7 @@
                         <?php endif ?>
 
                         <?php $_filters = $this->getFilters() ?>
-                        <?php $_filters = array_reverse($_filters); ?>
+                        <?php //$_filters = array_reverse($_filters); ?>
                         <?php foreach ($_filters as $_filter): ?>
                             <?php if ($_filter->getItemsCount()): ?>
                                 <dt class="fme_layered_dt">
@@ -32,11 +32,11 @@
                                 <?php echo $this->__($_filter->getName()) ?>
                                 </dt>
                                 <dd <?php echo $this->getHeightStyle() ?> id="fme_layered_<?php echo $_filter->getVar() ?>">
-                                    
+
                                 <?php echo $_filter->getHtml() ?>
-                                
+
                                 </dd>
-                                    
+
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </dl>
