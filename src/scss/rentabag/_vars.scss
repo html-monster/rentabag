@@ -1,0 +1,6 @@
+$box-shadow: 0 5px 25px -6px rgba(0, 0, 0, 0.5);
+$color-main: #FB1C5B;
+$color-green: #5d5d5d;
+@mixin payment_sprite{
+	background: url(../images/payment_sprite.png) no-repeat;
+}

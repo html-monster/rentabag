@@ -54,7 +54,7 @@ body {
 		.vc_col-sm-12{
 			max-width: 1260px;
 			margin: 0 auto;
-			padding-left: 30px;
+			//padding-left: 30px;
 		}
 	}
 	&.cms-how-it-works-buy-to-rent, &.cms-how-it-works-rent-a-bag {
@@ -399,9 +399,11 @@ body {
 	&.rent-search-index{
 		.renta-search{
 			padding: 15px 0;
+			text-align: center;
 			input[name="daterange"]{
 				display: inline-block !important;
 				vertical-align: top;
+				padding: 5px;
 				@include mdmax($mdmax){
 					width: 200px !important;
 					font-size: 13px;

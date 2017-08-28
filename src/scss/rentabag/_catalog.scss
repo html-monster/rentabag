@@ -24,7 +24,7 @@ select{
   border: none;
   background-color: transparent;
 }
-.main-container h1{  margin-left: 10px;  }
+.catalog-category-view .main-container h1{  margin-left: 10px;  }
 .category-products{
   .products-grid{
     display: flex;
@@ -95,6 +95,7 @@ select{
   .products-list .action .button, .products-grid .actions .button{
     width: 85%;
     height: 38px;
+    line-height: 25px;
   }
   .count-container .amount--no-pages{  display: none;  }
 }
