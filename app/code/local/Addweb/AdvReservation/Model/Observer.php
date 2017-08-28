@@ -787,7 +787,8 @@ class Addweb_AdvReservation_Model_Observer
         {
             Mage::getSingleton('customer/session')->setData('wasSubscribe', false);
             Mage::getSingleton('customer/session')->setData('wasSubscribeRedirct', true);
-            Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getBaseUrl().'trendystash_terms_and_conditions');
+            Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getBaseUrl().'rent/newssubscribe/success');
+//            Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getBaseUrl().'trendystash_terms_and_conditions');
 //            Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getBaseUrl().'rent-a-bag_terms_and_conditions');
         } // endif
     }
