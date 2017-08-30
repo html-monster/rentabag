@@ -6,6 +6,7 @@
  */
 ?>
 
+<?php $days = "-"; ?>
 <?php $_item = $this->getItem() ?>
 <?php $Item = $this->getOrderItem(); ?>
 <?php $Item = Mage::getModel('catalog/product')->setStoreId($Item->getStoreId())->load($Item->getProductId()); ?>
@@ -14,6 +15,8 @@
         <?php if($_options = $this->getItemOptions()): ?>
         <dl class="item-options">
         <?php foreach ($_options as $_option) : ?>
+            <?php if ($_option['option_type'] === 'days') $days = $_option['value']; ?>
+            <?php if ($_option['display'] === false) continue; ?>
             <dt><?php echo $this->escapeHtml($_option['label']) ?></dt>
             <?php if (!$this->getPrintStatus()): ?>
                 <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
@@ -67,7 +70,8 @@
                     <?php if (Mage::helper('weee')->typeOfDisplay($this->getItem(), array(0, 1, 4), 'sales') && (float)$this->getItem()->getWeeeTaxAppliedAmount()): ?>
                         <?php echo $this->getOrder()->formatPrice($this->getItem()->getPrice() + $this->getItem()->getWeeeTaxAppliedAmount() + $this->getItem()->getWeeeTaxDisposition()); ?>
                     <?php else: ?>
-                        <?php echo $this->getOrder()->formatPrice($this->getItem()->getPrice()) ?>
+                        <?php echo $this->getOrder()->formatPrice($this->getItem()->getData('original_price')) ?>
+                        <?php /*echo $this->getOrder()->formatPrice($this->getItem()->getPrice())*/ ?>
                     <?php endif; ?>
 
                 </span>
@@ -163,6 +167,8 @@
         <?php endif; ?>
     </td>
     <td class="a-right" data-rwd-label="<?php echo $this->__('Qty') ?>">
+        <?= $days ?>
+        <?php /*
         <span class="nobr">
                 <?php if ($this->getItem()->getQtyOrdered() > 0): ?>
             <strong><?php echo $this->getItem()->getQtyOrdered()*1 ?></strong><br />
@@ -177,6 +183,7 @@
             <?php echo $this->__('Refunded'); ?>: <strong><?php echo $this->getItem()->getQtyRefunded()*1 ?></strong><br />
         <?php endif; ?>
         </span>
+        */ ?>
     </td>
     <td class="a-right" data-rwd-label="<?php echo $this->__('Subtotal') ?>">
         <?php if ($this->helper('tax')->displaySalesBothPrices() || $this->helper('tax')->displaySalesPriceExclTax()): ?>

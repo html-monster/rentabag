@@ -143,9 +143,9 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                         'url' => $Item->getProductUrl(),
                         'img' => $Item->getImageUrl(),
                         'pledge' => number_format($itemData['pledge'], 2),
-                        'tdate' => date('d M Y', strtotime($rentInfo[$id]['tdate'])),
-                        'fdate' => date('d M Y', strtotime($rentInfo[$id]['fdate'])),
-                        'pldate' => date('d M Y H:i', strtotime($rentInfo[$id]['pldate'])),
+                        'tdate' => date('d F Y', strtotime($rentInfo[$id]['tdate'])),
+                        'fdate' => date('d F Y', strtotime($rentInfo[$id]['fdate'])),
+                        'pldate' => date('d F Y H:i', strtotime($rentInfo[$id]['pldate'])),
                         'price' => number_format($rentInfo[$id]['price'], 2),
                         'expired' => $datetime1->getTimestamp() < $datetime2->getTimestamp() ? false : true,
                         'greaterT7' => $interval->y == 0 && $interval->m == 0 && $interval->d > 7, // greater the 7 days
@@ -205,7 +205,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
         $emailTemplateVariables['userEmail'] = $orderData['customer_email'];
         $emailTemplateVariables['orderNum'] = $order->getIncrementId();
         $emailTemplateVariables['prodName'] = $Item->getName();
-        $emailTemplateVariables['payDate'] = date('H:i d M Y', time());
+        $emailTemplateVariables['payDate'] = date('H:i d F Y', time());
         $emailTemplateVariables['baseUrl'] = Mage::getBaseUrl();
         $emailTemplateVariables['idOrder'] = $order->getId();
 
@@ -355,10 +355,10 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
 
                             $emailTemplateVariables = array();
                             $emailTemplateVariables['baseUrl'] = Mage::getBaseUrl();
-                            $emailTemplateVariables['orderDate'] = date('d M Y', strtotime($itemData['created_at']));
+                            $emailTemplateVariables['orderDate'] = date('d F Y', strtotime($order->getCreatedAt()));
                             $emailTemplateVariables['orderNum'] = $order->getIncrementId();
                             $emailTemplateVariables['goodsName'] = trim($itemData['name']);
-                            $emailTemplateVariables['rentStart'] = date('d M Y', strtotime($prod['fdate']));
+                            $emailTemplateVariables['rentStart'] = date('d F Y', strtotime($prod['fdate']));
                             $emailTemplateVariables['pledge'] = number_format($itemData['pledge'], 2);
                             $emailTemplateVariables['orderId'] = $order->getId();
                             $emailTemplateVariables['prodId'] = $id;
@@ -393,7 +393,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                         } // endif
                     } // endif
 
-                    $result[$order_id]['items'][] = [$Item->getId(), $Item->getName(), $Item->getPrice(), $Item->getProductUrl(), $Item->getImageUrl(), $Item->getData()['pledge'], date('d M Y', strtotime($prod['fdate'])), $mailletter, (int)$Item->getData()['pledge'] > 0 && ($prod = $this->searchProduct($rents, $id, $order->getId()))];
+                    $result[$order_id]['items'][] = [$Item->getId(), $Item->getName(), $Item->getPrice(), $Item->getProductUrl(), $Item->getImageUrl(), $Item->getData()['pledge'], date('d F Y', strtotime($prod['fdate'])), $mailletter, (int)$Item->getData()['pledge'] > 0 && ($prod = $this->searchProduct($rents, $id, $order->getId()))];
                 }
             }
         }
