@@ -139,6 +139,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
 
                     $result[$id] = [
                         'id' => $id,
+                        'idOrder' => $order->getIncrementId(),
                         'name' => $Item->getName(),
                         'url' => $Item->getProductUrl(),
                         'img' => $Item->getImageUrl(),
@@ -147,7 +148,7 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
                         'fdate' => date('d F Y', strtotime($rentInfo[$id]['fdate'])),
                         'pldate' => date('d F Y H:i', strtotime($rentInfo[$id]['pldate'])),
                         'price' => number_format($rentInfo[$id]['price'], 2),
-                        'expired' => $datetime1->getTimestamp() < $datetime2->getTimestamp() ? false : true,
+                        'expired' => !($datetime1->getTimestamp() < $datetime2->getTimestamp()), // ? false : true,
                         'greaterT7' => $interval->y == 0 && $interval->m == 0 && $interval->d > 7, // greater the 7 days
                     ];
 //                    if ($datetime1->getTimestamp() < $datetime2->getTimestamp()) {
