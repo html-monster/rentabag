@@ -64,6 +64,7 @@
 				&:after{ display: none; }
 			}
 		}
+		.ssl_certificate{  width: 75px;  margin-top: 15px;  }
 		@include mdmax($mdmax) {
 			display: inline-block;
 			float: none;
