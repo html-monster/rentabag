@@ -12,3 +12,5 @@ cache
 /_BCKP
 
 11/
+
+app/etc/local\.xml
