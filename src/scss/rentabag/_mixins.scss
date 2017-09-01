@@ -83,7 +83,7 @@
 		display: block;
 		width: 0;
 		height: 1px;
-		background: linear-gradient(to right, #ffffff, #FB1C5B, #ffffff);
+		background: linear-gradient(to right, #ffffff, $color-main, #ffffff);
 		//background-color: $color-main;
 		position: absolute;
 		bottom: 0;

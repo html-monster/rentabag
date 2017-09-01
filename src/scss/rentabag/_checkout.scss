@@ -38,7 +38,7 @@ body.checkout-onepage-index{
 			min-width: 180px;
 			height: 40px;
 			float: none;
-			background: #fb1c5b !important;
+			background: $color-main !important;
 			border-radius: 5px;
 			@media (max-width: 700px){  float: right;  margin-right: 10px;  }
 		}

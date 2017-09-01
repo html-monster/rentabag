@@ -60,7 +60,7 @@
 		.sharing-links{ display: flex; justify-content: flex-start;
 			li{  margin-right: 15px;  padding: 0;  }
 			a{ display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #000;
-				&:hover{ border-color: #FB1C5B; }
+				&:hover{ border-color: $color-main; }
 				&:after{ display: none; }
 			}
 		}
@@ -93,7 +93,7 @@
 			margin-left: -5px;
 			background: $color-main;
 			border-radius: 0 5px 5px 0;
-			&:hover{  background: #C11747;  }
+			&:hover{  background: $color-main-hover;  }
 			@include btn-shadow;
 		}
 	}

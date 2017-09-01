@@ -98,18 +98,14 @@ $j(document).ready(function () {
 
     var link = $j(this).children('a');
 
-    if (link.attr('href') === 'https://www.rent-a-bag.club/home') link.attr('href', '/how-it-works-rent-a-bag');
-
-    if (link.attr('href') === 'http://rentabag.loca/home') link.attr('href', '/how-it-works-rent-a-bag');
+    if (/\/home/i.test(link.attr('href'))) link.attr('href', '/how-it-works-rent-a-bag');
   });
 
   $j('.level1.view-all').each(function () {
 
     var link = $j(this).children('a');
 
-    if (link.attr('href') === 'https://www.rent-a-bag.club/home') $j(this).hide();
-
-    if (link.attr('href') === 'http://rentabag.loca/home') $j(this).hide();
+    if (/\/home/i.test(link.attr('href'))) $j(this).hide();
   });
 
   $j('.sidebar').on('click', '.fme-filter .block-subtitle--filter', function () {
