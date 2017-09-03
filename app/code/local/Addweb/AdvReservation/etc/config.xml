@@ -207,15 +207,16 @@
 				</observers>
 			</sales_order_save_after>
 
-			<model_save_after>
+			<!--model_save_after-->
+			<newsletter_subscriber_save_commit_after>
 				<observers>
-					<model_save_after_handler>
+					<newsletter_subscriber_save_commit_after_handler>
 						<type>advreservation/observer</type>
 						<class>advreservation/observer</class>
-						<method>onModelSaveAfter</method>
-					</model_save_after_handler>
+						<method>onNewsletterSubscriberSaveCommitAfter</method>
+					</newsletter_subscriber_save_commit_after_handler>
 				</observers>
-			</model_save_after>
+			</newsletter_subscriber_save_commit_after>
 
 			<controller_action_layout_load_before>
 				<observers>
