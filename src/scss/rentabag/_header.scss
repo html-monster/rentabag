@@ -19,7 +19,7 @@
 	.account-cart-wrapper {
 		right: 50px;
 		.skip-account{
-			&:hover{  color: #C11747;  }
+			&:hover{  color: $color-main-hover;  }
 			a{
 				@include smmin($mdmin){
 					display: none;
@@ -398,11 +398,11 @@
 		@include smmax($smmax) {
 			&.active {
 				a {
-					color: #FB1C5B;
+					color: $color-main;
 				}
 				ul li {
 					&.active a {
-						color: #FB1C5B;
+						color: $color-main;
 					}
 				}
 			}
