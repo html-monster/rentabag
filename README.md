@@ -35,6 +35,8 @@
 - Wiki (http://wiki.ebizmarts.com/sage-pay-installation)
 - Run url via cron (https://stackoverflow.com/questions/11375260/cron-command-to-run-url-address-every-5-minutes)
 - How to create and edit order emails in Magento (https://www.youtube.com/watch?v=KcqutcejpXE)
+- test sagepay (https://test.sagepay.com/mysagepay/login.msp)
+- live.sagepay (https://live.sagepay.com/mysagepay/login.msp)
 
 ###Plugins
 - AOE Scheduler (https://www.magentocommerce.com/magento-connect/aoe-scheduler.html)
