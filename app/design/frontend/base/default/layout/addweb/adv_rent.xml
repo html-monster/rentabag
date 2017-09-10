@@ -2,42 +2,22 @@
 <layout>
     <customers_rent_current>
         <update handle="customer_account" />
-        <!-- Mage_Customer -->
         <reference name="my.account.wrapper">
             <block type="advreservation/rentcollection" name="addweb_advreservation_content" template="addweb/rent.phtml" />
-            <!--<block type="core/text" name="addweb_advreservation_content">
-                <action method="setText"><text><![CDATA[
-                    <h1>Look at me!</h1>
-                ]]></text></action>
-            </block>-->
         </reference>
     </customers_rent_current>
 
     <customers_rent_future>
         <update handle="customer_account" />
-        <!-- Mage_Customer -->
         <reference name="my.account.wrapper">
-            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
             <block type="advreservation/rentfuture" name="addweb_advreservation_content" template="addweb/rentFuture.phtml" />
-            <!--<block type="core/text" name="addweb_advreservation_content">
-                <action method="setText"><text><![CDATA[
-                    <h1>Look at me!</h1>
-                ]]></text></action>
-            </block>-->
         </reference>
     </customers_rent_future>
 
     <customers_rent_history>
         <update handle="customer_account" />
-        <!-- Mage_Customer -->
         <reference name="my.account.wrapper">
-            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
             <block type="advreservation/renthistory" name="addweb_advreservation_content" template="addweb/rentHistory.phtml" />
-            <!--<block type="core/text" name="addweb_advreservation_content">
-                <action method="setText"><text><![CDATA[
-                    <h1>Look at me!</h1>
-                ]]></text></action>
-            </block>-->
         </reference>
     </customers_rent_history>
 
@@ -57,40 +37,28 @@
 
 
     <rent_search_index>
-        <!--<update handle="customer_account" />-->
-        <!-- Mage_Customer -->
         <reference name="content">
-            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
             <block type="advreservation/rentsearch" name="addweb_advreservation_content" template="addweb/rentSearch.phtml" />
         </reference>
     </rent_search_index>
 
 
     <rent_pledge_notify>
-        <!--<update handle="customer_account" />-->
-        <!-- Mage_Customer -->
         <reference name="content">
-            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
             <block type="advreservation/rentpledge" name="addweb_advreservation_content" template="addweb/rentPledgeNotify.phtml" />
         </reference>
     </rent_pledge_notify>
 
 
     <rent_pledge_pay>
-        <!--<update handle="customer_account" />-->
-        <!-- Mage_Customer -->
         <reference name="content">
-            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
             <block type="advreservation/rentpledge" name="addweb_advreservation_content" template="addweb/rentPledgePay.phtml" />
         </reference>
     </rent_pledge_pay>
 
 
     <rent_pledge_payresult>
-        <!--<update handle="customer_account" />-->
-        <!-- Mage_Customer -->
         <reference name="content">
-            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
             <block type="advreservation/rentpledge" name="addweb_advreservation_content" template="addweb/rentPledgePayResult.phtml" />
         </reference>
     </rent_pledge_payresult>
@@ -98,10 +66,7 @@
 
     <!--Заготовка под любой контроллер см. README-->
     <rent_newssubscribe_success>
-        <!--<update handle="customer_account" />-->
-        <!-- Mage_Customer -->
         <reference name="content">
-            <!--<block type="core/template" name="addweb_advreservation_content" template="addweb/rent.phtml"/>-->
             <block type="advreservation/newssubscribe" name="addweb_advreservation_content" template="addweb/newsSubscribeSuccess.phtml" />
         </reference>
     </rent_newssubscribe_success>
@@ -119,13 +84,6 @@
 
     <customer_account>
         <reference name="customer_account_navigation">
-<!--
-            <action method="addLink">
-                <name>bytorent</name>
-                <path>customers/bytorent</path>
-                <label>My Buy To Rent Portfolio</label>
-            </action>
--->
             <action method="addLink">
                 <name>current_rent</name>
                 <path>customers/rent/current</path>

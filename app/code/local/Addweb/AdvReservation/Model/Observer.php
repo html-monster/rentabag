@@ -771,7 +771,7 @@ class Addweb_AdvReservation_Model_Observer
     }
 
 
-    public function onControllerActionLayoutLoadBefore($observer)
+/*    public function onControllerActionLayoutLoadBefore($observer)
     {
         // redirect for after subcribe event
         if( Mage::getSingleton('customer/session')->getData()['wasSubscribe'] === true )
@@ -795,5 +795,5 @@ class Addweb_AdvReservation_Model_Observer
 //
 //        }
         Mage::getSingleton('customer/session')->setData('wasSubscribe', true);
-    }
+    }*/
 }

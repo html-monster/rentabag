@@ -37,6 +37,7 @@
 - How to create and edit order emails in Magento (https://www.youtube.com/watch?v=KcqutcejpXE)
 - test sagepay (https://test.sagepay.com/mysagepay/login.msp)
 - live.sagepay (https://live.sagepay.com/mysagepay/login.msp)
+- подписка на новости (https://magento.stackexchange.com/questions/36843/redirect-to-another-page-after-newsletter-signup)
 
 ###Plugins
 - AOE Scheduler (https://www.magentocommerce.com/magento-connect/aoe-scheduler.html)

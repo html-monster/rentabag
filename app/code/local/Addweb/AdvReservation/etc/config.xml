@@ -208,6 +208,7 @@
 			</sales_order_save_after>
 
 			<!--model_save_after-->
+<!--
 			<newsletter_subscriber_save_commit_after>
 				<observers>
 					<newsletter_subscriber_save_commit_after_handler>
@@ -217,7 +218,9 @@
 					</newsletter_subscriber_save_commit_after_handler>
 				</observers>
 			</newsletter_subscriber_save_commit_after>
+-->
 
+<!--
 			<controller_action_layout_load_before>
 				<observers>
 					<controller_action_layout_load_before_handler>
@@ -227,6 +230,7 @@
 					</controller_action_layout_load_before_handler>
 				</observers>
 			</controller_action_layout_load_before>
+-->
 		</events>
 		<catalog>
 			<product>
@@ -307,6 +311,15 @@
                     <frontName>rent</frontName>
                 </args>
             </rent>
+
+             <!-- Subscribe -->
+            <newsletter>
+                <args>
+                    <modules>
+                        <addweb_advreservation before="Mage_Newsletter">Addweb_AdvReservation</addweb_advreservation>
+                    </modules>
+                </args>
+            </newsletter>
         </routers>
      </frontend>
 
@@ -358,25 +371,6 @@
                     </modules>
                 </args>
             </adminhtml>
-<!--
-
-            <adminhtml>
-                <args>
-                    <modules>
-                        <foo_bar before="Mage_Adminhtml">JR_CreateAdminController_Adminhtml</foo_bar>
-                    </modules>
-                </args>
-            </adminhtml>
-			<checkout>
-				<use>standard</use>
-				<args>
-					<modules>
-						<Addweb_AdvReservation before="Mage_Checkout">Addweb_AdvReservation_Checkout</Addweb_AdvReservation>
-					</modules>
-				</args>
-			</checkout>
--->
-
         </routers>
     </admin>
 </config>
