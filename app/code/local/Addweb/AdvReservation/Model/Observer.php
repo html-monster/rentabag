@@ -771,40 +771,29 @@ class Addweb_AdvReservation_Model_Observer
     }
 
 
-    public function onControllerActionLayoutLoadBefore($observer)
+/*    public function onControllerActionLayoutLoadBefore($observer)
     {
-        // set message after subscribe
-        if( Mage::getSingleton('customer/session')->getData()['wasSubscribeRedirct'] )
-        {
-            Mage::getSingleton('customer/session')->setData('wasSubscribeRedirct', false);
-            Mage::getSingleton('core/session')->addSuccess("Thank You for your subscription");
-        }
-
-
-
         // redirect for after subcribe event
-        if( Mage::getSingleton('customer/session')->getData()['wasSubscribe'] )
+        if( Mage::getSingleton('customer/session')->getData()['wasSubscribe'] === true )
         {
             Mage::getSingleton('customer/session')->setData('wasSubscribe', false);
-            Mage::getSingleton('customer/session')->setData('wasSubscribeRedirct', true);
+
             Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getBaseUrl().'rent/newssubscribe/success');
-//            Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getBaseUrl().'trendystash_terms_and_conditions');
-//            Mage::app()->getFrontController()->getResponse()->setRedirect(Mage::getBaseUrl().'rent-a-bag_terms_and_conditions');
         } // endif
     }
 
-    public function onModelSaveAfter($observer)
+    public function onNewsletterSubscriberSaveCommitAfter($observer)
     {
-        $model = $observer->getObject();
-        if (!$model instanceof Mage_Newsletter_Model_Subscriber) {
-            return;
-        }
-
-        // newsletter_subscriber table
-        if ($model->isSubscribed())
-        {
-            Mage::getSingleton('customer/session')->setData('wasSubscribe', true);
-
-        }
-    }
+//        $model = $observer->getObject();
+//        if (!($model instanceof Mage_Newsletter_Model_Subscriber)) {
+//            return;
+//        }
+//
+//        // newsletter_subscriber table
+//        if ($model->isSubscribed())
+//        {
+//
+//        }
+        Mage::getSingleton('customer/session')->setData('wasSubscribe', true);
+    }*/
 }

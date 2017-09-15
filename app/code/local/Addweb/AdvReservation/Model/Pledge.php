@@ -56,7 +56,12 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
             'DeliveryCountry' => 'GB',
         ];
 
-        $pass = Mage::getStoreConfig('addweb/test_pass', 1);
+
+        $pass = Mage::getStoreConfig('addweb/sagepay_is_test_mode', 1) == 1 ?
+            Mage::getStoreConfig('addweb/test_pass', 1)
+            :
+            Mage::getStoreConfig('addweb/live_pass', 1)
+            ;
 
         return [
             'data' => [
@@ -169,7 +174,11 @@ class Addweb_AdvReservation_Model_Pledge extends Mage_Core_Model_Abstract
      */
     public function getPaymentResultInfo($cryptData)
     {
-        $pass = Mage::getStoreConfig('addweb/test_pass', 1);
+        $pass = Mage::getStoreConfig('addweb/sagepay_is_test_mode', 1) == 1 ?
+            Mage::getStoreConfig('addweb/test_pass', 1)
+            :
+            Mage::getStoreConfig('addweb/live_pass', 1)
+            ;
 
         return Mage::helper('advreservation')->queryStringToArray(Mage::helper('advreservation')->decryptAes($cryptData, $pass));
     }
