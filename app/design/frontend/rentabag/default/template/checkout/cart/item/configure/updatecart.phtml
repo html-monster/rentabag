@@ -195,8 +195,8 @@
                                 days.push(arr[$j.inArray('Buy', arr) + 1]);
                                 price.push(+$j(this).children('.price').text().slice(1));
                                 percent.push($j(this).find('.percent').text());
-                                $j(this).html('<span class="price">&#163;' + price[ii] + '</span> a day if rent for more than ' +
-                                  '<span class="days">' + days[ii] + '</span> days <strong class="benefit">Save ' + percent[ii] + '%');
+                                $j(this).html('<strong class="benefit">Save ' + percent[ii] + '% </strong> if rent for more than ' +
+                                  '<span class="days">' + days[ii] + '</span> days: <span class="price">&#163;' + price[ii] + ' </span>p/day');
                                 ii++;
                             });
                             $j('.tier-prices').css('display', 'block');

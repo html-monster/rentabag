@@ -171,6 +171,13 @@
 
     RewriteRule .* index.php [L]
 
+############################################
+## redirect to https
+
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP_HOST} !^www\.
+    RewriteRule ^ https://www.trendystash.com%{REQUEST_URI} [NE,L,R=301]
+
 </IfModule>
 
 
@@ -235,3 +242,6 @@
         Deny from all
 
     </Files>
+
+
+
