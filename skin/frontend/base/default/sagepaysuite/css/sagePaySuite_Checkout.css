@@ -27,13 +27,14 @@ label[for="p_method_sagepaydirectpro"],
 label[for="p_method_sagepayserver"],
 label[for="p_method_sagepayform"],
 label[for="p_method_sagepaynit"]{
+    display: none!important;
     padding-left: 135px !important;
     padding-top: 7px !important;
     background-repeat: no-repeat;
     background-image: url(../images/sage-pay-small.jpg);
     background-size: 86px;
     background-position: 40px 2px;
-    display: block !important;
+    /*display: block !important;*/
     min-height: 31px;
 }
 
